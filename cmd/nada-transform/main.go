@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	database "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/tree/main/internal/app/nada-transform/database"
+	"github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-transform/database"
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
 
