@@ -1,14 +1,14 @@
-package influxDB
+package database
 
 import (
-	"fmt"
 	"time"
 
+	"github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-transform/myLog"
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
 )
 
 func Insert() {
-	fmt.Println("INFO - start insert")
+	myLog.MyLog(myLog.Get_level_INFO(), "database(start insert)")
 
 	// Create a client
 	// You can generate a Token from the "Tokens Tab" in the UI
@@ -68,5 +68,5 @@ func Insert() {
 	*/
 	// always close client at the end
 	defer client.Close()
-	fmt.Println("INFO - end insert")
+	myLog.MyLog(myLog.Get_level_INFO(), "database(end insert)")
 }
