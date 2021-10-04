@@ -1,0 +1,7 @@
+2021/10/04 09:18:42  - INFO - main(start)
+2021/10/04 09:18:42  - INFO - subscriber(Trying to connect (tcp://localhost:1883, my-client-id)...)
+2021/10/04 09:18:42  - INFO - subscriber(client options created)
+2021/10/04 09:18:42  - INFO - subscriber(connected at tcp://localhost:1883, my-client-id)
+2021/10/04 09:18:42  - INFO - database(start insert)
+2021/10/04 09:18:43  - INFO - database(end insert)
+2021/10/04 09:18:43  - INFO - main(end)
