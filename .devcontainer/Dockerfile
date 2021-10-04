@@ -2,10 +2,13 @@
 
 # [Choice] Go version: 1, 1.16, 1.17
 ARG VARIANT="1.17"
+
 FROM mcr.microsoft.com/vscode/devcontainers/go:0-${VARIANT}
 
 # [Choice] Bazel version
 ENV BAZEL_VERSION 4.2.1
+# [Choice] Mosquitto clients version
+ENV  MOSQUITTO_VERSION=2.0.11
 
 # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="none"
@@ -16,6 +19,14 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 
 # Creating the man pages directory to deal with the slim variants not having it.
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl gnupg \
+    && echo "deb https://repo.mosquitto.org/debian bullseye main" > \
+    /etc/apt/sources.list.d/mosquitto.list \
+    && curl http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key | apt-key add - \
+    && apt-get update && apt-get install -y --no-install-recommends mosquitto-clients \
+    && apt-get purge --auto-remove -y curl gnupg \
+    && rm -rf /etc/apt/sources.list.d/mosquitto.list
+
 RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl gnupg \
  && echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" > \
          /etc/apt/sources.list.d/bazel.list \
