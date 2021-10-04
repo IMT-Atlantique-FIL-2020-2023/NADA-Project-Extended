@@ -25,8 +25,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
  && rm -rf /etc/apt/sources.list.d/bazel.list \
  && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get install mosquitto-clients
-
 RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.42.1
 
 # [Optional] Uncomment the next line to use go get to install anything else you need
