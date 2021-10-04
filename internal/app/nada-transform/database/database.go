@@ -1,4 +1,4 @@
-package influxDB
+package database
 
 import (
 	"fmt"
