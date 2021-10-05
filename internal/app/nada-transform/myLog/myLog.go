@@ -3,6 +3,7 @@ package myLog
 import (
 	"log"
 	"os"
+	"fmt"
 )
 
 type logLevel struct {
@@ -40,6 +41,7 @@ func init() {
 
 func MyLog(loglevel logLevel, msg string) {
 	if loglevel.level >= CURRENT_LOG_LEVEL.level {
+		fmt.Println(" - " + loglevel.label + " - " + msg)
 		log.Println(" - " + loglevel.label + " - " + msg)
 	}
 }

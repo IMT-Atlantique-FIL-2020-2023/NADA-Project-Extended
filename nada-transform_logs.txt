@@ -51,3 +51,70 @@
 2021/10/05 15:59:27  - INFO - subscriber(connected at tcp://localhost:1883, my-client-id)
 2021/10/05 15:59:27  - INFO - database(start insert)
 2021/10/05 15:59:27  - INFO - database(end insert)
+2021/10/05 23:00:53  - INFO - main(start)
+2021/10/05 23:00:53  - INFO - subscriber(Trying to connect (tcp://localhost:1883, my-client-id)...)
+2021/10/05 23:00:53  - INFO - subscriber(client options created)
+2021/10/05 23:00:55  - ERROR - subscriber(Connection error at tcp://localhost:1883, my-client-id)
+2021/10/05 23:00:55  - INFO - database(start insert)
+2021/10/05 23:00:55  - INFO - database(end insert)
+2021/10/05 23:04:23  - INFO - main(start)
+2021/10/05 23:04:23  - INFO - subscriber(Trying to connect (tcp://localhost:1883, my-client-id)...)
+2021/10/05 23:04:23  - INFO - subscriber(client options created)
+2021/10/05 23:04:23  - INFO - subscriber(connected at tcp://localhost:1883, my-client-id)
+2021/10/05 23:04:23  - INFO - database(start insert)
+2021/10/05 23:04:23  - INFO - database(end insert)
+2021/10/05 23:04:23  - INFO - blarg
+2021/10/05 23:04:26  - INFO - blarg
+2021/10/05 23:05:22  - INFO - blarg
+2021/10/05 23:06:49  - INFO - main(start)
+2021/10/05 23:06:49  - INFO - subscriber(Trying to connect (tcp://localhost:1883, my-client-id)...)
+2021/10/05 23:06:49  - INFO - subscriber(client options created)
+2021/10/05 23:06:49  - INFO - subscriber(connected at tcp://localhost:1883, my-client-id)
+2021/10/05 23:06:49  - INFO - database(start insert)
+2021/10/05 23:06:49  - INFO - database(end insert)
+2021/10/05 23:06:51  - INFO - blarg
+2021/10/05 23:08:32  - INFO - main(start)
+2021/10/05 23:08:32  - INFO - subscriber(Trying to connect (tcp://localhost:1883, my-client-id)...)
+2021/10/05 23:08:32  - INFO - subscriber(client options created)
+2021/10/05 23:11:51  - INFO - main(start)
+2021/10/05 23:11:51  - INFO - subscriber(Trying to connect (tcp://localhost:1883, my-client-id)...)
+2021/10/05 23:11:51  - INFO - subscriber(client options created)
+2021/10/05 23:16:21  - INFO - main(start)
+2021/10/05 23:19:07  - INFO - main(start)
+2021/10/05 23:19:07  - INFO - Trying to connect (tcp://localhost:1883, my-client-id)...
+2021/10/05 23:20:11  - INFO - main(start)
+2021/10/05 23:20:11  - INFO - Trying to connect (tcp://localhost:1883, my-client-id)...
+2021/10/05 23:20:37  - INFO - main(start)
+2021/10/05 23:20:40  - INFO - Trying to connect (tcp://localhost:1883, my-client-id)...
+2021/10/05 23:20:43  - INFO - Trying to connect (tcp://localhost:1883, my-client-id)...
+2021/10/05 23:20:46  - INFO - Trying to connect (tcp://localhost:1883, my-client-id)...
+2021/10/05 23:20:49  - INFO - Trying to connect (tcp://localhost:1883, my-client-id)...
+2021/10/05 23:20:52  - INFO - Trying to connect (tcp://localhost:1883, my-client-id)...
+2021/10/05 23:20:55  - INFO - Trying to connect (tcp://localhost:1883, my-client-id)...
+2021/10/05 23:21:06  - INFO - main(start)
+2021/10/05 23:21:06  - INFO - connected to (tcp://localhost:1883, my-client-id)...
+2021/10/05 23:21:06  - INFO - database(start insert)
+2021/10/05 23:21:06  - INFO - my super message
+2021/10/05 23:21:06  - INFO - database(end insert)
+2021/10/05 23:22:05  - INFO - main(start)
+2021/10/05 23:22:05  - INFO - connected to (tcp://localhost:1883, my-client-id)...
+2021/10/05 23:22:05  - INFO - database(start insert)
+2021/10/05 23:22:05  - INFO - my super message
+2021/10/05 23:22:05  - INFO - database(end insert)
+2021/10/05 23:22:05  - INFO - waiting for pubs...
+2021/10/05 23:23:55  - INFO - main(start)
+2021/10/05 23:23:55  - INFO - connected to (tcp://localhost:1883, my-client-id)...
+2021/10/05 23:23:55  - INFO - database(start insert)
+2021/10/05 23:23:55  - INFO - my super message
+2021/10/05 23:23:55  - INFO - database(end insert)
+2021/10/05 23:23:55  - INFO - waiting for pubs...
+2021/10/05 23:23:58  - INFO - blarg
+2021/10/05 23:24:00  - INFO - blarg
+2021/10/05 23:24:01  - INFO - blarg
+2021/10/05 23:25:07  - INFO - main(start)
+2021/10/05 23:25:07  - INFO - connected to (tcp://localhost:1883, my-client-id)...
+2021/10/05 23:25:07  - INFO - database(start insert)
+2021/10/05 23:25:07  - INFO - database(end insert)
+2021/10/05 23:25:07  - INFO - waiting for pubs...
+2021/10/05 23:25:08  - INFO - received message: blarg
+2021/10/05 23:25:10  - INFO - received message: blarg

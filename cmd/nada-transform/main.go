@@ -8,7 +8,9 @@ import (
 )
 
 func onMessageReceived(client mqtt.Client, message mqtt.Message) {
-	myLog.MyLog(myLog.Get_level_INFO(), string(message.Payload()))
+	//TODO: fmt client id also
+	myLog.MyLog(myLog.Get_level_INFO(), "received message: "+string(message.Payload()))
+	//TODO: split message
 
 }
 
@@ -19,9 +21,12 @@ func main() {
 	myLog.MyLog(myLog.Get_level_INFO(), "main(start)")
 	client := subscriber.Connect("tcp://localhost:1883", "my-client-id")
 	client.Subscribe(topic, 0, onMessageReceived)
+	//client.Publish(topic, 0, false, "my super message")
 	database.Insert()
-	for {
+	myLog.MyLog(myLog.Get_level_INFO(), "waiting for pubs...")
 
+	for {
+		//TODO: press a key to stop end programm properly
 	}
 	myLog.MyLog(myLog.Get_level_INFO(), "main(end)")
 }
