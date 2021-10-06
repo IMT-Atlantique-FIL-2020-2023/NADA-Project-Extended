@@ -1,8 +1,9 @@
 package subscriber
 
 import (
-	"time"
 	"log"
+	"time"
+
 	"github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-transform/myLog"
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
@@ -17,20 +18,20 @@ func createClientOptions(brokerURI string, clientId string) *mqtt.ClientOptions 
 	// opts.SetPassword(password)
 	opts.SetClientID(clientId)
 	return opts
-	
-	}
 
-	func Connect(brokerURI string, clientId string) mqtt.Client {
-		opts := createClientOptions(brokerURI, clientId)
-		client := mqtt.NewClient(opts)
-		token := client.Connect()
-		for !token.WaitTimeout(3 * time.Second) {
-			myLog.MyLog(myLog.Get_level_INFO(), "Trying to connect (" + brokerURI + ", " + clientId + ")...")
-		}
-		if err := token.Error(); err != nil {
-			log.Fatal(err)
-		}
-		myLog.MyLog(myLog.Get_level_INFO(), "connected to (" + brokerURI + ", " + clientId + ")...")
-		return client
-		
-		}
+}
+
+func Connect(brokerURI string, clientId string) mqtt.Client {
+	opts := createClientOptions(brokerURI, clientId)
+	client := mqtt.NewClient(opts)
+	token := client.Connect()
+	for !token.WaitTimeout(3 * time.Second) {
+		myLog.MyLog(myLog.Get_level_INFO(), "subscriber(Trying to connect "+brokerURI+", "+clientId+"...)")
+	}
+	if err := token.Error(); err != nil {
+		log.Fatal(err)
+	}
+	myLog.MyLog(myLog.Get_level_INFO(), "subscriber(connected to "+brokerURI+" as "+clientId+")")
+	return client
+
+}
