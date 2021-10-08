@@ -1,16 +1,20 @@
 # github.com/deepmap/oapi-codegen v1.8.2
-## explicit; go 1.14
+## explicit
 github.com/deepmap/oapi-codegen/pkg/runtime
 github.com/deepmap/oapi-codegen/pkg/types
 # github.com/eclipse/paho.mqtt.golang v1.3.5
-## explicit; go 1.14
+## explicit
 github.com/eclipse/paho.mqtt.golang
 github.com/eclipse/paho.mqtt.golang/packets
+# github.com/fsnotify/fsnotify v1.5.1
+## explicit
 # github.com/gorilla/websocket v1.4.2
-## explicit; go 1.12
+## explicit
 github.com/gorilla/websocket
+# github.com/hashicorp/hcl v1.0.0
+## explicit
 # github.com/influxdata/influxdb-client-go/v2 v2.5.1
-## explicit; go 1.13
+## explicit
 github.com/influxdata/influxdb-client-go/v2
 github.com/influxdata/influxdb-client-go/v2/api
 github.com/influxdata/influxdb-client-go/v2/api/http
@@ -23,16 +27,43 @@ github.com/influxdata/influxdb-client-go/v2/internal/log
 github.com/influxdata/influxdb-client-go/v2/internal/write
 github.com/influxdata/influxdb-client-go/v2/log
 # github.com/influxdata/line-protocol v0.0.0-20200327222509-2487e7298839
-## explicit; go 1.13
+## explicit
 github.com/influxdata/line-protocol
+# github.com/joho/godotenv v1.4.0
+## explicit
+github.com/joho/godotenv
+# github.com/magiconair/properties v1.8.5
+## explicit
+# github.com/mitchellh/mapstructure v1.4.2
+## explicit
+# github.com/pelletier/go-toml v1.9.4
+## explicit
 # github.com/pkg/errors v0.9.1
 ## explicit
 github.com/pkg/errors
-# golang.org/x/net v0.0.0-20210119194325-5f4716e94777
-## explicit; go 1.11
+# github.com/spf13/afero v1.6.0
+## explicit
+# github.com/spf13/cast v1.4.1
+## explicit
+# github.com/spf13/jwalterweatherman v1.1.0
+## explicit
+# github.com/spf13/pflag v1.0.5
+## explicit
+# github.com/spf13/viper v1.9.0
+## explicit
+# github.com/subosito/gotenv v1.2.0
+## explicit
+# golang.org/x/net v0.0.0-20210503060351-7fd8e65b6420
+## explicit
 golang.org/x/net/internal/socks
 golang.org/x/net/proxy
 golang.org/x/net/publicsuffix
-# gopkg.in/yaml.v2 v2.3.0
+# golang.org/x/sys v0.0.0-20210823070655-63515b42dcdf
+## explicit
+# golang.org/x/text v0.3.6
+## explicit
+# gopkg.in/ini.v1 v1.63.2
+## explicit
+# gopkg.in/yaml.v2 v2.4.0
 ## explicit
 gopkg.in/yaml.v2

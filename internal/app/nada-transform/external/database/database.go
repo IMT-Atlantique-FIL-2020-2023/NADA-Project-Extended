@@ -7,17 +7,24 @@ import (
 
 	myLog "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-transform/myLog"
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
+	env "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-transform/env"
 )
 
 func Insert(measure model.Measure) {
 	myLog.MyLog(myLog.Get_level_INFO(), "database(start insert)")
 
+	var db_url string = env.GetEnv("INFLUXDB_URL")
+	var db_authToken string = env.GetEnv("INFLUXDB_AUTHTKN")
+	var db_usermail string = env.GetEnv("INFLUXDB_USERMAIL")
+	var db_bucketName string = env.GetEnv("INFLUXDB_BUCKETNAME")
+
+
 	// Create a client
 	// You can generate a Token from the "Tokens Tab" in the UI
-	client := influxdb2.NewClient("https://europe-west1-1.gcp.cloud2.influxdata.com", "0H50vNcIocetKxlsmX86RuQHgGWU4O4gFfTFDMRLXDhxj-3LwrraHcMKkd3tq27ahf_s2lnCroTauXJIu737xg==")
+	client := influxdb2.NewClient(db_url, db_authToken)
 
 	// get non-blocking write client
-	writeAPI := client.WriteAPI("raphapainterr@gmail.com", "bucket1")
+	writeAPI := client.WriteAPI(db_usermail, db_bucketName)
 
 	/*
 		• Id du capteur ( entier )
