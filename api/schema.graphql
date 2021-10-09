@@ -29,7 +29,7 @@
 Scalar defined by gqlgen
 """
 scalar Time
-  @fake(type: date, options: { dateFormat: "YYYY-MM-DD HH:mm:ss.SSSSSSSSS" })
+  @fake(type: date, options: { dateFormat: "YYYY-MM-DDTHH:mm:ss.SSSSSSSSSZ" })
 
 schema {
   query: Query
@@ -194,7 +194,7 @@ type MeasureMeanData implements Node {
   startDate: Time!
     @fake(
       type: pastDate
-      options: { dateFormat: "YYYY-MM-DD HH:mm:ss.SSSSSSSSS" }
+      options: { dateFormat: "YYYY-MM-DDTHH:mm:ss.SSSSSSSSSZ" }
     )
   """
   End date of mean calculation
@@ -202,6 +202,6 @@ type MeasureMeanData implements Node {
   endDate: Time!
     @fake(
       type: futureDate
-      options: { dateFormat: "YYYY-MM-DD HH:mm:ss.SSSSSSSSS" }
+      options: { dateFormat: "YYYY-MM-DDTHH:mm:ss.SSSSSSSSSZ" }
     )
 }
