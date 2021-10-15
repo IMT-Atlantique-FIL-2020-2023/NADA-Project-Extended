@@ -666,3 +666,136 @@
 2021/10/09 00:02:09  - INFO - message converted to json: 
 2021/10/09 00:02:09  - INFO - database(start insert)
 2021/10/09 00:02:09  - INFO - database(end insert)
+2021/10/09 00:09:32  - INFO - main(end)
+2021/10/14 21:47:04  - INFO - main(start)
+2021/10/14 21:47:04  - INFO - subscriber(connected to tcp://localhost:1883 as id_client)
+2021/10/14 21:47:04  - INFO - main(subscribed to topic "topic")
+2021/10/14 21:47:04  - INFO - main(waiting for pubs... press Enter to stop programm properly)
+2021/10/14 21:50:53  - INFO - main(end)
+2021/10/14 21:50:56  - INFO - main(start)
+2021/10/14 21:50:56  - INFO - subscriber(connected to tcp://localhost:1883 as id_client)
+2021/10/14 21:50:56  - INFO - main(subscribed to topic "topic")
+2021/10/14 21:50:56  - INFO - main(waiting for pubs... press Enter to stop programm properly)
+2021/10/14 21:51:07  - INFO - received message from {"sensorId": "S001", "airportId" : "A001", "measureType" : "temperature", "value" : 40.2, "timestamp" : "1977-04-22T01:00:00-05:00" }
+
+2021/10/14 21:51:07  - INFO - message converted to json: 
+2021/10/14 21:51:07  - INFO - database(start insert)
+2021/10/14 21:51:08  - INFO - database(end insert)
+2021/10/14 21:51:39  - INFO - main(end)
+2021/10/14 21:51:41  - INFO - main(start)
+2021/10/14 21:51:41  - INFO - subscriber(connected to tcp://localhost:1883 as id_client)
+2021/10/14 21:51:41  - INFO - main(subscribed to topic "topic")
+2021/10/14 21:51:41  - INFO - main(waiting for pubs... press Enter to stop programm properly)
+2021/10/14 21:51:45  - INFO - received message from {"sensorId": "S001", "airportId" : "A001", "measureType" : "temperature", "value" : 40.2, "timestamp" : "1977-04-22T01:00:00-05:00" }
+
+2021/10/14 21:51:45  - INFO - database(start insert)
+2021/10/14 21:51:45  - INFO - database(end insert)
+2021/10/14 21:52:32  - INFO - main(end)
+2021/10/14 21:52:35  - INFO - main(start)
+2021/10/14 21:52:35  - INFO - subscriber(connected to tcp://localhost:1883 as id_client)
+2021/10/14 21:52:35  - INFO - main(subscribed to topic "topic")
+2021/10/14 21:52:35  - INFO - main(waiting for pubs... press Enter to stop programm properly)
+2021/10/14 21:52:37  - INFO - received message from {"sensorId": "S001", "airportId" : "A001", "measureType" : "temperature", "value" : 40.2, "timestamp" : "1977-04-22T01:00:00-05:00" }
+
+2021/10/14 21:52:37  - INFO - database(start insert)
+2021/10/14 21:52:37  - INFO - database(end insert)
+2021/10/14 21:59:32  - INFO - main(end)
+2021/10/14 21:59:44  - INFO - main(start)
+2021/10/14 21:59:44  - INFO - subscriber(connected to tcp://localhost:1883 as id_client)
+2021/10/14 21:59:44  - INFO - main(subscribed to topic "topic")
+2021/10/14 21:59:44  - INFO - main(waiting for pubs... press Enter to stop programm properly)
+2021/10/14 21:59:46  - INFO - received message from {"sensorId": "S001", "airportId" : "A001", "measureType" : "temperature", "value" : 40.2, "timestamp" : "1977-04-22T01:00:00-05:00" }
+
+2021/10/14 21:59:46  - INFO - database(start insert)
+2021/10/14 21:59:46  - INFO - database(end insert)
+2021/10/14 22:00:06  - INFO - received message from {"sensorId": "S001", "airportId" : "A001", "measureType" : "temperature", "value" : 40.2, "timestamp" : "1977-04-22T01:00:00-05:00" }
+
+2021/10/14 22:00:06  - INFO - database(start insert)
+2021/10/14 22:00:06 influxdb2client E! Write error: Post "https://europe-west1-1.gcp.cloud2.influxdata.com/api/v2/write?bucket=bucket1&org=raphapainterr%40gmail.com&precision=ns": dial tcp: lookup europe-west1-1.gcp.cloud2.influxdata.com: no such host
+Batch kept for retrying
+2021/10/14 22:00:06  - INFO - database(end insert)
+2021/10/14 22:00:07  - INFO - received message from {"sensorId": "S001", "airportId" : "A001", "measureType" : "temperature", "value" : 40.2, "timestamp" : "1977-04-22T01:00:00-05:00" }
+
+2021/10/14 22:00:07  - INFO - database(start insert)
+2021/10/14 22:00:07 influxdb2client E! Write error: Post "https://europe-west1-1.gcp.cloud2.influxdata.com/api/v2/write?bucket=bucket1&org=raphapainterr%40gmail.com&precision=ns": dial tcp: lookup europe-west1-1.gcp.cloud2.influxdata.com: no such host
+Batch kept for retrying
+2021/10/14 22:00:07  - INFO - database(end insert)
+2021/10/14 22:00:08  - INFO - received message from {"sensorId": "S001", "airportId" : "A001", "measureType" : "temperature", "value" : 40.2, "timestamp" : "1977-04-22T01:00:00-05:00" }
+
+2021/10/14 22:00:08  - INFO - database(start insert)
+2021/10/14 22:00:08 influxdb2client E! Write error: Post "https://europe-west1-1.gcp.cloud2.influxdata.com/api/v2/write?bucket=bucket1&org=raphapainterr%40gmail.com&precision=ns": dial tcp: lookup europe-west1-1.gcp.cloud2.influxdata.com: no such host
+Batch kept for retrying
+2021/10/14 22:00:08  - INFO - database(end insert)
+2021/10/14 22:00:09  - INFO - received message from {"sensorId": "S001", "airportId" : "A001", "measureType" : "temperature", "value" : 40.2, "timestamp" : "1977-04-22T01:00:00-05:00" }
+
+2021/10/14 22:00:09  - INFO - database(start insert)
+2021/10/14 22:00:09 influxdb2client E! Write error: Post "https://europe-west1-1.gcp.cloud2.influxdata.com/api/v2/write?bucket=bucket1&org=raphapainterr%40gmail.com&precision=ns": dial tcp: lookup europe-west1-1.gcp.cloud2.influxdata.com: no such host
+Batch kept for retrying
+2021/10/14 22:00:09  - INFO - database(end insert)
+2021/10/14 22:00:24  - INFO - main(end)
+2021/10/14 22:00:26  - INFO - main(start)
+2021/10/14 22:00:26  - INFO - subscriber(connected to tcp://localhost:1883 as id_client)
+2021/10/14 22:00:26  - INFO - main(subscribed to topic "topic")
+2021/10/14 22:00:26  - INFO - main(waiting for pubs... press Enter to stop programm properly)
+2021/10/14 22:00:28  - INFO - received message from {"sensorId": "S001", "airportId" : "A001", "measureType" : "temperature", "value" : 40.2, "timestamp" : "1977-04-22T01:00:00-05:00" }
+
+2021/10/14 22:00:28  - INFO - database(start insert)
+2021/10/14 22:00:28 influxdb2client E! Write error: Post "https://europe-west1-1.gcp.cloud2.influxdata.com/api/v2/write?bucket=bucket1&org=raphapainterr%40gmail.com&precision=ns": dial tcp: lookup europe-west1-1.gcp.cloud2.influxdata.com: no such host
+Batch kept for retrying
+2021/10/14 22:00:28  - INFO - database(end insert)
+2021/10/14 22:00:28  - INFO - received message from {"sensorId": "S001", "airportId" : "A001", "measureType" : "temperature", "value" : 40.2, "timestamp" : "1977-04-22T01:00:00-05:00" }
+
+2021/10/14 22:00:28  - INFO - database(start insert)
+2021/10/14 22:00:28 influxdb2client E! Write error: Post "https://europe-west1-1.gcp.cloud2.influxdata.com/api/v2/write?bucket=bucket1&org=raphapainterr%40gmail.com&precision=ns": dial tcp: lookup europe-west1-1.gcp.cloud2.influxdata.com: no such host
+Batch kept for retrying
+2021/10/14 22:00:28  - INFO - database(end insert)
+2021/10/14 22:00:58  - INFO - main(end)
+2021/10/15 17:23:24  - INFO - main(start)
+2021/10/15 17:23:26 network Error : dial tcp [::1]:1883: connectex: Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée.
+2021/10/15 17:28:09  - INFO - main(start)
+2021/10/15 17:28:09 not Authorized
+2021/10/15 17:30:10  - INFO - main(start)
+2021/10/15 17:30:13  - INFO - subscriber(Trying to connect ssl://mqtt.beebotte.com:1883, id_client...)
+2021/10/15 17:30:16  - INFO - subscriber(Trying to connect ssl://mqtt.beebotte.com:1883, id_client...)
+2021/10/15 17:30:19  - INFO - subscriber(Trying to connect ssl://mqtt.beebotte.com:1883, id_client...)
+2021/10/15 17:30:22  - INFO - subscriber(Trying to connect ssl://mqtt.beebotte.com:1883, id_client...)
+2021/10/15 17:30:25  - INFO - subscriber(Trying to connect ssl://mqtt.beebotte.com:1883, id_client...)
+2021/10/15 17:30:28  - INFO - subscriber(Trying to connect ssl://mqtt.beebotte.com:1883, id_client...)
+2021/10/15 17:30:31  - INFO - subscriber(Trying to connect ssl://mqtt.beebotte.com:1883, id_client...)
+2021/10/15 17:30:34  - INFO - subscriber(Trying to connect ssl://mqtt.beebotte.com:1883, id_client...)
+2021/10/15 17:30:37  - INFO - subscriber(Trying to connect ssl://mqtt.beebotte.com:1883, id_client...)
+2021/10/15 17:30:40  - INFO - subscriber(Trying to connect ssl://mqtt.beebotte.com:1883, id_client...)
+2021/10/15 17:30:40 network Error : tls: DialWithDialer timed out
+2021/10/15 17:32:39  - INFO - main(start)
+2021/10/15 17:32:39 network Error : dial tcp: address mqtt.beebotte.com: missing port in address
+2021/10/15 17:32:46  - INFO - main(start)
+2021/10/15 17:32:49  - INFO - subscriber(Trying to connect ssl://mqtt.beebotte.com:1883, id_client...)
+2021/10/15 17:32:52  - INFO - subscriber(Trying to connect ssl://mqtt.beebotte.com:1883, id_client...)
+2021/10/15 17:33:30  - INFO - main(start)
+2021/10/15 17:33:30 network Error : dial tcp: address mqtt.beebotte.com: missing port in address
+2021/10/15 17:34:14  - INFO - main(start)
+2021/10/15 17:34:17  - INFO - subscriber(Trying to connect ssl://mqtt.beebotte.com:1883/shirzooa, id_client...)
+2021/10/15 17:34:20  - INFO - subscriber(Trying to connect ssl://mqtt.beebotte.com:1883/shirzooa, id_client...)
+2021/10/15 17:35:30  - INFO - main(start)
+2021/10/15 17:35:33  - INFO - subscriber(Trying to connect ssl://mqtt.beebotte.com:1883/shirzooa, id_client...)
+2021/10/15 17:35:36  - INFO - subscriber(Trying to connect ssl://mqtt.beebotte.com:1883/shirzooa, id_client...)
+2021/10/15 17:36:27  - INFO - main(start)
+2021/10/15 17:36:30  - INFO - subscriber(Trying to connect ssl://mqtt.beebotte.com:1883, id_client...)
+2021/10/15 17:36:33  - INFO - subscriber(Trying to connect ssl://mqtt.beebotte.com:1883, id_client...)
+2021/10/15 17:40:48  - INFO - main(start)
+2021/10/15 17:40:50 network Error : dial tcp: lookup https: no such host
+2021/10/15 17:40:57  - INFO - main(start)
+2021/10/15 17:41:00 network Error : dial tcp: lookup https: no such host
+2021/10/15 17:41:35  - INFO - main(start)
+2021/10/15 17:41:37 network Error : read tcp 172.16.128.212:52663->5.196.95.208:1883: wsarecv: Une connexion existante a dû être fermée par l’hôte distant.
+2021/10/15 17:43:20  - INFO - main(start)
+2021/10/15 17:43:21 network Error : read tcp 172.16.128.212:52652->5.196.95.208:1883: wsarecv: Une connexion existante a dû être fermée par l’hôte distant.
+2021/10/15 17:44:06  - INFO - main(start)
+2021/10/15 17:44:07  - INFO - subscriber(connected to tcp://test.mosquitto.org:1883 as id_client)
+2021/10/15 17:44:07  - INFO - main(subscribed to topic "topic")
+2021/10/15 17:44:07  - INFO - main(waiting for pubs... press Enter to stop programm properly)
+2021/10/15 17:44:30  - INFO - received message from sd
+2021/10/15 17:44:30  - ERROR - invalid character 's' looking for beginning of value
+2021/10/15 17:44:30  - INFO - database(start insert)
+2021/10/15 17:44:30  - INFO - database(end insert)
+2021/10/15 17:44:34  - INFO - main(end)

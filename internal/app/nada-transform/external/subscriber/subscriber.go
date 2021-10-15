@@ -14,7 +14,6 @@ func createClientOptions(brokerURI string, clientId string) *mqtt.ClientOptions 
 	// AddBroker adds a broker URI to the list of brokers to be used.
 	// The format should be "scheme://host:port"
 	opts.AddBroker(brokerURI)
-	// opts.SetUsername(user)
 	// opts.SetPassword(password)
 	opts.SetClientID(clientId)
 	return opts

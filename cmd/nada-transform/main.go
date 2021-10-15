@@ -22,7 +22,6 @@ func onMessageReceived(client mqtt.Client, message mqtt.Message) {
 		myLog.MyLog(myLog.Get_level_ERROR(), err.Error())
 	}
 	
-	myLog.MyLog(myLog.Get_level_INFO(), "message converted to json: ")
 
 	database.Insert(measurement)
 }
