@@ -1,3 +1,7 @@
+***NADA-TRANSFORM***  
+- Subscribes to a configured MQTT topic  
+- Inserts received data into the configured influxDB database
+
 **LAUNCH MOSQUITTO**  
 cd \<mosquitto directory\>  
 ./mosquitto -v
