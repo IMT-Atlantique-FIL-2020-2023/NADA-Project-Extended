@@ -26,7 +26,7 @@ func onMessageReceived(client mqtt.Client, message mqtt.Message) {
 }
 
 func init() {
-	env.Init("internal/app/nada-transform/env/.env")
+	env.Init("internal/app/nada-transform/env/.nada-transform.env")
 	myLog.Init(env.GetEnv("NADA_TRANSFORM_LOG_LEVEL"))
 }
 
@@ -38,7 +38,7 @@ func main() {
 	var mqtt_client_id string = env.GetEnv("NADA_TRANSFORM_MQTT_CLIENT_ID")
 	var topic string = env.GetEnv("NADA_TRANSFORM_MQTT_TOPIC")
 
-	client := subscriber.Connect("tcp://"+mqtt_host+":"+mqtt_port, mqtt_client_id)
+	client := subscriber.Connect(mqtt_host+":"+mqtt_port, mqtt_client_id)
 	client.Subscribe(topic, 0, onMessageReceived)
 
 	myLog.MyLog(myLog.Get_level_INFO(), "main(subscribed to topic \""+topic+"\")")

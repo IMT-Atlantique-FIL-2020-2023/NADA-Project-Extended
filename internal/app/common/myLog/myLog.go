@@ -28,8 +28,8 @@ func Get_level_ERROR() logLevel {
 	return logLevel{label: "ERROR", level: 2}
 }
 
-func Init(path string) {
-	logEnvLevel, err := strconv.Atoi(path)
+func Init(loglevelstring string) {
+	logEnvLevel, err := strconv.Atoi(loglevelstring)
 	if err != nil {
 		MyLog(Get_level_ERROR(), err.Error())
 	}

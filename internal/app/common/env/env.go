@@ -1,19 +1,20 @@
 package env
 
 import (
-  godotenv "github.com/joho/godotenv"
-  "os"
-  "log"
+  viper "github.com/spf13/viper"
+  "fmt"
 )
 
 func GetEnv(key string) string {
-	return os.Getenv(key)
+	return viper.GetString(key)
   }
 
 func Init(path string){
-	err := godotenv.Load()
-	//"internal/app/nada-transform/env/.env"
+	viper.AddConfigPath("internal/app/nada-transform/env")
+    viper.SetConfigName(".nada-transform.env")
+    viper.SetConfigType("env")
+	err := viper.ReadInConfig()
 	if err != nil {
-		log.Fatal(err)
-	}
+		fmt.Println(err)
+	 }
 }
