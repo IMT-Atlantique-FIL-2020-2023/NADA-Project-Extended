@@ -1,5 +1,5 @@
 **LAUNCH MOSQUITTO**  
-cd 'C:\Program Files\Mosquitto'
+cd <mosquitto directory>
 ./mosquitto -v
 
 **CONFIGURE**  
