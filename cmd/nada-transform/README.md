@@ -1,5 +1,5 @@
 **LAUNCH MOSQUITTO**  
-cd \<mosquitto directory\>
+cd \<mosquitto directory\>  
 ./mosquitto -v
 
 **CONFIGURE**  
