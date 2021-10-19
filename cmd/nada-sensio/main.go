@@ -15,7 +15,7 @@ import (
 )
 
 func init() {
-	env.Init("internal/app/nada-sensio/env/.nada-sensio.env")
+	env.Init("internal/app/nada-sensio/env/.nada-sensio.env", ".nada-transform.env")
 	myLog.Init(env.GetEnv("NADA_SENSIO_LOG_LEVEL"))
 }
 
