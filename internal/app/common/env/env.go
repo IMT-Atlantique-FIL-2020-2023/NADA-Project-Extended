@@ -1,20 +1,21 @@
 package env
 
 import (
-  viper "github.com/spf13/viper"
-  "fmt"
+	"fmt"
+
+	viper "github.com/spf13/viper"
 )
 
 func GetEnv(key string) string {
 	return viper.GetString(key)
-  }
+}
 
-func Init(path string){
-	viper.AddConfigPath("internal/app/nada-transform/env")
-    viper.SetConfigName(".nada-transform.env")
-    viper.SetConfigType("env")
+func Init(path string, name string) {
+	viper.AddConfigPath(path)
+	viper.SetConfigName(name)
+	viper.SetConfigType("env")
 	err := viper.ReadInConfig()
 	if err != nil {
 		fmt.Println(err)
-	 }
+	}
 }
