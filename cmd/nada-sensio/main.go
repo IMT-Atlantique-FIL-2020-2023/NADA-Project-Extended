@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
 	"time"
 
 	env "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/common/env"
@@ -8,8 +10,6 @@ import (
 
 	publisher "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-sensio/publisher"
 	sim "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-sensio/simulation"
-
-	"encoding/json"
 
 	"github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/common/myLog"
 )
@@ -29,15 +29,18 @@ func main() {
 
 	params := sim.SimParam{Noise_seed: 0, Origin_latitude: 0, Origin_longitude: 0, TimeStamp: time.Now()}
 
+	client := publisher.Connect(mqtt_host+":"+mqtt_port, mqtt_client_id)
+
 	for {
-		result := model.Measure{SensorID: "S001", AirportID: "A001", MeasureType: "temperature", Value: sim.Temperature(params), Timestamp: time.Now().String()}
-		client := publisher.Connect("tcp://"+mqtt_host+":"+mqtt_port, mqtt_client_id)
+		result := model.Measure{SensorID: "S001", AirportID: "A001", MeasureType: "temperature", Value: sim.Altitude(params), Timestamp: time.Now().String()}
+		fmt.Println(result)
 		msg, err := json.Marshal(result)
 		if err != nil {
 			myLog.MyLog(myLog.Get_level_ERROR(), "main(could not parse Measure struct to json format)")
 		}
 		client.Publish(topic, env.GetEnv("NADA_SENSIO_QOS")[0], false, msg)
-		time.Sleep(500)
+
+		time.Sleep(time.Millisecond * 500)
 	}
 
 	myLog.MyLog(myLog.Get_level_INFO(), "main(end)")

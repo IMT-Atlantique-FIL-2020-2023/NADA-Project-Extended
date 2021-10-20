@@ -40,7 +40,9 @@ func Altitude(params SimParam) float64 {
 
 	noiseFactor := noise.Noise1D(float64(params.TimeStamp.UnixMilli()) / 1000)
 
-	altitude := params.Origin_altitude * noiseFactor
+	noiseScale := 20
+
+	altitude := params.Origin_altitude + noiseFactor*float64(noiseScale)
 
 	return altitude
 }
