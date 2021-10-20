@@ -13,7 +13,7 @@ import (
 )
 
 func onMessageReceived(client mqtt.Client, message mqtt.Message) {
-	myLog.MyLog(myLog.Get_level_INFO(), "received message from "+string(message.Payload()))
+	myLog.MyLog(myLog.Get_level_INFO(), "received message: "+string(message.Payload()))
 
 	// decoding JSON
 	var measurement model.Measure
