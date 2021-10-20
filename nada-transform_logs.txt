@@ -799,3 +799,5 @@ Batch kept for retrying
 2021/10/15 17:44:30  - INFO - database(start insert)
 2021/10/15 17:44:30  - INFO - database(end insert)
 2021/10/15 17:44:34  - INFO - main(end)
+2021/10/18 13:46:38  - INFO - main(start)
+2021/10/18 13:46:38 network Error : read tcp 172.16.125.151:52090->5.196.95.208:1883: wsarecv: An existing connection was forcibly closed by the remote host.

@@ -39,7 +39,7 @@ func main() {
 	var topic string = env.GetEnv("NADA_TRANSFORM_MQTT_TOPIC")
 
 	client := subscriber.Connect(mqtt_host+":"+mqtt_port, mqtt_client_id)
-	client.Subscribe(topic, 0, onMessageReceived)
+	client.Subscribe(topic, 1, onMessageReceived)
 
 	myLog.MyLog(myLog.Get_level_INFO(), "main(subscribed to topic \""+topic+"\")")
 	myLog.MyLog(myLog.Get_level_INFO(), "main(waiting for pubs... press Enter to stop programm properly)")

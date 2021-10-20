@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"strconv"
 	"time"
 
 	env "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/common/env"
@@ -38,7 +39,13 @@ func main() {
 		if err != nil {
 			myLog.MyLog(myLog.Get_level_ERROR(), "main(could not parse Measure struct to json format)")
 		}
-		client.Publish(topic, env.GetEnv("NADA_SENSIO_QOS")[0], false, msg)
+
+		qos, err := strconv.Atoi(env.GetEnv("NADA_SENSIO_QOS"))
+		if err != nil {
+			myLog.MyLog(myLog.Get_level_ERROR(), "main(could not retrieve qos from env)")
+		}
+
+		client.Publish(topic, byte(qos), false, msg)
 
 		time.Sleep(time.Millisecond * 500)
 	}
