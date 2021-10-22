@@ -1,20 +1,77 @@
+# github.com/99designs/gqlgen v0.14.0
+## explicit; go 1.12
+github.com/99designs/gqlgen
+github.com/99designs/gqlgen/api
+github.com/99designs/gqlgen/cmd
+github.com/99designs/gqlgen/codegen
+github.com/99designs/gqlgen/codegen/config
+github.com/99designs/gqlgen/codegen/templates
+github.com/99designs/gqlgen/complexity
+github.com/99designs/gqlgen/graphql
+github.com/99designs/gqlgen/graphql/errcode
+github.com/99designs/gqlgen/graphql/executor
+github.com/99designs/gqlgen/graphql/handler
+github.com/99designs/gqlgen/graphql/handler/extension
+github.com/99designs/gqlgen/graphql/handler/lru
+github.com/99designs/gqlgen/graphql/handler/transport
+github.com/99designs/gqlgen/graphql/introspection
+github.com/99designs/gqlgen/graphql/playground
+github.com/99designs/gqlgen/handler
+github.com/99designs/gqlgen/internal/code
+github.com/99designs/gqlgen/internal/imports
+github.com/99designs/gqlgen/internal/rewrite
+github.com/99designs/gqlgen/plugin
+github.com/99designs/gqlgen/plugin/federation
+github.com/99designs/gqlgen/plugin/modelgen
+github.com/99designs/gqlgen/plugin/resolvergen
+github.com/99designs/gqlgen/plugin/servergen
+# github.com/agnivade/levenshtein v1.1.0
+## explicit; go 1.13
+github.com/agnivade/levenshtein
+# github.com/cpuguy83/go-md2man/v2 v2.0.0
+## explicit; go 1.12
+github.com/cpuguy83/go-md2man/v2/md2man
 # github.com/deepmap/oapi-codegen v1.8.2
-## explicit
+## explicit; go 1.14
 github.com/deepmap/oapi-codegen/pkg/runtime
 github.com/deepmap/oapi-codegen/pkg/types
 # github.com/eclipse/paho.mqtt.golang v1.3.5
-## explicit
+## explicit; go 1.14
 github.com/eclipse/paho.mqtt.golang
 github.com/eclipse/paho.mqtt.golang/packets
+# github.com/fatih/structs v1.1.0
+## explicit
+github.com/fatih/structs
 # github.com/fsnotify/fsnotify v1.5.1
-## explicit
+## explicit; go 1.13
+github.com/fsnotify/fsnotify
+# github.com/go-playground/locales v0.14.0
+## explicit; go 1.13
+github.com/go-playground/locales
+github.com/go-playground/locales/currency
+# github.com/go-playground/universal-translator v0.18.0
+## explicit; go 1.13
+github.com/go-playground/universal-translator
+# github.com/go-playground/validator/v10 v10.9.0
+## explicit; go 1.13
+github.com/go-playground/validator/v10
 # github.com/gorilla/websocket v1.4.2
-## explicit
+## explicit; go 1.12
 github.com/gorilla/websocket
-# github.com/hashicorp/hcl v1.0.0
-## explicit
+# github.com/graph-gophers/dataloader/v6 v6.0.0
+## explicit; go 1.15
+github.com/graph-gophers/dataloader/v6
+# github.com/hashicorp/golang-lru v0.5.4
+## explicit; go 1.12
+github.com/hashicorp/golang-lru
+github.com/hashicorp/golang-lru/simplelru
+# github.com/henvic/httpretty v0.0.6
+## explicit; go 1.13
+github.com/henvic/httpretty
+github.com/henvic/httpretty/internal/color
+github.com/henvic/httpretty/internal/header
 # github.com/influxdata/influxdb-client-go/v2 v2.5.1
-## explicit
+## explicit; go 1.13
 github.com/influxdata/influxdb-client-go/v2
 github.com/influxdata/influxdb-client-go/v2/api
 github.com/influxdata/influxdb-client-go/v2/api/http
@@ -27,43 +84,119 @@ github.com/influxdata/influxdb-client-go/v2/internal/log
 github.com/influxdata/influxdb-client-go/v2/internal/write
 github.com/influxdata/influxdb-client-go/v2/log
 # github.com/influxdata/line-protocol v0.0.0-20200327222509-2487e7298839
-## explicit
+## explicit; go 1.13
 github.com/influxdata/line-protocol
 # github.com/joho/godotenv v1.4.0
-## explicit
+## explicit; go 1.12
 github.com/joho/godotenv
-# github.com/magiconair/properties v1.8.5
+# github.com/knadh/koanf v1.2.4
+## explicit; go 1.12
+github.com/knadh/koanf
+github.com/knadh/koanf/maps
+github.com/knadh/koanf/parsers/yaml
+github.com/knadh/koanf/providers/env
+github.com/knadh/koanf/providers/file
+github.com/knadh/koanf/providers/structs
+# github.com/leodido/go-urn v1.2.1
+## explicit; go 1.13
+github.com/leodido/go-urn
+# github.com/matryer/moq v0.0.0-20200106131100-75d0ddfc0007
 ## explicit
+github.com/matryer/moq
+github.com/matryer/moq/pkg/moq
+# github.com/mitchellh/copystructure v1.2.0
+## explicit; go 1.15
+github.com/mitchellh/copystructure
 # github.com/mitchellh/mapstructure v1.4.2
+## explicit; go 1.14
+github.com/mitchellh/mapstructure
+# github.com/mitchellh/reflectwalk v1.0.2
 ## explicit
+github.com/mitchellh/reflectwalk
+# github.com/opentracing/opentracing-go v1.2.0
+## explicit; go 1.14
+github.com/opentracing/opentracing-go
+github.com/opentracing/opentracing-go/log
 # github.com/pelletier/go-toml v1.9.4
-## explicit
+## explicit; go 1.12
 # github.com/pkg/errors v0.9.1
 ## explicit
 github.com/pkg/errors
-# github.com/spf13/afero v1.6.0
+# github.com/rs/zerolog v1.25.0
+## explicit; go 1.15
+github.com/rs/zerolog
+github.com/rs/zerolog/internal/cbor
+github.com/rs/zerolog/internal/json
+github.com/rs/zerolog/log
+# github.com/russross/blackfriday/v2 v2.0.1
 ## explicit
-# github.com/spf13/cast v1.4.1
+github.com/russross/blackfriday/v2
+# github.com/shurcooL/sanitized_anchor_name v1.0.0
 ## explicit
-# github.com/spf13/jwalterweatherman v1.1.0
+github.com/shurcooL/sanitized_anchor_name
+# github.com/urfave/cli/v2 v2.1.1
+## explicit; go 1.11
+github.com/urfave/cli/v2
+# github.com/vektah/dataloaden v0.3.0
 ## explicit
-# github.com/spf13/pflag v1.0.5
-## explicit
-# github.com/spf13/viper v1.9.0
-## explicit
-# github.com/subosito/gotenv v1.2.0
-## explicit
+github.com/vektah/dataloaden
+github.com/vektah/dataloaden/pkg/generator
+# github.com/vektah/gqlparser/v2 v2.2.0
+## explicit; go 1.13
+github.com/vektah/gqlparser/v2
+github.com/vektah/gqlparser/v2/ast
+github.com/vektah/gqlparser/v2/gqlerror
+github.com/vektah/gqlparser/v2/lexer
+github.com/vektah/gqlparser/v2/parser
+github.com/vektah/gqlparser/v2/validator
+github.com/vektah/gqlparser/v2/validator/rules
+# golang.org/x/crypto v0.0.0-20210711020723-a769d52b0f97
+## explicit; go 1.17
+golang.org/x/crypto/sha3
+# golang.org/x/mod v0.4.2
+## explicit; go 1.12
+golang.org/x/mod/module
+golang.org/x/mod/semver
 # golang.org/x/net v0.0.0-20210503060351-7fd8e65b6420
-## explicit
+## explicit; go 1.17
 golang.org/x/net/internal/socks
 golang.org/x/net/proxy
 golang.org/x/net/publicsuffix
 # golang.org/x/sys v0.0.0-20210823070655-63515b42dcdf
-## explicit
+## explicit; go 1.17
+golang.org/x/sys/cpu
+golang.org/x/sys/execabs
+golang.org/x/sys/internal/unsafeheader
+golang.org/x/sys/unix
 # golang.org/x/text v0.3.6
-## explicit
-# gopkg.in/ini.v1 v1.63.2
-## explicit
+## explicit; go 1.11
+golang.org/x/text/internal/language
+golang.org/x/text/internal/language/compact
+golang.org/x/text/internal/tag
+golang.org/x/text/language
+# golang.org/x/tools v0.1.5
+## explicit; go 1.17
+golang.org/x/tools/go/ast/astutil
+golang.org/x/tools/go/gcexportdata
+golang.org/x/tools/go/internal/gcimporter
+golang.org/x/tools/go/internal/packagesdriver
+golang.org/x/tools/go/packages
+golang.org/x/tools/imports
+golang.org/x/tools/internal/event
+golang.org/x/tools/internal/event/core
+golang.org/x/tools/internal/event/keys
+golang.org/x/tools/internal/event/label
+golang.org/x/tools/internal/fastwalk
+golang.org/x/tools/internal/gocommand
+golang.org/x/tools/internal/gopathwalk
+golang.org/x/tools/internal/imports
+golang.org/x/tools/internal/packagesinternal
+golang.org/x/tools/internal/typeparams
+golang.org/x/tools/internal/typesinternal
+# golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1
+## explicit; go 1.11
+golang.org/x/xerrors
+golang.org/x/xerrors/internal
 # gopkg.in/yaml.v2 v2.4.0
-## explicit
+## explicit; go 1.15
 gopkg.in/yaml.v2
