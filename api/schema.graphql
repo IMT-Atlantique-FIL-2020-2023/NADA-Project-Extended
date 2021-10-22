@@ -24,11 +24,26 @@
 #     }
 #   }
 # }
-
+# https://gqlgen.com/getting-started/
 """
-Scalar defined by gqlgen
+Directives defined by gqlgen
+"""
+directive @goModel(
+  model: String
+  models: [String!]
+) on OBJECT | INPUT_OBJECT | SCALAR | ENUM | INTERFACE | UNION
+
+directive @goField(
+  forceResolver: Boolean
+  name: String
+) on INPUT_FIELD_DEFINITION | FIELD_DEFINITION
+"""
+Scalars defined by gqlgen
 """
 scalar Time
+scalar Map
+scalar Upload
+scalar Any
   @fake(type: date, options: { dateFormat: "YYYY-MM-DDTHH:mm:ss.SSSSSSSSSZ" })
 
 schema {
@@ -72,7 +87,7 @@ type Airport implements Node {
   """
   List of available sensors for this airport
   """
-  sensors: [Sensor!]! @listLength(min: 2, max: 2)
+  sensors: [Sensor!]! @listLength(min: 2, max: 2) @goField(forceResolver: true)
 
   """
   Get mean measures for a specific day, for each sensor available.
@@ -83,7 +98,9 @@ type Airport implements Node {
     Mean values will be calculated for the day specified
     """
     day: Time
-  ): [MeasureMeanData!]! @listLength(min: 2, max: 2)
+  ): [MeasureMeanData!]!
+    @listLength(min: 2, max: 2)
+    @goField(forceResolver: true)
 
   """
   Get a subset of sensors
@@ -93,7 +110,7 @@ type Airport implements Node {
     Ids of sensors to get
     """
     sensorIds: [ID!]!
-  ): [Sensor!]! @listLength(min: 1, max: 2)
+  ): [Sensor!]! @listLength(min: 1, max: 2) @goField(forceResolver: true)
 }
 
 type Measurement implements Node {
@@ -148,7 +165,9 @@ type Sensor implements Node {
     Specify discretize argument behaviour
     """
     discretizeMode: MeanMeasureMode
-  ): [MeasureMeanData!]! @listLength(min: 5, max: 15)
+  ): [MeasureMeanData!]!
+    @listLength(min: 5, max: 15)
+    @goField(forceResolver: true)
 }
 
 enum MeanMeasureMode {
