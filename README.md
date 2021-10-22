@@ -118,8 +118,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 [build-shield]: https://img.shields.io/github/workflow/status/IMT-Atlantique-FIL-2020-2023/NADA-webapp/Build%20Vue/main?style=flat-square
 [build-url]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-webapp/blob/main/.github/workflows/main.yml
-[version-shield]: https://img.shields.io/github/package-json/v/IMT-Atlantique-FIL-2020-2023/NADA-webapp?style=flat-square
-[version-url]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-webapp/blob/main/package.json
+[version-shield]: https://img.shields.io/github/go-mod/go-version/IMT-Atlantique-FIL-2020-2023/NADA-extended?style=flat-square&color=orange
+[version-url]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/blob/main/mod.go
 [language-shield]: https://img.shields.io/github/languages/top/IMT-Atlantique-FIL-2020-2023/NADA-extended?style=flat-square
 [language-url]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/search?l=vue
 [roadmap-shield]: https://img.shields.io/badge/roadmap-available-brightgreen?style=flat-square
