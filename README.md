@@ -9,7 +9,7 @@
 <br />
 <div align="center">
 <a href="https://imt-atlantique-fil-2020-2023.github.io/NADA-webapp/">
-<img src="src/assets/NADA.svg" alt="Logo" width="200" height="200">
+<img src="https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-webapp/blob/main/src/assets/NADA.svg" alt="Logo" width="200" height="200">
 </a>
 
 <h2 align="center">N.A.D.A Extended</h2>
