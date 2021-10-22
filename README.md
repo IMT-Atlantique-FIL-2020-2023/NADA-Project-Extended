@@ -121,7 +121,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [version-shield]: https://img.shields.io/github/go-mod/go-version/IMT-Atlantique-FIL-2020-2023/NADA-extended?style=flat-square&color=orange
 [version-url]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/blob/main/mod.go
 [language-shield]: https://img.shields.io/github/languages/top/IMT-Atlantique-FIL-2020-2023/NADA-extended?style=flat-square
-[language-url]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/search?l=vue
+[language-url]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/search?l=go
 [roadmap-shield]: https://img.shields.io/badge/roadmap-available-brightgreen?style=flat-square
 [roadmap-url]: https://github.com/orgs/IMT-Atlantique-FIL-2020-2023/projects/1
 [license-shield]: https://img.shields.io/github/license/IMT-Atlantique-FIL-2020-2023/NADA-extended?style=flat-square
