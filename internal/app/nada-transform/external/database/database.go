@@ -3,10 +3,10 @@ package database
 import (
 	"time"
 
-	model "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/common/model"
+	model "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/model"
 
-	env "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/common/env"
-	myLog "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/common/myLog"
+	env "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/env"
+	myLog "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/myLog"
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
 )
 

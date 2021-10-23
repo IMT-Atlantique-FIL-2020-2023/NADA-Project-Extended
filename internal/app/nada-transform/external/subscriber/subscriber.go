@@ -4,7 +4,7 @@ import (
 	"log"
 	"time"
 
-	myLog "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/common/myLog"
+	myLog "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/myLog"
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
 
