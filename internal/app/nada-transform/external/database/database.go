@@ -3,21 +3,20 @@ package database
 import (
 	"time"
 
-	model "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-transform/model"
+	model "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/common/model"
 
-	myLog "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-transform/myLog"
+	env "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/common/env"
+	myLog "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/common/myLog"
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
-	env "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-transform/env"
 )
 
 func Insert(measure model.Measure) {
 	myLog.MyLog(myLog.Get_level_INFO(), "database(start insert)")
 
-	var db_url string = env.GetEnv("INFLUXDB_URL")
-	var db_authToken string = env.GetEnv("INFLUXDB_AUTHTKN")
-	var db_usermail string = env.GetEnv("INFLUXDB_USERMAIL")
-	var db_bucketName string = env.GetEnv("INFLUXDB_BUCKETNAME")
-
+	var db_url string = env.GetEnv("NADA_TRANSFORM_INFLUXDB_URL")
+	var db_authToken string = env.GetEnv("NADA_TRANSFORM_INFLUXDB_AUTHTKN")
+	var db_usermail string = env.GetEnv("NADA_TRANSFORM_INFLUXDB_USERMAIL")
+	var db_bucketName string = env.GetEnv("NADA_TRANSFORM_INFLUXDB_BUCKETNAME")
 
 	// Create a client
 	// You can generate a Token from the "Tokens Tab" in the UI

@@ -11,6 +11,14 @@
       "mode": "auto",
       "program": "cmd/nada-serve/main.go",
       "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Launch Nada-Sensio",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "cmd/nada-sensio/main.go",
+      "cwd": "${workspaceFolder}"
     }
   ]
 }
