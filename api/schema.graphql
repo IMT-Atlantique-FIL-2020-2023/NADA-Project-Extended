@@ -90,19 +90,6 @@ type Airport implements Node {
   sensors: [Sensor!]! @listLength(min: 2, max: 2) @goField(forceResolver: true)
 
   """
-  Get mean measures for a specific day, for each sensor available.
-  For example, if this airport has 8 sensors, you will get 8 mean values for the day specified
-  """
-  getMeanMeasures(
-    """
-    Mean values will be calculated for the day specified
-    """
-    day: Time
-  ): [MeasureMeanData!]!
-    @listLength(min: 2, max: 2)
-    @goField(forceResolver: true)
-
-  """
   Get a subset of sensors
   """
   getSubsetOfSensors(
@@ -135,6 +122,10 @@ type Sensor implements Node {
   Sensor id
   """
   id: ID! @examples(values: ["T001", "W001"])
+  """
+  Sensor's airport
+  """
+  airport: Airport!
 
   """
   Type of measurement that provides this sensor
@@ -157,9 +148,9 @@ type Sensor implements Node {
     end: Time!
 
     """
-    Specify the number of measures to obtain
+    Specify either the number of measures to obtain, either the duration as a string
     """
-    discretize: Int
+    discretize: String
 
     """
     Specify discretize argument behaviour
@@ -168,13 +159,25 @@ type Sensor implements Node {
   ): [MeasureMeanData!]!
     @listLength(min: 5, max: 15)
     @goField(forceResolver: true)
+
+  """
+  Get mean measures for a specific day, for this sensor.
+  """
+  getMeanMeasures(
+    """
+    Mean values will be calculated for the day specified
+    """
+    day: Time
+  ): [MeasureMeanData!]!
+    @listLength(min: 2, max: 2)
+    @goField(forceResolver: true)
 }
 
 enum MeanMeasureMode {
   """
-  The value specified by discretize will divide in X MeasureMeanData for one day
+  The value specified by discretize will divide in X MeasureMeanData specified by the duration
   """
-  PER_DAY
+  FLUX_DURATION
 
   """
   The value specified by discretize will divide in X MeasureMeanData for the whole interval
