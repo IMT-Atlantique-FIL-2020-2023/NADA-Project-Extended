@@ -61,6 +61,7 @@ require (
 require (
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/go-playground/validator/v10 v10.9.0
+	github.com/google/uuid v1.3.0
 	github.com/graph-gophers/dataloader/v6 v6.0.0
 	github.com/henvic/httpretty v0.0.6
 	github.com/mitchellh/mapstructure v1.4.2
