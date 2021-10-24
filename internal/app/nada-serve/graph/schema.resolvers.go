@@ -8,25 +8,23 @@ import (
 	"fmt"
 	"time"
 
+	dl "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-serve/dataloader"
 	"github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-serve/db"
 	"github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-serve/graph/generated"
 	"github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-serve/graph/model"
-	"github.com/graph-gophers/dataloader/v6"
 	"github.com/vektah/gqlparser/v2/gqlerror"
 )
 
 func (r *airportResolver) Sensors(ctx context.Context, obj *model.Airport) ([]*model.Sensor, error) {
-	thunk := r.Dataloader.SensorDataloader.Load(ctx, dataloader.StringKey(obj.ID))
+	thunk := r.Dataloader.SensorDataloader.Load(ctx, dl.NewSensorDlKey(obj))
 	result, err := thunk()
 	return result.([]*model.Sensor), err
 }
 
-func (r *airportResolver) GetMeanMeasures(ctx context.Context, obj *model.Airport, day *time.Time) ([]*model.MeasureMeanData, error) {
-	panic(fmt.Errorf("not implemented"))
-}
-
 func (r *airportResolver) GetSubsetOfSensors(ctx context.Context, obj *model.Airport, sensorIds []string) ([]*model.Sensor, error) {
-	panic(fmt.Errorf("not implemented"))
+	thunk := r.Dataloader.SensorDataloader.Load(ctx, dl.NewSensorDlKey(obj, sensorIds...))
+	result, err := thunk()
+	return result.([]*model.Sensor), err
 }
 
 func (r *queryResolver) Airports(ctx context.Context) ([]*model.Airport, error) {
@@ -69,8 +67,38 @@ from(bucket: "nada-bucket")
 	return airport, err
 }
 
-func (r *sensorResolver) GetMeanMeasureInterval(ctx context.Context, obj *model.Sensor, start time.Time, end time.Time, discretize *int, discretizeMode *model.MeanMeasureMode) ([]*model.MeasureMeanData, error) {
-	panic(fmt.Errorf("not implemented"))
+func (r *sensorResolver) GetMeanMeasureInterval(ctx context.Context, obj *model.Sensor, start time.Time, end time.Time, discretize *string, discretizeMode *model.MeanMeasureMode) ([]*model.MeasureMeanData, error) {
+	thunk := r.Dataloader.MeanValuesDataloader.Load(ctx, dl.MeanDataDlKey{
+		AirportId:      obj.Airport.ID,
+		Start:          start,
+		End:            end,
+		EveryValue:     *discretize,
+		DiscretizeMode: discretizeMode,
+		Sensor:         obj,
+	})
+
+	result, err := thunk()
+	return result.([]*model.MeasureMeanData), err
+}
+func Bod(t time.Time) time.Time {
+	year, month, day := t.Date()
+	return time.Date(year, month, day, 0, 0, 0, 0, t.Location())
+}
+
+func (r *sensorResolver) GetMeanMeasures(ctx context.Context, obj *model.Sensor, day *time.Time) ([]*model.MeasureMeanData, error) {
+	start := Bod(*day)
+	end := start.AddDate(0, 0, 1)
+	thunk := r.Dataloader.MeanValuesDataloader.Load(ctx, dl.MeanDataDlKey{
+		AirportId:      obj.Airport.ID,
+		Start:          start,
+		End:            end,
+		EveryValue:     "1",
+		DiscretizeMode: &model.AllMeanMeasureMode[1],
+		Sensor:         obj,
+	})
+
+	result, err := thunk()
+	return result.([]*model.MeasureMeanData), err
 }
 
 // Airport returns generated.AirportResolver implementation.

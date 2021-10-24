@@ -50,7 +50,6 @@ type DirectiveRoot struct {
 
 type ComplexityRoot struct {
 	Airport struct {
-		GetMeanMeasures    func(childComplexity int, day *time.Time) int
 		GetSubsetOfSensors func(childComplexity int, sensorIds []string) int
 		ID                 func(childComplexity int) int
 		Name               func(childComplexity int) int
@@ -78,7 +77,9 @@ type ComplexityRoot struct {
 	}
 
 	Sensor struct {
-		GetMeanMeasureInterval func(childComplexity int, start time.Time, end time.Time, discretize *int, discretizeMode *model.MeanMeasureMode) int
+		Airport                func(childComplexity int) int
+		GetMeanMeasureInterval func(childComplexity int, start time.Time, end time.Time, discretize *string, discretizeMode *model.MeanMeasureMode) int
+		GetMeanMeasures        func(childComplexity int, day *time.Time) int
 		ID                     func(childComplexity int) int
 		Measurement            func(childComplexity int) int
 	}
@@ -86,7 +87,6 @@ type ComplexityRoot struct {
 
 type AirportResolver interface {
 	Sensors(ctx context.Context, obj *model.Airport) ([]*model.Sensor, error)
-	GetMeanMeasures(ctx context.Context, obj *model.Airport, day *time.Time) ([]*model.MeasureMeanData, error)
 	GetSubsetOfSensors(ctx context.Context, obj *model.Airport, sensorIds []string) ([]*model.Sensor, error)
 }
 type QueryResolver interface {
@@ -94,7 +94,8 @@ type QueryResolver interface {
 	GetAirportByID(ctx context.Context, id string) (*model.Airport, error)
 }
 type SensorResolver interface {
-	GetMeanMeasureInterval(ctx context.Context, obj *model.Sensor, start time.Time, end time.Time, discretize *int, discretizeMode *model.MeanMeasureMode) ([]*model.MeasureMeanData, error)
+	GetMeanMeasureInterval(ctx context.Context, obj *model.Sensor, start time.Time, end time.Time, discretize *string, discretizeMode *model.MeanMeasureMode) ([]*model.MeasureMeanData, error)
+	GetMeanMeasures(ctx context.Context, obj *model.Sensor, day *time.Time) ([]*model.MeasureMeanData, error)
 }
 
 type executableSchema struct {
@@ -111,18 +112,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 	ec := executionContext{nil, e}
 	_ = ec
 	switch typeName + "." + field {
-
-	case "Airport.getMeanMeasures":
-		if e.complexity.Airport.GetMeanMeasures == nil {
-			break
-		}
-
-		args, err := ec.field_Airport_getMeanMeasures_args(context.TODO(), rawArgs)
-		if err != nil {
-			return 0, false
-		}
-
-		return e.complexity.Airport.GetMeanMeasures(childComplexity, args["day"].(*time.Time)), true
 
 	case "Airport.getSubsetOfSensors":
 		if e.complexity.Airport.GetSubsetOfSensors == nil {
@@ -239,6 +228,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Query.GetAirportByID(childComplexity, args["id"].(string)), true
 
+	case "Sensor.airport":
+		if e.complexity.Sensor.Airport == nil {
+			break
+		}
+
+		return e.complexity.Sensor.Airport(childComplexity), true
+
 	case "Sensor.getMeanMeasureInterval":
 		if e.complexity.Sensor.GetMeanMeasureInterval == nil {
 			break
@@ -249,7 +245,19 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Sensor.GetMeanMeasureInterval(childComplexity, args["start"].(time.Time), args["end"].(time.Time), args["discretize"].(*int), args["discretizeMode"].(*model.MeanMeasureMode)), true
+		return e.complexity.Sensor.GetMeanMeasureInterval(childComplexity, args["start"].(time.Time), args["end"].(time.Time), args["discretize"].(*string), args["discretizeMode"].(*model.MeanMeasureMode)), true
+
+	case "Sensor.getMeanMeasures":
+		if e.complexity.Sensor.GetMeanMeasures == nil {
+			break
+		}
+
+		args, err := ec.field_Sensor_getMeanMeasures_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Sensor.GetMeanMeasures(childComplexity, args["day"].(*time.Time)), true
 
 	case "Sensor.id":
 		if e.complexity.Sensor.ID == nil {
@@ -563,19 +571,6 @@ type Airport implements Node {
   sensors: [Sensor!]! @listLength(min: 2, max: 2) @goField(forceResolver: true)
 
   """
-  Get mean measures for a specific day, for each sensor available.
-  For example, if this airport has 8 sensors, you will get 8 mean values for the day specified
-  """
-  getMeanMeasures(
-    """
-    Mean values will be calculated for the day specified
-    """
-    day: Time
-  ): [MeasureMeanData!]!
-    @listLength(min: 2, max: 2)
-    @goField(forceResolver: true)
-
-  """
   Get a subset of sensors
   """
   getSubsetOfSensors(
@@ -608,6 +603,10 @@ type Sensor implements Node {
   Sensor id
   """
   id: ID! @examples(values: ["T001", "W001"])
+  """
+  Sensor's airport
+  """
+  airport: Airport!
 
   """
   Type of measurement that provides this sensor
@@ -630,9 +629,9 @@ type Sensor implements Node {
     end: Time!
 
     """
-    Specify the number of measures to obtain
+    Specify either the number of measures to obtain, either the duration as a string
     """
-    discretize: Int
+    discretize: String
 
     """
     Specify discretize argument behaviour
@@ -641,13 +640,25 @@ type Sensor implements Node {
   ): [MeasureMeanData!]!
     @listLength(min: 5, max: 15)
     @goField(forceResolver: true)
+
+  """
+  Get mean measures for a specific day, for this sensor.
+  """
+  getMeanMeasures(
+    """
+    Mean values will be calculated for the day specified
+    """
+    day: Time
+  ): [MeasureMeanData!]!
+    @listLength(min: 2, max: 2)
+    @goField(forceResolver: true)
 }
 
 enum MeanMeasureMode {
   """
-  The value specified by discretize will divide in X MeasureMeanData for one day
+  The value specified by discretize will divide in X MeasureMeanData specified by the duration
   """
-  PER_DAY
+  FLUX_DURATION
 
   """
   The value specified by discretize will divide in X MeasureMeanData for the whole interval
@@ -777,21 +788,6 @@ func (ec *executionContext) dir_listLength_args(ctx context.Context, rawArgs map
 	return args, nil
 }
 
-func (ec *executionContext) field_Airport_getMeanMeasures_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
-	var err error
-	args := map[string]interface{}{}
-	var arg0 *time.Time
-	if tmp, ok := rawArgs["day"]; ok {
-		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("day"))
-		arg0, err = ec.unmarshalOTime2ᚖtimeᚐTime(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["day"] = arg0
-	return args, nil
-}
-
 func (ec *executionContext) field_Airport_getSubsetOfSensors_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
@@ -858,10 +854,10 @@ func (ec *executionContext) field_Sensor_getMeanMeasureInterval_args(ctx context
 		}
 	}
 	args["end"] = arg1
-	var arg2 *int
+	var arg2 *string
 	if tmp, ok := rawArgs["discretize"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("discretize"))
-		arg2, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		arg2, err = ec.unmarshalOString2ᚖstring(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -876,6 +872,21 @@ func (ec *executionContext) field_Sensor_getMeanMeasureInterval_args(ctx context
 		}
 	}
 	args["discretizeMode"] = arg3
+	return args, nil
+}
+
+func (ec *executionContext) field_Sensor_getMeanMeasures_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *time.Time
+	if tmp, ok := rawArgs["day"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("day"))
+		arg0, err = ec.unmarshalOTime2ᚖtimeᚐTime(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["day"] = arg0
 	return args, nil
 }
 
@@ -1104,76 +1115,6 @@ func (ec *executionContext) _Airport_sensors(ctx context.Context, field graphql.
 	res := resTmp.([]*model.Sensor)
 	fc.Result = res
 	return ec.marshalNSensor2ᚕᚖgithubᚗcomᚋIMTᚑAtlantiqueᚑFILᚑ2020ᚑ2023ᚋNADAᚑextendedᚋinternalᚋappᚋnadaᚑserveᚋgraphᚋmodelᚐSensorᚄ(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) _Airport_getMeanMeasures(ctx context.Context, field graphql.CollectedField, obj *model.Airport) (ret graphql.Marshaler) {
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	fc := &graphql.FieldContext{
-		Object:     "Airport",
-		Field:      field,
-		Args:       nil,
-		IsMethod:   true,
-		IsResolver: true,
-	}
-
-	ctx = graphql.WithFieldContext(ctx, fc)
-	rawArgs := field.ArgumentMap(ec.Variables)
-	args, err := ec.field_Airport_getMeanMeasures_args(ctx, rawArgs)
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	fc.Args = args
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		directive0 := func(rctx context.Context) (interface{}, error) {
-			ctx = rctx // use context from middleware stack in children
-			return ec.resolvers.Airport().GetMeanMeasures(rctx, obj, args["day"].(*time.Time))
-		}
-		directive1 := func(ctx context.Context) (interface{}, error) {
-			min, err := ec.unmarshalNInt2int(ctx, 2)
-			if err != nil {
-				return nil, err
-			}
-			max, err := ec.unmarshalNInt2int(ctx, 2)
-			if err != nil {
-				return nil, err
-			}
-			if ec.directives.ListLength == nil {
-				return nil, errors.New("directive listLength is not implemented")
-			}
-			return ec.directives.ListLength(ctx, obj, directive0, min, max)
-		}
-
-		tmp, err := directive1(rctx)
-		if err != nil {
-			return nil, graphql.ErrorOnPath(ctx, err)
-		}
-		if tmp == nil {
-			return nil, nil
-		}
-		if data, ok := tmp.([]*model.MeasureMeanData); ok {
-			return data, nil
-		}
-		return nil, fmt.Errorf(`unexpected type %T from directive, should be []*github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-serve/graph/model.MeasureMeanData`, tmp)
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.([]*model.MeasureMeanData)
-	fc.Result = res
-	return ec.marshalNMeasureMeanData2ᚕᚖgithubᚗcomᚋIMTᚑAtlantiqueᚑFILᚑ2020ᚑ2023ᚋNADAᚑextendedᚋinternalᚋappᚋnadaᚑserveᚋgraphᚋmodelᚐMeasureMeanDataᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Airport_getSubsetOfSensors(ctx context.Context, field graphql.CollectedField, obj *model.Airport) (ret graphql.Marshaler) {
@@ -1949,6 +1890,41 @@ func (ec *executionContext) _Sensor_id(ctx context.Context, field graphql.Collec
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
+func (ec *executionContext) _Sensor_airport(ctx context.Context, field graphql.CollectedField, obj *model.Sensor) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:     "Sensor",
+		Field:      field,
+		Args:       nil,
+		IsMethod:   false,
+		IsResolver: false,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Airport, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.Airport)
+	fc.Result = res
+	return ec.marshalNAirport2ᚖgithubᚗcomᚋIMTᚑAtlantiqueᚑFILᚑ2020ᚑ2023ᚋNADAᚑextendedᚋinternalᚋappᚋnadaᚑserveᚋgraphᚋmodelᚐAirport(ctx, field.Selections, res)
+}
+
 func (ec *executionContext) _Sensor_measurement(ctx context.Context, field graphql.CollectedField, obj *model.Sensor) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
@@ -2010,7 +1986,7 @@ func (ec *executionContext) _Sensor_getMeanMeasureInterval(ctx context.Context, 
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		directive0 := func(rctx context.Context) (interface{}, error) {
 			ctx = rctx // use context from middleware stack in children
-			return ec.resolvers.Sensor().GetMeanMeasureInterval(rctx, obj, args["start"].(time.Time), args["end"].(time.Time), args["discretize"].(*int), args["discretizeMode"].(*model.MeanMeasureMode))
+			return ec.resolvers.Sensor().GetMeanMeasureInterval(rctx, obj, args["start"].(time.Time), args["end"].(time.Time), args["discretize"].(*string), args["discretizeMode"].(*model.MeanMeasureMode))
 		}
 		directive1 := func(ctx context.Context) (interface{}, error) {
 			min, err := ec.unmarshalNInt2int(ctx, 5)
@@ -2018,6 +1994,76 @@ func (ec *executionContext) _Sensor_getMeanMeasureInterval(ctx context.Context, 
 				return nil, err
 			}
 			max, err := ec.unmarshalNInt2int(ctx, 15)
+			if err != nil {
+				return nil, err
+			}
+			if ec.directives.ListLength == nil {
+				return nil, errors.New("directive listLength is not implemented")
+			}
+			return ec.directives.ListLength(ctx, obj, directive0, min, max)
+		}
+
+		tmp, err := directive1(rctx)
+		if err != nil {
+			return nil, graphql.ErrorOnPath(ctx, err)
+		}
+		if tmp == nil {
+			return nil, nil
+		}
+		if data, ok := tmp.([]*model.MeasureMeanData); ok {
+			return data, nil
+		}
+		return nil, fmt.Errorf(`unexpected type %T from directive, should be []*github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-serve/graph/model.MeasureMeanData`, tmp)
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.MeasureMeanData)
+	fc.Result = res
+	return ec.marshalNMeasureMeanData2ᚕᚖgithubᚗcomᚋIMTᚑAtlantiqueᚑFILᚑ2020ᚑ2023ᚋNADAᚑextendedᚋinternalᚋappᚋnadaᚑserveᚋgraphᚋmodelᚐMeasureMeanDataᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Sensor_getMeanMeasures(ctx context.Context, field graphql.CollectedField, obj *model.Sensor) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:     "Sensor",
+		Field:      field,
+		Args:       nil,
+		IsMethod:   true,
+		IsResolver: true,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Sensor_getMeanMeasures_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	fc.Args = args
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		directive0 := func(rctx context.Context) (interface{}, error) {
+			ctx = rctx // use context from middleware stack in children
+			return ec.resolvers.Sensor().GetMeanMeasures(rctx, obj, args["day"].(*time.Time))
+		}
+		directive1 := func(ctx context.Context) (interface{}, error) {
+			min, err := ec.unmarshalNInt2int(ctx, 2)
+			if err != nil {
+				return nil, err
+			}
+			max, err := ec.unmarshalNInt2int(ctx, 2)
 			if err != nil {
 				return nil, err
 			}
@@ -3490,20 +3536,6 @@ func (ec *executionContext) _Airport(ctx context.Context, sel ast.SelectionSet, 
 				}
 				return res
 			})
-		case "getMeanMeasures":
-			field := field
-			out.Concurrently(i, func() (res graphql.Marshaler) {
-				defer func() {
-					if r := recover(); r != nil {
-						ec.Error(ctx, ec.Recover(ctx, r))
-					}
-				}()
-				res = ec._Airport_getMeanMeasures(ctx, field, obj)
-				if res == graphql.Null {
-					atomic.AddUint32(&invalids, 1)
-				}
-				return res
-			})
 		case "getSubsetOfSensors":
 			field := field
 			out.Concurrently(i, func() (res graphql.Marshaler) {
@@ -3689,6 +3721,11 @@ func (ec *executionContext) _Sensor(ctx context.Context, sel ast.SelectionSet, o
 			if out.Values[i] == graphql.Null {
 				atomic.AddUint32(&invalids, 1)
 			}
+		case "airport":
+			out.Values[i] = ec._Sensor_airport(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&invalids, 1)
+			}
 		case "measurement":
 			out.Values[i] = ec._Sensor_measurement(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
@@ -3703,6 +3740,20 @@ func (ec *executionContext) _Sensor(ctx context.Context, sel ast.SelectionSet, o
 					}
 				}()
 				res = ec._Sensor_getMeanMeasureInterval(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
+				return res
+			})
+		case "getMeanMeasures":
+			field := field
+			out.Concurrently(i, func() (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Sensor_getMeanMeasures(ctx, field, obj)
 				if res == graphql.Null {
 					atomic.AddUint32(&invalids, 1)
 				}

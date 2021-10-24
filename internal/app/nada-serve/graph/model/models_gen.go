@@ -21,9 +21,6 @@ type Airport struct {
 	Name string `json:"name"`
 	// List of available sensors for this airport
 	Sensors []*Sensor `json:"sensors"`
-	// Get mean measures for a specific day, for each sensor available.
-	// For example, if this airport has 8 sensors, you will get 8 mean values for the day specified
-	GetMeanMeasures []*MeasureMeanData `json:"getMeanMeasures"`
 	// Get a subset of sensors
 	GetSubsetOfSensors []*Sensor `json:"getSubsetOfSensors"`
 }
@@ -61,10 +58,14 @@ func (Measurement) IsNode() {}
 type Sensor struct {
 	// Sensor id
 	ID string `json:"id"`
+	// Sensor's airport
+	Airport *Airport `json:"airport"`
 	// Type of measurement that provides this sensor
 	Measurement *Measurement `json:"measurement"`
 	// Get a serie of mean measures for this sensor
 	GetMeanMeasureInterval []*MeasureMeanData `json:"getMeanMeasureInterval"`
+	// Get mean measures for a specific day, for this sensor.
+	GetMeanMeasures []*MeasureMeanData `json:"getMeanMeasures"`
 }
 
 func (Sensor) IsNode() {}
@@ -103,20 +104,20 @@ type FakeOptions struct {
 type MeanMeasureMode string
 
 const (
-	// The value specified by discretize will divide in X MeasureMeanData for one day
-	MeanMeasureModePerDay MeanMeasureMode = "PER_DAY"
+	// The value specified by discretize will divide in X MeasureMeanData specified by the duration
+	MeanMeasureModeFluxDuration MeanMeasureMode = "FLUX_DURATION"
 	// The value specified by discretize will divide in X MeasureMeanData for the whole interval
 	MeanMeasureModeForInterval MeanMeasureMode = "FOR_INTERVAL"
 )
 
 var AllMeanMeasureMode = []MeanMeasureMode{
-	MeanMeasureModePerDay,
+	MeanMeasureModeFluxDuration,
 	MeanMeasureModeForInterval,
 }
 
 func (e MeanMeasureMode) IsValid() bool {
 	switch e {
-	case MeanMeasureModePerDay, MeanMeasureModeForInterval:
+	case MeanMeasureModeFluxDuration, MeanMeasureModeForInterval:
 		return true
 	}
 	return false

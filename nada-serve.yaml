@@ -1,0 +1,10 @@
+sensors:
+  temperature:
+    name: Température
+    unit: °C
+  humidity:
+    name: Humidité relative
+    unit: "%"
+  co:
+    name: Monoxyde de carbone
+    unit: "ppm"
