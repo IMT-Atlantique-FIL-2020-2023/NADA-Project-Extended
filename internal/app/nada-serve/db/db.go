@@ -2,6 +2,7 @@ package db
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-serve/config"
@@ -100,4 +101,20 @@ func SanitizeStringArray(strs []string) string {
 		str += "\"" + SanitizeString(v) + "\","
 	}
 	return str
+}
+
+func SanitizeMapArrayString(m map[string][]string) string {
+	str := ""
+	for k, v := range m {
+		str += fmt.Sprintf("\"%v\":[%v],", k, SanitizeStringArray(v))
+	}
+	return str
+}
+
+func SanitizeTime(t time.Time) string {
+	return fmt.Sprintf("time(v: \"%v\")", t.Format(time.RFC3339))
+}
+
+func SanitizeDuration(d string) string {
+	return fmt.Sprintf(`duration(v: "%v")`, SanitizeString(d))
 }
