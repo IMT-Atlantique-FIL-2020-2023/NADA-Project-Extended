@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"os"
 	"sync"
 
@@ -23,9 +24,10 @@ var mutexConfig sync.Mutex
 var validate *validator.Validate
 
 type NadaServeConfig struct {
-	Port     int           `koanf:"port" validate:"required"`
-	LogLevel zerolog.Level `koanf:"loglevel" validate:"omitempty,required"`
-	InfluxDb InfluxbConfig `koanf:"influxdb" validate:"required"`
+	Port     int                     `koanf:"port" validate:"required"`
+	LogLevel zerolog.Level           `koanf:"loglevel" validate:"omitempty,required"`
+	InfluxDb InfluxbConfig           `koanf:"influxdb" validate:"required"`
+	Sensors  map[string]SensorConfig `koanf:"sensors" validate:"required,min=1"` // we need at least one sensor available in config
 }
 
 type InfluxbConfig struct {
@@ -33,6 +35,11 @@ type InfluxbConfig struct {
 	Token  string `koanf:"token" validate:"required"`
 	Org    string `koanf:"org" validate:"required"`
 	Bucket string `koanf:"bucket" validate:"required"`
+}
+
+type SensorConfig struct {
+	MeasurementName string `koanf:"name" validate:"required"`
+	MeasurementUnit string `koanf:"unit" validate:"required"`
 }
 
 var CurrentConfig NadaServeConfig
@@ -109,4 +116,14 @@ func LoadConfig() {
 	log.Debug().Msgf("Config loaded: %v", CurrentConfig)
 
 	watcherAdded = true
+}
+
+func GetSensorConfig(sensorType string) SensorConfig {
+	if v, ok := CurrentConfig.Sensors[sensorType]; ok {
+		return v
+	}
+	return SensorConfig{
+		MeasurementName: fmt.Sprintf("Unknown sensor type %v", sensorType),
+		MeasurementUnit: "Unknown unit",
+	}
 }
