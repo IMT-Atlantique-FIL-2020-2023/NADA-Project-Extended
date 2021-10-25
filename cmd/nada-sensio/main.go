@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"os"
 	"strconv"
 	"time"
 
@@ -23,17 +24,49 @@ func init() {
 func main() {
 	myLog.MyLog(myLog.Get_level_INFO(), "main(start)")
 
+	if len(os.Args) < 4 || len(os.Args) > 4 {
+		fmt.Println("Error: Needs exactly 3 arguments, " + strconv.Itoa(len(os.Args)-1) + " given")
+		fmt.Println("sensio [sensorID] [airportID] [measureType]")
+		return
+	}
+
+	sensorID := os.Args[1]
+	airportID := os.Args[2]
+	measureType := os.Args[3]
+
 	var mqtt_port string = env.GetEnv("NADA_SENSIO_MQTT_PORT")
 	var mqtt_host string = env.GetEnv("NADA_SENSIO_MQTT_HOST")
 	var mqtt_client_id string = env.GetEnv("NADA_SENSIO_MQTT_CLIENT_ID")
 	var topic string = env.GetEnv("NADA_SENSIO_MQTT_TOPIC")
 
-	params := sim.SimParam{Noise_seed: 0, Origin_latitude: 0, Origin_longitude: 0, TimeStamp: time.Now()}
-
 	client := publisher.Connect(mqtt_host+":"+mqtt_port, mqtt_client_id)
 
 	for {
-		result := model.Measure{SensorID: "S001", AirportID: "A001", MeasureType: "temperature", Value: sim.Altitude(params), Timestamp: time.Now().String()}
+		params := sim.SimParam{Noise_seed: 0, Origin_latitude: 0, Origin_longitude: 0, Origin_altitude: 1000, TimeStamp: time.Now()}
+		var measureValue float64 = 0.0
+		switch measureType {
+		case "temperature":
+			measureValue = sim.Temperature(params)
+		case "altitude":
+			measureValue = sim.Altitude(params)
+		case "pressure":
+			measureValue = sim.Pressure(params)
+		case "latitude":
+			measureValue = sim.Latitude(params)
+		case "longitude":
+			measureValue = sim.Longitude(params)
+		case "windspeed":
+			measureValue = sim.WindSpeed(params)
+		case "winddirx":
+			measureValue = sim.WindDirX(params)
+		case "winddiry":
+			measureValue = sim.WindDirY(params)
+		default:
+			fmt.Println("incorrect measure name, " + measureType + " is not a valid measure type")
+
+		}
+
+		result := model.Measure{SensorID: sensorID, AirportID: airportID, MeasureType: measureType, Value: measureValue, Timestamp: time.Now().String()}
 		fmt.Println(result)
 		msg, err := json.Marshal(result)
 		if err != nil {

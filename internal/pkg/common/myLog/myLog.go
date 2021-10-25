@@ -30,6 +30,7 @@ func Get_level_ERROR() Logstatus {
 }
 
 func Init(loglevelstring string) {
+	fmt.Println(loglevelstring)
 	logEnvLevel, err := strconv.Atoi(loglevelstring)
 	if err != nil {
 		MyLog(Get_level_ERROR(), err.Error())
