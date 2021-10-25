@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/graphql/handler"
@@ -16,8 +17,6 @@ import (
 	"github.com/rs/cors"
 	"github.com/rs/zerolog/log"
 )
-
-const defaultPort = "8080"
 
 func main() {
 	config.LoadConfig()
@@ -40,9 +39,11 @@ func main() {
 	// if config.CurrentConfig.LogLevel == zerolog.DebugLevel {
 	// 	//router.Use(logger.Middleware)
 	// }
-
+	herokuPort := os.Getenv("PORT")
 	port := fmt.Sprint(config.CurrentConfig.Port)
-
+	if herokuPort != "" {
+		port = herokuPort
+	}
 	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: graph.NewResolver(), Directives: generated.DirectiveRoot{
 		Examples: func(ctx context.Context, obj interface{}, next graphql.Resolver, values []*string) (res interface{}, err error) {
 			return next(ctx)
