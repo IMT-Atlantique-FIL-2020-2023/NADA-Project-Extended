@@ -1,7 +1,15 @@
-# Package nada-sensio
+### Launching nada-sensio
 
-How to run:
+go run cmd/nada-sensio/main.go  [sensorID] [airportID] [measureType]
 
-```
-go run  cmd/nada-sensio/main.go
-```
+Accepted measureType:
+temperature
+altitude
+pressure
+latitude
+longitude
+windspeed
+winddirx
+winddiry
+
+example: go run cmd/nada-sensio/main.go S0 A0 windspeed 
