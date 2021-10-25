@@ -2,6 +2,6 @@ FROM golang
 
 WORKDIR app
 
-COPY ../.. .
+COPY . .
 
 RUN go run cmd/nada-serve/main.go
