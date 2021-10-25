@@ -24,10 +24,11 @@ var mutexConfig sync.Mutex
 var validate *validator.Validate
 
 type NadaServeConfig struct {
-	Port     int                     `koanf:"port" validate:"required"`
-	LogLevel zerolog.Level           `koanf:"loglevel" validate:"omitempty,required"`
-	InfluxDb InfluxbConfig           `koanf:"influxdb" validate:"required"`
-	Sensors  map[string]SensorConfig `koanf:"sensors" validate:"required,min=1"` // we need at least one sensor available in config
+	Port           int                     `koanf:"port" validate:"required"`
+	LogLevel       zerolog.Level           `koanf:"loglevel" validate:"omitempty,required"`
+	InfluxDb       InfluxbConfig           `koanf:"influxdb" validate:"required"`
+	AllowedOrigins []string                `koanf:"allowedorigins" validate:"required"`
+	Sensors        map[string]SensorConfig `koanf:"sensors" validate:"required,min=1"` // we need at least one sensor available in config
 }
 
 type InfluxbConfig struct {
@@ -99,7 +100,7 @@ func LoadConfig() {
 	// keys in the config file here as we lowercase the key,
 	// replace `_` with `.` and strip the MYVAR_ prefix so that
 	// only "parent1.child1.name" remains.
-	k.Load(env.Provider("NADA_SERVE_", ".", dotenv.TransformKey), nil)
+	k.Load(env.ProviderWithValue("NADA_SERVE_", ".", dotenv.TransformKeyWithValue), nil)
 	if err := k.UnmarshalWithConf("", &CurrentConfig, koanf.UnmarshalConf{
 		DecoderConfig: &mapstructure.DecoderConfig{
 			DecodeHook: mapstructure.ComposeDecodeHookFunc(
@@ -112,7 +113,7 @@ func LoadConfig() {
 		log.Fatal().Err(err)
 	}
 	if err := validate.Struct(&CurrentConfig); err != nil {
-		log.Fatal().Err(err).Msg("Error validating config")
+		log.Fatal().Err(err).Msg("Error incorrect config")
 	}
 	zerolog.SetGlobalLevel(CurrentConfig.LogLevel)
 	log.Debug().Fields(k.All()).Msg("Koanf loaded:")
