@@ -1,7 +1,6 @@
 package nadasensio
 
 import (
-	"fmt"
 	"math"
 	"time"
 
@@ -26,7 +25,6 @@ func getNoiseFactor(params SimParam) float64 {
 	x1 := float64(timeseconds)
 	x := x1 / float64(timerange)
 	noiseFactor := noise.Noise1D(x)
-	fmt.Println(noiseFactor)
 
 	return noiseFactor
 }
