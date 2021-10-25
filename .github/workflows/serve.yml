@@ -47,7 +47,13 @@ jobs:
 
           # (Optional, default: "")
           # Additional options of docker build command.
-          docker_options: "--no-cache -e NADA_SERVE_ENV='${{ secrets.NADA_SERVE_ENV }}'"
+          docker_options: "--no-cache \
+                          --build-arg NADA_SERVE_PORT=${{ secrets.NADA_SERVE_PORT }} \
+                          --build-arg NADA_SERVE_LOGLEVEL=${{ secrets.NADA_SERVE_LOGLEVEL }} \
+                          --build-arg NADA_SERVE_INFLUXDB_HOST=${{ secrets.NADA_SERVE_INFLUXDB_HOST }} \
+                          --build-arg NADA_SERVE_INFLUXDB_TOKEN=${{ secrets.NADA_SERVE_INFLUXDB_TOKEN }} \
+                          --build-arg NADA_SERVE_INFLUXDB_ORG=${{ secrets.NADA_SERVE_INFLUXDB_ORG }} \
+                          --build-arg NADA_SERVE_INFLUXDB_BUCKET=${{ secrets.NADA_SERVE_INFLUXDB_BUCKET }}"
 
           # (Optional, default: "web")
           # Select the process type for which you want the docker container to be uploaded.
