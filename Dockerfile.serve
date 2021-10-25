@@ -4,4 +4,6 @@ WORKDIR app
 
 COPY . .
 
+RUN echo ${NADA_SERVE_ENV} >> nada-serve.env
+
 RUN go run cmd/nada-serve/main.go
