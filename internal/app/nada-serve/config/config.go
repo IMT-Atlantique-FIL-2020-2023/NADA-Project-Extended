@@ -76,14 +76,17 @@ func LoadConfig() {
 	}, "koanf"), nil)
 	// Load YAML config and merge into the previously loaded config (because we can).
 	f := file.Provider("nada-serve.yaml")
+	f2 := file.Provider("nada-serve.yml")
 
 	k.Load(f, yaml.Parser())
+	k.Load(f2, yaml.Parser())
 
-	d := file.Provider(".env")
+	d := file.Provider("nada-serve.env")
 	k.Load(d, dotenv.Parser())
 	if !watcherAdded {
 		d.Watch(watch(d))
 		f.Watch(watch(f))
+		f2.Watch(watch(f2))
 	}
 	// Load environment variables and merge into the loaded config.
 	// "MYVAR" is the prefix to filter the env vars by.
