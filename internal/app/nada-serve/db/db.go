@@ -8,7 +8,6 @@ import (
 	"github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-serve/config"
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
 	"github.com/influxdata/influxdb-client-go/v2/api"
-	"github.com/influxdata/influxdb-client-go/v2/domain"
 	"github.com/rs/zerolog/log"
 )
 
@@ -19,20 +18,22 @@ func ConnectToDatabase() (influxdb2.Client, api.QueryAPI) {
 		influxdb2.DefaultOptions(),
 	)
 
-	result, err := client.Health(context.Background())
-	if err != nil {
+	result, err := client.Ready(context.Background())
+	if result == false || err != nil {
 		log.Fatal().Err(err).Msg("Cannot check database health")
 	}
-	if result.Status == domain.HealthCheckStatusPass {
-		log.Info().Msgf("Database HealthCheckStatusPass - %v %v %v", result.Name, *result.Version, *result.Message)
-	}
+
+	// Does not work on cloud version, sorry
+	// if result.Status == domain.HealthCheckStatusPass {
+	// 	log.Info().Msgf("Database HealthCheckStatusPass - %v %v %v", result.Name, *result.Version, *result.Message)
+	// }
 	ticker := time.NewTicker(60 * time.Second)
 	quit := make(chan struct{})
 	go func() {
 		for {
 			select {
 			case <-ticker.C:
-				_, err := client.Health(context.Background())
+				_, err := client.Ready(context.Background())
 				if err != nil {
 					log.Error().Err(err).Msg("Cannot check database health")
 				}
