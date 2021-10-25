@@ -71,7 +71,20 @@
 
 ## Getting Started
 
-> `// TODO`
+### Launching nada-sensio
+
+go run  cmd/nada-sensio/main.go S0 A0 windspeed 
+  sensio [sensorID] [airportID] [measureType]
+
+Accepted measureType:
+temperature
+altitude
+pressure
+latitude
+longitude
+windspeed
+winddirx
+winddiry
 
 ### Prerequisites
 
