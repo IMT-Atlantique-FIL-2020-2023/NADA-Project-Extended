@@ -8,7 +8,7 @@
 
 <br />
 <div align="center">
-<a href="https://imt-atlantique-fil-2020-2023.github.io/NADA-webapp/">
+<a href="https://nada-extended.herokuapp.com/">
 <img src="https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-webapp/blob/main/src/assets/NADA.svg" alt="Logo" width="200" height="200">
 </a>
 
@@ -16,8 +16,8 @@
 
 <p align="center">National Atmospheric Data | Capture data from airport sensor and visualize it.</p>
 <p align="center">
-<a href="https://imt-atlantique-fil-2020-2023.github.io/NADA-webapp/">
-<strong>Browse the website »</strong>
+<a href="https://nada-extended.herokuapp.com/">
+<strong>Browse the deployment »</strong>
 </a>
 <br />
 <br />
@@ -115,8 +115,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-[build-shield]: https://img.shields.io/github/workflow/status/IMT-Atlantique-FIL-2020-2023/NADA-extended/actions?style=flat-square
-[build-url]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/blob/main/.github/workflows/main.yml
+[build-shield]: https://img.shields.io/github/workflow/status/IMT-Atlantique-FIL-2020-2023/NADA-extended/Deploy%20to%20heroku./main?style=flat-square
+[build-url]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/blob/main/.github/workflows/serve.yml
 [version-shield]: https://img.shields.io/github/go-mod/go-version/IMT-Atlantique-FIL-2020-2023/NADA-extended?style=flat-square&color=orange
 [version-url]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/blob/main/go.mod
 [language-shield]: https://img.shields.io/github/languages/top/IMT-Atlantique-FIL-2020-2023/NADA-extended?style=flat-square
