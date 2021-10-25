@@ -1,5 +1,7 @@
 FROM golang
 
-COPY . .
+WORKDIR app
 
-RUN go run main.go
+COPY ../.. .
+
+RUN go run cmd/nada-serve/main.go
