@@ -47,7 +47,7 @@ jobs:
 
           # (Optional, default: "")
           # Additional options of docker build command.
-          docker_options: ["--no-cache", "-e NADA_SERVE_ENV='${{ secrets.NADA_SERVE_ENV }}'"]
+          docker_options: "--no-cache -e NADA_SERVE_ENV='${{ secrets.NADA_SERVE_ENV }}'"
 
           # (Optional, default: "web")
           # Select the process type for which you want the docker container to be uploaded.
