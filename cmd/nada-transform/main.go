@@ -40,11 +40,13 @@ func main() {
 	var mqtt_client_name string = env.GetEnv("NADA_TRANSFORM_MQTT_CLIENT_NAME")
 	var mqtt_client_paswrd string = env.GetEnv("NADA_TRANSFORM_MQTT_PSWRD")
 
-	client := myMqttClient.Connect(mqtt_host+":"+mqtt_port, mqtt_client_id, mqtt_client_name, mqtt_client_paswrd)
-	client.Subscribe(topic, 1, onMessageReceived)
-
-	myLog.MyLog(myLog.Get_level_INFO(), "main(subscribed to topic \""+topic+"\")")
-	myLog.MyLog(myLog.Get_level_INFO(), "main(waiting for pubs... press Enter to stop programm properly)")
+	myMqttClient.Connect(mqtt_host+":"+mqtt_port, mqtt_client_id, mqtt_client_name, mqtt_client_paswrd, func(c mqtt.Client) {
+		if token := c.Subscribe(topic, 1, onMessageReceived); token.Wait() && token.Error() != nil {
+			myLog.MyLog(myLog.Get_level_ERROR(), token.Error().Error())
+		}
+		myLog.MyLog(myLog.Get_level_INFO(), "main(subscribed to topic \""+topic+"\")")
+		myLog.MyLog(myLog.Get_level_INFO(), "main(waiting for pubs... press Enter to stop programm properly)")
+	})
 
 	fmt.Scanln()
 
