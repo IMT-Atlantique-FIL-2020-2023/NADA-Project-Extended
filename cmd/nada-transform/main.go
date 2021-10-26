@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 
-	database "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/database"
+	database "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-transform/external/database"
 	env "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/env"
 	model "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/model"
-	subscriber "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/mqtt/myMqttClient"
 	myLog "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/myLog"
+	myMqttClient "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/myMqttClient"
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
 
@@ -40,7 +40,7 @@ func main() {
 	var mqtt_client_name string = env.GetEnv("NADA_TRANSFORM_MQTT_CLIENT_NAME")
 	var mqtt_client_paswrd string = env.GetEnv("NADA_TRANSFORM_MQTT_PSWRD")
 
-	client := subscriber.Connect(mqtt_host+":"+mqtt_port, mqtt_client_id, mqtt_client_name, mqtt_client_paswrd)
+	client := myMqttClient.Connect(mqtt_host+":"+mqtt_port, mqtt_client_id, mqtt_client_name, mqtt_client_paswrd)
 	client.Subscribe(topic, 1, onMessageReceived)
 
 	myLog.MyLog(myLog.Get_level_INFO(), "main(subscribed to topic \""+topic+"\")")

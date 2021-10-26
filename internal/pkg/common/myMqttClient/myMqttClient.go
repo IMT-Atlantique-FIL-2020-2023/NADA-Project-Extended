@@ -27,12 +27,12 @@ func Connect(brokerURI string, clientId string, username string, pswrd string) m
 	client := mqtt.NewClient(opts)
 	token := client.Connect()
 	for !token.WaitTimeout(3 * time.Second) {
-		myLog.MyLog(myLog.Get_level_INFO(), "subscriber(Trying to connect "+brokerURI+", "+clientId+"...)")
+		myLog.MyLog(myLog.Get_level_INFO(), "myMqttClient(Trying to connect "+brokerURI+", "+clientId+"...)")
 	}
 	if err := token.Error(); err != nil {
 		log.Fatal(err)
 	}
-	myLog.MyLog(myLog.Get_level_INFO(), "subscriber(connected to "+brokerURI+" as "+clientId+")")
+	myLog.MyLog(myLog.Get_level_INFO(), "myMqttClient(connected to "+brokerURI+" as "+clientId+")")
 	return client
 
 }

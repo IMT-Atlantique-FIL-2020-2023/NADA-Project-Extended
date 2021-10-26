@@ -10,8 +10,8 @@ import (
 	env "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/env"
 	model "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/model"
 
-	publisher "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-sensio/publisher"
 	sim "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-sensio/simulation"
+	myMqttClient "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/myMqttClient"
 
 	"github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/myLog"
 )
@@ -41,7 +41,7 @@ func main() {
 	var mqtt_client_name string = env.GetEnv("NADA_SENSIO_MQTT_CLIENT_NAME")
 	var mqtt_client_paswrd string = env.GetEnv("NADA_SENSIO_MQTT_PSWRD")
 
-	client := publisher.Connect(mqtt_host+":"+mqtt_port, mqtt_client_id, mqtt_client_name, mqtt_client_paswrd)
+	client := myMqttClient.Connect(mqtt_host+":"+mqtt_port, mqtt_client_id, mqtt_client_name, mqtt_client_paswrd)
 
 	for {
 		params := sim.SimParam{Noise_seed: 0, Origin_latitude: 0, Origin_longitude: 0, Origin_altitude: 1000, TimeStamp: time.Now()}
