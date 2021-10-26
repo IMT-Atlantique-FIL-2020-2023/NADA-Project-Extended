@@ -8,7 +8,7 @@ import (
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
 
-func createClientOptions(brokerURI string, clientId string) *mqtt.ClientOptions {
+func createClientOptions(brokerURI string, clientId string, username string, pswrd string) *mqtt.ClientOptions {
 
 	opts := mqtt.NewClientOptions()
 	// AddBroker adds a broker URI to the list of brokers to be used.
@@ -16,12 +16,14 @@ func createClientOptions(brokerURI string, clientId string) *mqtt.ClientOptions 
 	opts.AddBroker(brokerURI)
 	// opts.SetPassword(password)
 	opts.SetClientID(clientId)
+	opts.SetUsername(username)
+	opts.SetPassword(pswrd)
 	return opts
 
 }
 
-func Connect(brokerURI string, clientId string) mqtt.Client {
-	opts := createClientOptions(brokerURI, clientId)
+func Connect(brokerURI string, clientId string, username string, pswrd string) mqtt.Client {
+	opts := createClientOptions(brokerURI, clientId, username, pswrd)
 	client := mqtt.NewClient(opts)
 	token := client.Connect()
 	for !token.WaitTimeout(3 * time.Second) {
