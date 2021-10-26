@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 
-	database "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-transform/external/database"
-	subscriber "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-transform/external/subscriber"
+	database "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/database"
 	env "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/env"
 	model "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/model"
+	subscriber "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/mqtt/myMqttClient"
 	myLog "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/myLog"
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 )

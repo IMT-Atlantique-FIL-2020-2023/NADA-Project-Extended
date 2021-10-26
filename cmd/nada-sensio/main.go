@@ -38,8 +38,10 @@ func main() {
 	var mqtt_host string = env.GetEnv("NADA_SENSIO_MQTT_HOST")
 	var mqtt_client_id string = env.GetEnv("NADA_SENSIO_MQTT_CLIENT_ID")
 	var topic string = env.GetEnv("NADA_SENSIO_MQTT_TOPIC")
+	var mqtt_client_name string = env.GetEnv("NADA_SENSIO_MQTT_CLIENT_NAME")
+	var mqtt_client_paswrd string = env.GetEnv("NADA_SENSIO_MQTT_PSWRD")
 
-	client := publisher.Connect(mqtt_host+":"+mqtt_port, mqtt_client_id)
+	client := publisher.Connect(mqtt_host+":"+mqtt_port, mqtt_client_id, mqtt_client_name, mqtt_client_paswrd)
 
 	for {
 		params := sim.SimParam{Noise_seed: 0, Origin_latitude: 0, Origin_longitude: 0, Origin_altitude: 1000, TimeStamp: time.Now()}
