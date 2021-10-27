@@ -17,7 +17,7 @@ import (
 )
 
 func init() {
-	env.Init("internal/app/nada-sensio/", ".nada-sensio.env")
+	env.Init(".", ".nada-sensio.env")
 	myLog.Init(env.GetEnv("NADA_SENSIO_LOG_LEVEL"))
 }
 
@@ -80,7 +80,11 @@ func main() {
 			myLog.MyLog(myLog.Get_level_ERROR(), "main(could not retrieve qos from env)")
 		}
 
-		client.Publish(topic, byte(qos), false, msg)
+		token := client.Publish(topic, byte(qos), false, msg)
+
+		if token.Wait() && token.Error() != nil {
+			panic(token.Error())
+		}
 
 		time.Sleep(time.Millisecond * 500)
 	}
