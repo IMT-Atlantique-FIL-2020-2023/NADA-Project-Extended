@@ -58,6 +58,7 @@
 ## About The Project
 
 > `// TODO`
+![alt text](http://url/to/img.png)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
