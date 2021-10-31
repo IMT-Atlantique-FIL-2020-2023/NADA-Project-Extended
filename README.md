@@ -57,6 +57,8 @@
 
 ## About The Project
 
+### General architecture
+
 This is an IoT application example using <a href="https://github.com/eclipse/paho.mqtt.golang">Paho</a> MQTT Client.
 
 <br />
