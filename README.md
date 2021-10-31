@@ -98,13 +98,15 @@ Accepted measureType:
 - winddirx
 - winddiry
 
-**example**: go run cmd/nada-sensio/main.go S0 A0 windspeed 
+**example**: 
+> go run cmd/nada-sensio/main.go S0 A0 windspeed 
 
 ### nada-transform (MQTT subscriber + database insert)
 - Subscribes to a configured MQTT topic  
 - Inserts received data into the configured influxDB database
 
-**example**: go run cmd/nada-transform/Main.go
+**example**: 
+> go run cmd/nada-transform/Main.go
 
 <!-- CONTRIBUTING -->
 
