@@ -57,8 +57,7 @@
 
 ## About The Project
 
-This is an IoT application example using a <a href="https://github.com/eclipse/paho.mqtt.golang">Paho</a> MQTT Client.
-
+This is an IoT application example using <a href="https://github.com/eclipse/paho.mqtt.golang">Paho</a> MQTT Client.
 
 <br />
 <img src="https://raw.githubusercontent.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/develop/assets/architecture.PNG" alt="Architecture" width="50%" align="center">
@@ -79,8 +78,8 @@ This is an IoT application example using a <a href="https://github.com/eclipse/p
 
 ### Prerequisites
 
-> `// TODO`
-- MQTT Broker (example: Mosquitto)
+- MQTT broker (example: <a href="https://github.com/eclipse/mosquitto">Mosquitto</a>)
+- Time series database (example: <a href="https://www.influxdata.com/">InfluxDB</a>)
 
 ### Installation
 
