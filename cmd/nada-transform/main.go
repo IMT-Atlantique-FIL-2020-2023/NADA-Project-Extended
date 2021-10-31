@@ -26,7 +26,7 @@ func onMessageReceived(client mqtt.Client, message mqtt.Message) {
 }
 
 func init() {
-	env.Init("internal/app/nada-transform/env/", ".nada-transform.env")
+	env.Init("./", ".nada-transform.env")
 	myLog.Init(env.GetEnv("NADA_TRANSFORM_LOG_LEVEL"))
 }
 
