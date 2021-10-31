@@ -58,6 +58,10 @@
 ## About The Project
 
 > `// TODO`
+<br />
+<a href="https://nada-extended.herokuapp.com/">
+<img src="https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-webapp/blob/main/src/assets/NADA.svg" alt="Logo" width="200" height="200">
+</a>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

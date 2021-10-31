@@ -38,10 +38,9 @@ from(bucket: "nada-bucket")
 	airports := make([]*model.Airport, 0, 10)
 	if err == nil {
 		for result.Next() {
-			airports = append(airports, &model.Airport{
-				ID:   result.Record().Value().(string),
-				Name: "",
-			})
+			airportIataCode := result.Record().Value().(string)
+			airport := db.ExecQuery(ctx, r.CsvDbClient, airportIataCode)
+			airports = append(airports, airport)
 		}
 	}
 	return airports, err
@@ -59,12 +58,8 @@ from(bucket: "nada-bucket")
 	if !result.Next() {
 		return nil, gqlerror.Errorf("Airport not found %v", id)
 	}
-	airport := &model.Airport{
-		ID:   result.Record().Value().(string),
-		Name: "",
-	}
-
-	return airport, err
+	airportIataCode := result.Record().Value().(string)
+	return db.ExecQuery(ctx, r.CsvDbClient, airportIataCode), err
 }
 
 func (r *sensorResolver) GetMeanMeasureInterval(ctx context.Context, obj *model.Sensor, start time.Time, end time.Time, discretize *string, discretizeMode *model.MeanMeasureMode) ([]*model.MeasureMeanData, error) {
@@ -79,10 +74,6 @@ func (r *sensorResolver) GetMeanMeasureInterval(ctx context.Context, obj *model.
 
 	result, err := thunk()
 	return result.([]*model.MeasureMeanData), err
-}
-func Bod(t time.Time) time.Time {
-	year, month, day := t.Date()
-	return time.Date(year, month, day, 0, 0, 0, 0, t.Location())
 }
 
 func (r *sensorResolver) GetMeanMeasures(ctx context.Context, obj *model.Sensor, day *time.Time) ([]*model.MeasureMeanData, error) {

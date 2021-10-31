@@ -28,8 +28,8 @@ func (p *DotEnv) Unmarshal(b []byte) (map[string]interface{}, error) {
 	// Convert a map[string]string to a map[string]interface{}
 	mp := make(map[string]interface{})
 	for k, v := range r {
-		k = TransformKey(k)
-		mp[k] = v
+		k, vV := TransformKeyWithValue(k, v)
+		mp[k] = vV
 	}
 	return maps.Unflatten(mp, "."), err
 }
@@ -52,7 +52,13 @@ func (p *DotEnv) Marshal(o map[string]interface{}) ([]byte, error) {
 	return []byte(out), nil
 }
 
-func TransformKey(s string) string {
-	return strings.Replace(strings.ToLower(
+func TransformKeyWithValue(s string, value string) (string, interface{}) {
+	key := strings.Replace(strings.ToLower(
 		strings.TrimPrefix(s, "NADA_SERVE_")), "_", ".", -1)
+	trimed := strings.TrimSuffix(key, "..array")
+	if trimed != key {
+		return trimed, strings.Split(value, ",")
+	}
+	return key, value
+
 }

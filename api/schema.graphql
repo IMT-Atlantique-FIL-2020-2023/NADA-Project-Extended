@@ -82,7 +82,52 @@ type Airport implements Node {
   """
   Airport literal name
   """
-  name: String! @fake(locale: fr, type: city)
+  name: String @fake(locale: fr, type: city)
+
+  """
+  Airport elevation in feet
+  """
+  elevationFt: Int
+
+  """
+  Airport continent
+  """
+  continent: String
+
+  """
+  Airport iso country
+  """
+  isoCountry: String
+
+  """
+  Airport iso region
+  """
+  isoRegion: String
+
+  """
+  Airport municipality
+  """
+  municipality: String
+
+  """
+  Airport gps code
+  """
+  gpsCode: String
+
+  """
+  Airport local code
+  """
+  localCode: String
+
+  """
+  Airport coordinate lat (Decimal Degree) in WGS84 coordinate system
+  """
+  lat: Float
+
+  """
+  Airport coordinate lon (Decimal Degree) in WGS84 coordinate system
+  """
+  lon: Float
 
   """
   List of available sensors for this airport

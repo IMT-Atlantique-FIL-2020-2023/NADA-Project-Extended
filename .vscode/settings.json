@@ -1,7 +1,8 @@
 {
-    "conventionalCommits.scopes": [
-        "nada-transform",
-        "nada-sensio",
-        "nada-sensio + nada-transform"
-    ]
+  "conventionalCommits.scopes": [
+    "nada-transform",
+    "nada-sensio",
+    "nada-serve",
+    "nada-sensio + nada-transform"
+  ]
 }
