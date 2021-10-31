@@ -59,8 +59,8 @@
 
 > `// TODO`
 <br />
-<img src="https://raw.githubusercontent.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/develop/assets/architecture.PNG" alt="Architecture" width="50%">
-</a>
+<img src="https://raw.githubusercontent.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/develop/assets/architecture.PNG" alt="Architecture" width="50%" align="center">
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
