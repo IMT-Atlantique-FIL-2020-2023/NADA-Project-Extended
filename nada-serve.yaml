@@ -24,8 +24,8 @@ sensors:
     name: "Vitesse du vent"
     unit: "m/s"
   winddirx:
-    name: "Direction du vent"
+    name: "Direction du vent x"
     unit: "x"
   winddiry:
-    name: "Direction du vent"
+    name: "Direction du vent y"
     unit: "y"
