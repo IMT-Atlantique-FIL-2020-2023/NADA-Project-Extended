@@ -41,7 +41,9 @@ func ExecQuery(ctx context.Context, db *sql.DB, iataCode string) *model.Airport 
 
 	if err != nil {
 		log.Error().Err(err).Msgf("Error loading from CSV file airport %v", iataCode)
-		return &model.Airport{}
+		return &model.Airport{
+			ID: iataCode,
+		}
 	}
 	coords := strings.Split(coordinates.String, ",")
 	lon, _ := strconv.ParseFloat(strings.TrimSpace(coords[0]), 64)
