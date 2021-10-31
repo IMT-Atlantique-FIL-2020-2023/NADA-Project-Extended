@@ -152,10 +152,3 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [license-shield]: https://img.shields.io/github/license/IMT-Atlantique-FIL-2020-2023/NADA-extended?style=flat-square
 [license-url]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/blob/main/LICENSE/
 [logo]: src/assets/logo.png
-
-
-NADA-SENSIO
-Message Broker
-NADA-SERVE
-NADA-DB
-NADA-TRANSFORM
