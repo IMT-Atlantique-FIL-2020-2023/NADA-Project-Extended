@@ -36,9 +36,6 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -61,18 +58,10 @@
 
 This is an IoT application example using <a href="https://github.com/eclipse/paho.mqtt.golang">Paho</a> MQTT Client.
 
-
-<br />
 <img src="https://raw.githubusercontent.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/develop/assets/architecture.PNG" alt="Architecture" width="50%" align="center">
-<a href="https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-webapp">Nada-webapp</a> is in another git project 
+<a href="https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-webapp">Nada-Webapp</a> is in another git project 
 
-<p align="right">(<a href="#top">back to top</a>)</p>
 
-### Built With
-
-- [TODO](...)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
 
@@ -106,14 +95,16 @@ Accepted measureType:
 - winddirx
 - winddiry
 
-example: go run cmd/nada-sensio/main.go S0 A0 windspeed 
+**example**: go run cmd/nada-sensio/main.go S0 A0 windspeed 
 
-### nada-transform (MQTT subscriber + db insert)
+### nada-transform (MQTT subscriber + database insert)
 - Subscribes to a configured MQTT topic  
 - Inserts received data into the configured influxDB database
 
-go run cmd/nada-transform/Main.go
+**example**: go run cmd/nada-transform/Main.go
 
+### nada-serve (GraphQL API)
+TODO
 
 <!-- CONTRIBUTING -->
 
