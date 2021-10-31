@@ -19,8 +19,7 @@ sensorsIds = ["":[],"NTE":[],]
 
 filterFunc = (r) => {
     item = dict.get(dict: sensorsIds, key: r.airportId, default: [])
-    len = length(arr: item) 
-    return (len == 0 or contains(value: r.sensorId, set: item))
+    return (contains(value: r.sensorId, set: item))
 }
 
 from(bucket: "nada-bucket")
