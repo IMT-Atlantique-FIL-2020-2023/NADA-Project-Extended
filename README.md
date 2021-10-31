@@ -75,6 +75,7 @@
 ### Prerequisites
 
 > `// TODO`
+- MQTT Broker (example: Mosquitto)
 
 ### Installation
 
@@ -82,21 +83,31 @@
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### Launching nada-sensio
+### Launching 
+
+## Nada-sensio (MQTT Publisher)
+- Simulates a sensor publishing data to the configured MQTT Broker
 
 go run cmd/nada-sensio/main.go  [sensorID] [airportID] [measureType]
 
 Accepted measureType:
-temperature
-altitude
-pressure
-latitude
-longitude
-windspeed
-winddirx
-winddiry
+- temperature
+- altitude
+- pressure
+- latitude
+- longitude
+- windspeed
+- winddirx
+- winddiry
 
 example: go run cmd/nada-sensio/main.go S0 A0 windspeed 
+
+## nada-transform (MQTT subscriber + db insert)
+- Subscribes to a configured MQTT topic  
+- Inserts received data into the configured influxDB database
+
+go run cmd/nada-transform/Main.go
+
 
 <!-- CONTRIBUTING -->
 
