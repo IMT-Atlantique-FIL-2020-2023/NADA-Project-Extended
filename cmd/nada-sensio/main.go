@@ -68,7 +68,7 @@ func main() {
 
 		}
 
-		result := model.Measure{SensorID: sensorID, AirportID: airportID, MeasureType: measureType, Value: measureValue, Timestamp: time.Now().String()}
+		result := model.Measure{SensorID: sensorID, AirportID: airportID, MeasureType: measureType, Value: measureValue, Timestamp: time.Now().Format(time.RFC3339Nano)}
 		fmt.Println(result)
 		msg, err := json.Marshal(result)
 		if err != nil {
