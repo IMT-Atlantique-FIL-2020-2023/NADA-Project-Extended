@@ -86,11 +86,6 @@ github.com/hashicorp/hcl/hcl/token
 github.com/hashicorp/hcl/json/parser
 github.com/hashicorp/hcl/json/scanner
 github.com/hashicorp/hcl/json/token
-# github.com/henvic/httpretty v0.0.6
-## explicit; go 1.13
-github.com/henvic/httpretty
-github.com/henvic/httpretty/internal/color
-github.com/henvic/httpretty/internal/header
 # github.com/influxdata/influxdb-client-go/v2 v2.5.1
 ## explicit; go 1.13
 github.com/influxdata/influxdb-client-go/v2
@@ -131,12 +126,46 @@ github.com/matryer/moq/pkg/moq
 # github.com/mitchellh/copystructure v1.2.0
 ## explicit; go 1.15
 github.com/mitchellh/copystructure
+# github.com/mitchellh/go-homedir v1.1.0
+## explicit
+github.com/mitchellh/go-homedir
 # github.com/mitchellh/mapstructure v1.4.2
 ## explicit; go 1.14
 github.com/mitchellh/mapstructure
 # github.com/mitchellh/reflectwalk v1.0.2
 ## explicit
 github.com/mitchellh/reflectwalk
+# github.com/mithrandie/csvq v1.15.2
+## explicit; go 1.14
+github.com/mithrandie/csvq/lib/cmd
+github.com/mithrandie/csvq/lib/excmd
+github.com/mithrandie/csvq/lib/file
+github.com/mithrandie/csvq/lib/json
+github.com/mithrandie/csvq/lib/parser
+github.com/mithrandie/csvq/lib/query
+github.com/mithrandie/csvq/lib/syntax
+github.com/mithrandie/csvq/lib/value
+# github.com/mithrandie/csvq-driver v1.4.3
+## explicit; go 1.14
+github.com/mithrandie/csvq-driver
+# github.com/mithrandie/go-file/v2 v2.0.2
+## explicit
+github.com/mithrandie/go-file/v2
+# github.com/mithrandie/go-text v1.4.1
+## explicit; go 1.14
+github.com/mithrandie/go-text
+github.com/mithrandie/go-text/color
+github.com/mithrandie/go-text/csv
+github.com/mithrandie/go-text/fixedlen
+github.com/mithrandie/go-text/json
+github.com/mithrandie/go-text/ltsv
+github.com/mithrandie/go-text/table
+# github.com/mithrandie/readline-csvq v1.1.1
+## explicit; go 1.11
+github.com/mithrandie/readline-csvq
+# github.com/mithrandie/ternary v1.1.0
+## explicit
+github.com/mithrandie/ternary
 # github.com/opentracing/opentracing-go v1.2.0
 ## explicit; go 1.14
 github.com/opentracing/opentracing-go
@@ -205,6 +234,7 @@ github.com/vektah/gqlparser/v2/validator/rules
 # golang.org/x/crypto v0.0.0-20210817164053-32db794688a5
 ## explicit; go 1.17
 golang.org/x/crypto/sha3
+golang.org/x/crypto/ssh/terminal
 # golang.org/x/mod v0.4.2
 ## explicit; go 1.12
 golang.org/x/mod/module
@@ -219,13 +249,25 @@ golang.org/x/net/publicsuffix
 golang.org/x/sys/cpu
 golang.org/x/sys/execabs
 golang.org/x/sys/internal/unsafeheader
+golang.org/x/sys/plan9
 golang.org/x/sys/unix
+golang.org/x/sys/windows
+# golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1
+## explicit; go 1.11
+golang.org/x/term
 # golang.org/x/text v0.3.6
 ## explicit; go 1.11
+golang.org/x/text/encoding
+golang.org/x/text/encoding/internal
+golang.org/x/text/encoding/internal/identifier
+golang.org/x/text/encoding/japanese
+golang.org/x/text/encoding/unicode
 golang.org/x/text/internal/language
 golang.org/x/text/internal/language/compact
 golang.org/x/text/internal/tag
+golang.org/x/text/internal/utf8internal
 golang.org/x/text/language
+golang.org/x/text/runes
 golang.org/x/text/transform
 golang.org/x/text/unicode/norm
 # golang.org/x/tools v0.1.5
