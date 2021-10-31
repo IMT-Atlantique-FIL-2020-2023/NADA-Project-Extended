@@ -32,10 +32,18 @@ func Insert(measure model.Measure) {
 		• Valeur de la mesure (numérique)
 		• Date et heure de la mesure (timestamp : YYYY-MM-DD-hh-mm-ss)
 	*/
+
+	/*
+		pressure,
+		airportId=NTE,
+		sensorId=c8d127dc-ae43-497b-b1fb-7fb5f786ae64,
+		_value=27.0 146565656556
+	*/
+
 	p := influxdb2.NewPointWithMeasurement("stat").
-		AddField("sensor_id", measure.SensorID).
-		AddField("airport_id", measure.AirportID).
-		AddField("measurement_type", measure.MeasureType).
+		AddTag("measurement_type", measure.MeasureType).
+		AddTag("airport_id", measure.AirportID).
+		AddTag("sensor_id", measure.SensorID).
 		AddField("measurement_value", measure.Value).
 		AddField("timestamp", measure.Timestamp).
 		SetTime(time.Now())
