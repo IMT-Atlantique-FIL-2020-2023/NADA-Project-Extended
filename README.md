@@ -103,9 +103,6 @@ Accepted measureType:
 
 **example**: go run cmd/nada-transform/Main.go
 
-### nada-serve (GraphQL API)
-TODO
-
 <!-- CONTRIBUTING -->
 
 ## Contributing
