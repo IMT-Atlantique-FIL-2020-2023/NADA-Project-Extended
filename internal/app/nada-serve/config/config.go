@@ -27,6 +27,7 @@ type NadaServeConfig struct {
 	Port           int                     `koanf:"port" validate:"required"`
 	LogLevel       zerolog.Level           `koanf:"loglevel" validate:"omitempty,required"`
 	InfluxDb       InfluxbConfig           `koanf:"influxdb" validate:"required"`
+	CsvAirportFile string                  `koanf:"csvairportfile" validate:"required"`
 	AllowedOrigins []string                `koanf:"allowedorigins" validate:"required"`
 	Sensors        map[string]SensorConfig `koanf:"sensors" validate:"required,min=1"` // we need at least one sensor available in config
 }
