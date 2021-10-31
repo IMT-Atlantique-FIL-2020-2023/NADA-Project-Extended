@@ -84,7 +84,7 @@ This is an IoT application example using <a href="https://github.com/eclipse/pah
 ### Installation
 
 - git clone <repository>
-- create and configure <a href="https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/blob/develop/nada-sensio.env.example"> nada-sensio </a>, <a href="https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/blob/develop/nada-transform.env.example">nada-transform </a>, and <a href="https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/blob/develop/nada-serve.env.example">nada-serve </a> .env files (follow links to see examples)
+- create and configure <a href="https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/blob/develop/nada-sensio.env.example">nada-sensio </a>, <a href="https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/blob/develop/nada-transform.env.example">nada-transform </a>, and <a href="https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/blob/develop/nada-serve.env.example">nada-serve </a> .env files (follow links to see examples)
 
 ## Launching 
 
