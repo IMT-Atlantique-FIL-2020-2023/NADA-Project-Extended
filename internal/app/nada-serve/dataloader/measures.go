@@ -125,7 +125,7 @@ from(bucket: "nada-bucket")
 			measureData[airportId][sensorId] = make(map[string][]*model.MeasureMeanData)
 		}
 		measureData[airportId][sensorId][measurement] = append(measureData[airportId][sensorId][measurement], &model.MeasureMeanData{
-			ID:        uuid.NewMD5(space, []byte(start.String()+end.String())).String(),
+			ID:        uuid.NewMD5(space, []byte(start.String()+end.String()+airportId+sensorId+measurement)).String(),
 			Sensor:    sensor,
 			Airport:   sensor.Airport,
 			StartDate: start,
