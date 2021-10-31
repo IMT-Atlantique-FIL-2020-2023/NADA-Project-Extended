@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -42,52 +43,62 @@ func main() {
 	var mqtt_client_paswrd string = env.GetEnv("NADA_SENSIO_MQTT_PSWRD")
 
 	client := myMqttClient.Connect(mqtt_host+":"+mqtt_port, mqtt_client_id, mqtt_client_name, mqtt_client_paswrd, nil)
+	defer myLog.MyLog(myLog.Get_level_INFO(), "main(end)")
+	ticker := time.NewTicker(500 * time.Millisecond)
+	ctx := context.Background()
 
-	for {
-		params := sim.SimParam{Noise_seed: 0, Origin_latitude: 0, Origin_longitude: 0, Origin_altitude: 1000, TimeStamp: time.Now()}
-		var measureValue float64 = 0.0
-		switch measureType {
-		case "temperature":
-			measureValue = sim.Temperature(params)
-		case "altitude":
-			measureValue = sim.Altitude(params)
-		case "pressure":
-			measureValue = sim.Pressure(params)
-		case "latitude":
-			measureValue = sim.Latitude(params)
-		case "longitude":
-			measureValue = sim.Longitude(params)
-		case "windspeed":
-			measureValue = sim.WindSpeed(params)
-		case "winddirx":
-			measureValue = sim.WindDirX(params)
-		case "winddiry":
-			measureValue = sim.WindDirY(params)
-		default:
-			fmt.Println("incorrect measure name, " + measureType + " is not a valid measure type")
+	go func() {
+		for {
+			select {
+			case <-ctx.Done():
+				break
+			case <-ticker.C:
+				params := sim.SimParam{Noise_seed: 0, Origin_latitude: 0, Origin_longitude: 0, Origin_altitude: 1000, TimeStamp: time.Now()}
+				var measureValue float64 = 0.0
+				switch measureType {
+				case "temperature":
+					measureValue = sim.Temperature(params)
+				case "altitude":
+					measureValue = sim.Altitude(params)
+				case "pressure":
+					measureValue = sim.Pressure(params)
+				case "latitude":
+					measureValue = sim.Latitude(params)
+				case "longitude":
+					measureValue = sim.Longitude(params)
+				case "windspeed":
+					measureValue = sim.WindSpeed(params)
+				case "winddirx":
+					measureValue = sim.WindDirX(params)
+				case "winddiry":
+					measureValue = sim.WindDirY(params)
+				default:
+					fmt.Println("incorrect measure name, " + measureType + " is not a valid measure type")
 
+				}
+
+				result := model.Measure{SensorID: sensorID, AirportID: airportID, MeasureType: measureType, Value: measureValue, Timestamp: time.Now().Format(time.RFC3339Nano)}
+				fmt.Println(result)
+				msg, err := json.Marshal(result)
+				if err != nil {
+					myLog.MyLog(myLog.Get_level_ERROR(), "main(could not parse Measure struct to json format)")
+				}
+
+				qos, err := strconv.Atoi(env.GetEnv("NADA_SENSIO_QOS"))
+				if err != nil {
+					myLog.MyLog(myLog.Get_level_ERROR(), "main(could not retrieve qos from env)")
+				}
+
+				token := client.Publish(topic, byte(qos), false, msg)
+
+				if token.Wait() && token.Error() != nil {
+					panic(token.Error())
+				}
+
+			}
 		}
+	}()
+	fmt.Scanln()
+	ctx.Done()
 
-		result := model.Measure{SensorID: sensorID, AirportID: airportID, MeasureType: measureType, Value: measureValue, Timestamp: time.Now().Format(time.RFC3339Nano)}
-		fmt.Println(result)
-		msg, err := json.Marshal(result)
-		if err != nil {
-			myLog.MyLog(myLog.Get_level_ERROR(), "main(could not parse Measure struct to json format)")
-		}
-
-		qos, err := strconv.Atoi(env.GetEnv("NADA_SENSIO_QOS"))
-		if err != nil {
-			myLog.MyLog(myLog.Get_level_ERROR(), "main(could not retrieve qos from env)")
-		}
-
-		token := client.Publish(topic, byte(qos), false, msg)
-
-		if token.Wait() && token.Error() != nil {
-			panic(token.Error())
-		}
-
-		time.Sleep(time.Millisecond * 500)
-	}
-
-	myLog.MyLog(myLog.Get_level_INFO(), "main(end)")
 }
