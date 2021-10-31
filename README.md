@@ -57,7 +57,9 @@
 
 ## About The Project
 
-> `// TODO`
+This is an IoT application example using a <a href="https://github.com/eclipse/paho.mqtt.golang">Paho</a> MQTT Client.
+
+
 <br />
 <img src="https://raw.githubusercontent.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/develop/assets/architecture.PNG" alt="Architecture" width="50%" align="center">
 
