@@ -22,6 +22,9 @@ func Insert(measure model.Measure) {
 	// You can generate a Token from the "Tokens Tab" in the UI
 	client := influxdb2.NewClient(db_url, db_authToken)
 
+	db_usermail := env.GetEnv("NADA_TRANSFORM_INFLUXDB_ORG")
+	db_bucketName := env.GetEnv("NADA_TRANSFORM_INFLUXDB_BUCKETNAME")
+
 	// get non-blocking write client
 	writeAPI := client.WriteAPI(db_usermail, db_bucketName)
 
