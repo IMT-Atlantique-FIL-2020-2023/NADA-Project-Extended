@@ -83,9 +83,9 @@
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### Launching 
+## Launching 
 
-## Nada-sensio (MQTT Publisher)
+### Nada-sensio (MQTT Publisher)
 - Simulates a sensor publishing data to the configured MQTT Broker
 
 go run cmd/nada-sensio/main.go  [sensorID] [airportID] [measureType]
@@ -102,7 +102,7 @@ Accepted measureType:
 
 example: go run cmd/nada-sensio/main.go S0 A0 windspeed 
 
-## nada-transform (MQTT subscriber + db insert)
+### nada-transform (MQTT subscriber + db insert)
 - Subscribes to a configured MQTT topic  
 - Inserts received data into the configured influxDB database
 
