@@ -1,6 +1,8 @@
 package database
 
 import (
+	"context"
+	"fmt"
 	"time"
 
 	model "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/model"
@@ -10,17 +12,22 @@ import (
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
 )
 
-func Insert(measure model.Measure) {
-	myLog.MyLog(myLog.Get_level_INFO(), "database(start insert)")
+func ConnectToDb() influxdb2.Client {
 
 	var db_url string = env.GetEnv("NADA_TRANSFORM_INFLUXDB_URL")
 	var db_authToken string = env.GetEnv("NADA_TRANSFORM_INFLUXDB_AUTHTKN")
-	var db_usermail string = env.GetEnv("NADA_TRANSFORM_INFLUXDB_USERMAIL")
-	var db_bucketName string = env.GetEnv("NADA_TRANSFORM_INFLUXDB_BUCKETNAME")
 
 	// Create a client
 	// You can generate a Token from the "Tokens Tab" in the UI
 	client := influxdb2.NewClient(db_url, db_authToken)
+	if _, err := client.Ready(context.Background()); err != nil {
+		myLog.MyLog(myLog.Get_level_ERROR(), fmt.Sprintf("Database is not ready: %v", err))
+	}
+	return client
+}
+
+func Insert(client influxdb2.Client, measure model.Measure) {
+	myLog.MyLog(myLog.Get_level_INFO(), "database(start insert)")
 
 	db_usermail := env.GetEnv("NADA_TRANSFORM_INFLUXDB_ORG")
 	db_bucketName := env.GetEnv("NADA_TRANSFORM_INFLUXDB_BUCKETNAME")
@@ -42,19 +49,21 @@ func Insert(measure model.Measure) {
 		sensorId=c8d127dc-ae43-497b-b1fb-7fb5f786ae64,
 		_value=27.0 146565656556
 	*/
+	t, err := time.Parse(time.RFC3339Nano, measure.Timestamp)
+	if err != nil {
+		myLog.MyLog(myLog.Get_level_WARNING(), err.Error())
+		return
+	}
 
-	p := influxdb2.NewPointWithMeasurement("stat").
-		AddTag("measurement_type", measure.MeasureType).
-		AddTag("airport_id", measure.AirportID).
-		AddTag("sensor_id", measure.SensorID).
-		AddField("measurement_value", measure.Value).
-		AddField("timestamp", measure.Timestamp).
-		SetTime(time.Now())
+	p := influxdb2.NewPointWithMeasurement(measure.MeasureType).
+		AddTag("airportId", measure.AirportID).
+		AddTag("sensorId", measure.SensorID).
+		AddField("_value", measure.Value).
+		SetTime(t)
 	writeAPI.WritePoint(p)
 
 	// Flush writes
 	writeAPI.Flush()
 
-	defer client.Close()
 	myLog.MyLog(myLog.Get_level_INFO(), "database(end insert)")
 }
