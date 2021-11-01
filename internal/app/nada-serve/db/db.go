@@ -8,6 +8,7 @@ import (
 	"github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-serve/config"
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
 	"github.com/influxdata/influxdb-client-go/v2/api"
+	"github.com/influxdata/influxdb-client-go/v2/domain"
 	"github.com/rs/zerolog/log"
 )
 
@@ -22,10 +23,18 @@ func ConnectToDatabase() (influxdb2.Client, api.QueryAPI) {
 	if result == false || err != nil {
 		log.Fatal().Err(err).Msg("Database is not ready")
 	}
-	if _, err := client.BucketsAPI().GetBuckets(context.Background()); err != nil {
-		log.Fatal().Err(err).Msg("Cannot get buckets from database")
-	}
+	if _, err := client.QueryAPI(config.CurrentConfig.InfluxDb.Org).QueryRaw(context.Background(), `
+import "generate"
 
+generate.from(
+  count: 1,
+  fn: (n) => n,
+  start: 2021-01-01T00:00:00Z,
+  stop: 2021-01-02T00:00:00Z
+)
+	`, &domain.Dialect{}); err != nil {
+		log.Fatal().Err(err).Msg("Invalid influxdb configuration")
+	}
 	// Does not work on cloud version, sorry
 	// if result.Status == domain.HealthCheckStatusPass {
 	// 	log.Info().Msgf("Database HealthCheckStatusPass - %v %v %v", result.Name, *result.Version, *result.Message)
