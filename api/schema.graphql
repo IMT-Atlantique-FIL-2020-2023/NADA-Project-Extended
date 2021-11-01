@@ -1,29 +1,29 @@
-# Examples :
+# Example :
 # {
-#   airports {
-#     id
-#     name
-#     sensors {
-#       id
-#       measurement {
-#         id
-#         name
-#         unit
-#       }
-#       getMeanMeasureInterval(
-#         start: "2021-03-15 23:20:47.367000000"
-#         end: "2022-03-04 17:02:18.325000000"
-#         discretize: 24
-#         discretizeMode: PER_DAY
+#  getAirportById(id: "NTE") {
+#    name
+#    id
+#    sensors {
+#      id
+#      measurement {
+#        id
+#        name
+#        unit
+#      }
+#      getMeanMeasureInterval(
+#        start: "2021-10-31T11:40:10.388Z"
+#        end: "2021-10-31T11:40:10.388Z"
+#        discretize: "1m"
+#        discretizeMode: FLUX_DURATION
 #       ) {
 #         id
-#         value
-#         startDate
-#         endDate
-#       }
-#     }
-#   }
-# }
+#        value
+#        startDate
+#        endDate
+#      }
+#    }
+#  }
+#}
 # https://gqlgen.com/getting-started/
 """
 Directives defined by gqlgen
