@@ -55,6 +55,10 @@ from(bucket: "nada-bucket")
     |> filter(fn: (r) => r.airportId == "%v")
     |> rename(columns: {airportId: "_value"})
     |> first()`, db.SanitizeString(id)))
+	if err != nil {
+		return nil, err
+	}
+
 	if !result.Next() {
 		return nil, gqlerror.Errorf("Airport not found %v", id)
 	}

@@ -20,7 +20,10 @@ func ConnectToDatabase() (influxdb2.Client, api.QueryAPI) {
 
 	result, err := client.Ready(context.Background())
 	if result == false || err != nil {
-		log.Fatal().Err(err).Msg("Cannot check database health")
+		log.Fatal().Err(err).Msg("Database is not ready")
+	}
+	if _, err := client.BucketsAPI().GetBuckets(context.Background()); err != nil {
+		log.Fatal().Err(err).Msg("Cannot get buckets from database")
 	}
 
 	// Does not work on cloud version, sorry
