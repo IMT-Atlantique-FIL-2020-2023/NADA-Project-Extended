@@ -1,7 +1,16 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Chore
+- update changelog
+- **nada-serve:** update changelog file
+
+### Docs
+- **nada-serve:** :memo: update graphQL query example
+- **nada-serve:** add initial changelog
+
 ### Fix
+- **nada-serve:** do an empty request to check authorization with influxdb
 - **nada-serve:** prevent launching if auth params from influxdb are invalid
 
 
@@ -106,9 +115,6 @@
 - **nada-transform:** :fire: vendor
 - **nada-transform:** :recycle: env variables
 - **nada-transform:** :loud_sound: added logging
-
-### Pull Requests
-- Merge pull request [#1](https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/issues/1) from IMT-Atlantique-FIL-2020-2023/develop
 
 ### BREAKING CHANGE
 
