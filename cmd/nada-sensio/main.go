@@ -26,7 +26,7 @@ func init() {
 }
 
 var mutex sync.Mutex
-var cachedMeasures [10]model.Measure
+var cachedMeasures [1000]model.Measure
 var index int = 0
 
 func main() {
