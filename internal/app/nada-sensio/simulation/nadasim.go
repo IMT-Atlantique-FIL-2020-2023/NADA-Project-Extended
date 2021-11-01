@@ -15,6 +15,32 @@ type SimParam struct {
 	TimeStamp        time.Time
 }
 
+func GetMeasureValue(measureType string, params SimParam) float64 {
+	var measureValue float64 = 0.0
+	switch measureType {
+	case "temperature":
+		measureValue = Temperature(params)
+	case "altitude":
+		measureValue = Altitude(params)
+	case "pressure":
+		measureValue = Pressure(params)
+	case "latitude":
+		measureValue = Latitude(params)
+	case "longitude":
+		measureValue = Longitude(params)
+	case "windspeed":
+		measureValue = WindSpeed(params)
+	case "winddirx":
+		measureValue = WindDirX(params)
+	case "winddiry":
+		measureValue = WindDirY(params)
+	default:
+		return -1.0
+	}
+
+	return measureValue
+}
+
 var temperature_lapse_rate float64 = 9.8
 var reference_temperature float64 = 293.0
 
