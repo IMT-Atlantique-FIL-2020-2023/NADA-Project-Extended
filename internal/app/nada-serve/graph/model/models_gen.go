@@ -18,7 +18,25 @@ type Airport struct {
 	// IATA airport code
 	ID string `json:"id"`
 	// Airport literal name
-	Name string `json:"name"`
+	Name *string `json:"name"`
+	// Airport elevation in feet
+	ElevationFt *int `json:"elevationFt"`
+	// Airport continent
+	Continent *string `json:"continent"`
+	// Airport continent
+	IsoCountry *string `json:"isoCountry"`
+	// Airport iso region
+	IsoRegion *string `json:"isoRegion"`
+	// Airport municipality
+	Municipality *string `json:"municipality"`
+	// Airport gps code
+	GpsCode *string `json:"gpsCode"`
+	// Airport local code
+	LocalCode *string `json:"localCode"`
+	// Airport coordinate lat (Decimal Degree) in WGS84 coordinate system
+	Lat *float64 `json:"lat"`
+	// Airport coordinate lat (Decimal Degree) in WGS84 coordinate system
+	Lon *float64 `json:"lon"`
 	// List of available sensors for this airport
 	Sensors []*Sensor `json:"sensors"`
 	// Get a subset of sensors

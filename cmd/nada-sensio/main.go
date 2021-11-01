@@ -1,11 +1,13 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"os"
 	"reflect"
 	"strconv"
+	"sync"
 	"time"
 
 	env "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/env"
@@ -23,7 +25,8 @@ func init() {
 	myLog.Init(env.GetEnv("NADA_SENSIO_LOG_LEVEL"))
 }
 
-var cachedMeasures [1000]model.Measure
+var mutex sync.Mutex
+var cachedMeasures [10]model.Measure
 var index int = 0
 
 func main() {
@@ -55,47 +58,77 @@ func main() {
 	client := myMqttClient.Connect(mqtt_host+":"+mqtt_port, mqtt_client_id, mqtt_client_name, mqtt_client_paswrd, nil)
 	go generateNewData(client, measureType, sensorID, airportID)
 
-	for {
-		if index > 0 {
-			currentMeasure := cachedMeasures[0]
+	defer myLog.MyLog(myLog.Get_level_INFO(), "main(end)")
+	ctx := context.Background()
 
-			msg, err := json.Marshal(currentMeasure)
-			if err != nil {
-				myLog.MyLog(myLog.Get_level_ERROR(), "main(could not parse Measure struct to json format)")
-			}
+	go func() {
+	out:
+		for {
+			select {
+			case <-ctx.Done():
+				break out
+			default:
+				if index > 0 {
+					mutex.Lock()
+					currentMeasure := cachedMeasures[0]
+					fmt.Println(currentMeasure)
+					for i := 0; i < len(cachedMeasures); i += 1 {
+						if i < len(cachedMeasures)-1 {
+							cachedMeasures[i] = cachedMeasures[i+1]
+						}
+					}
+					index -= 1
+					mutex.Unlock()
 
-			qos, err := strconv.Atoi(env.GetEnv("NADA_SENSIO_QOS"))
-			if err != nil {
-				myLog.MyLog(myLog.Get_level_ERROR(), "main(could not retrieve qos from env)")
-			}
+					msg, err := json.Marshal(currentMeasure)
+					if err != nil {
+						myLog.MyLog(myLog.Get_level_ERROR(), "main(could not parse Measure struct to json format)")
+					}
 
-			token := client.Publish(topic, byte(qos), false, msg)
-			if token.Wait() && token.Error() != nil {
-				panic(token.Error())
+					qos, err := strconv.Atoi(env.GetEnv("NADA_SENSIO_QOS"))
+					if err != nil {
+						myLog.MyLog(myLog.Get_level_ERROR(), "main(could not retrieve qos from env)")
+					}
+
+					token := client.Publish(topic, byte(qos), false, msg)
+					if token.Wait() && token.Error() != nil {
+						panic(token.Error())
+					}
+				}
 			}
-			index -= 1
 		}
-	}
+	}()
+	fmt.Scanln()
+	ctx.Done()
 }
 
 func generateNewData(client mqtt.Client, measureType string, sensorID string, airportID string) {
+	ticker := time.NewTicker(500 * time.Millisecond)
 	for {
-		params := sim.SimParam{
-			Noise_seed:       0,
-			Origin_latitude:  0,
-			Origin_longitude: 0,
-			Origin_altitude:  1000,
-			TimeStamp:        time.Now(),
+		select {
+		case <-ticker.C:
+			if index == len(cachedMeasures) {
+				continue
+			}
+			fmt.Println("Current cache size:", index)
+			params := sim.SimParam{
+				Noise_seed:       0,
+				Origin_latitude:  0,
+				Origin_longitude: 0,
+				Origin_altitude:  1000,
+				TimeStamp:        time.Now(),
+			}
+
+			measureValue := sim.GetMeasureValue(measureType, params)
+
+			result := model.Measure{SensorID: sensorID, AirportID: airportID, MeasureType: measureType, Value: measureValue, Timestamp: time.Now().String()}
+			mutex.Lock()
+			cachedMeasures[index] = result
+			index += 1
+			mutex.Unlock()
+
+			time.Sleep(time.Millisecond * 500)
 		}
-
-		measureValue := sim.GetMeasureValue(measureType, params)
-
-		result := model.Measure{SensorID: sensorID, AirportID: airportID, MeasureType: measureType, Value: measureValue, Timestamp: time.Now().String()}
-		fmt.Println(result)
-		cachedMeasures[index] = result
-		index += 1
-
-		time.Sleep(time.Millisecond * 500)
 	}
 }
 

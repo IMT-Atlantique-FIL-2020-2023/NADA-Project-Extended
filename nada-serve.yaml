@@ -8,3 +8,24 @@ sensors:
   co:
     name: Monoxyde de carbone
     unit: "ppm"
+  altitude:
+    name: "Altitude"
+    unit: "m"
+  pressure:
+    name: "Pression"
+    unit: "Pa"
+  latitude:
+    name: "Latitude (WGS84)"
+    unit: "DD"
+  longitude:
+    name: "Longitude (WGS84)"
+    unit: "DD"
+  windspeed:
+    name: "Vitesse du vent"
+    unit: "m/s"
+  winddirx:
+    name: "Direction du vent x"
+    unit: "x"
+  winddiry:
+    name: "Direction du vent y"
+    unit: "y"

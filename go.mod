@@ -29,7 +29,13 @@ require (
 	github.com/magiconair/properties v1.8.5 // indirect
 	github.com/matryer/moq v0.0.0-20200106131100-75d0ddfc0007 // indirect
 	github.com/mitchellh/copystructure v1.2.0 // indirect
+	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/reflectwalk v1.0.2 // indirect
+	github.com/mithrandie/csvq v1.15.2 // indirect
+	github.com/mithrandie/go-file/v2 v2.0.2 // indirect
+	github.com/mithrandie/go-text v1.4.1 // indirect
+	github.com/mithrandie/readline-csvq v1.1.1 // indirect
+	github.com/mithrandie/ternary v1.1.0 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/pelletier/go-toml v1.9.4 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
@@ -45,6 +51,7 @@ require (
 	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5 // indirect
 	golang.org/x/mod v0.4.2 // indirect
 	golang.org/x/sys v0.0.0-20210823070655-63515b42dcdf // indirect
+	golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1 // indirect
 	golang.org/x/text v0.3.6 // indirect
 	golang.org/x/tools v0.1.5 // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
@@ -60,9 +67,11 @@ require (
 
 require (
 	github.com/fatih/structs v1.1.0 // indirect
+	github.com/go-chi/chi v1.5.4
 	github.com/go-playground/validator/v10 v10.9.0
 	github.com/google/uuid v1.3.0
 	github.com/graph-gophers/dataloader/v6 v6.0.0
-	github.com/henvic/httpretty v0.0.6
 	github.com/mitchellh/mapstructure v1.4.2
+	github.com/mithrandie/csvq-driver v1.4.3
+	github.com/rs/cors v1.6.0
 )

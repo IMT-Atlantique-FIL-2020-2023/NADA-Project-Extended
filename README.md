@@ -36,15 +36,13 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+	<li><a href="#configuration">Configuration</a></li>
       </ul>
     </li>
     <li><a href="#contributing">Contributing</a></li>
@@ -57,15 +55,13 @@
 
 ## About The Project
 
-> `// TODO`
+### General architecture
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+This is an IoT application example using <a href="https://github.com/eclipse/paho.mqtt.golang">Paho</a> MQTT Client.
 
-### Built With
+<img src="https://raw.githubusercontent.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/develop/assets/architecture.PNG" alt="Architecture" width="50%" align="center">
+<a href="https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-webapp">Nada-Webapp</a> is in another git project 
 
-- [TODO](...)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
 
@@ -74,13 +70,43 @@
 
 ### Prerequisites
 
-> `// TODO`
+- MQTT broker (example: <a href="https://github.com/eclipse/mosquitto">Mosquitto</a>)
+- Time series database (example: <a href="https://www.influxdata.com/">InfluxDB</a>)
 
 ### Installation
 
-> `// TODO`
+- git clone <repository>
+	
+### Configuration
+	
+- create and configure <a href="https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/blob/develop/nada-sensio.env.example">nada-sensio </a>, <a href="https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/blob/develop/nada-transform.env.example">nada-transform </a>, and <a href="https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/blob/develop/nada-serve.env.example">nada-serve </a> .env files (follow links to see examples)
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+## Launching 
+
+### Nada-sensio (MQTT Publisher)
+- Simulates a sensor publishing data to the configured MQTT Broker
+
+go run cmd/nada-sensio/main.go  [sensorID] [airportID] [measureType]
+
+Accepted measureType:
+- temperature
+- altitude
+- pressure
+- latitude
+- longitude
+- windspeed
+- winddirx
+- winddiry
+
+**example**: 
+> go run cmd/nada-sensio/main.go S0 A0 windspeed 
+
+### nada-transform (MQTT subscriber + database insert)
+- Subscribes to a configured MQTT topic  
+- Inserts received data into the configured influxDB database
+
+**example**: 
+> go run cmd/nada-transform/Main.go
 
 <!-- CONTRIBUTING -->
 
@@ -126,10 +152,3 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [license-shield]: https://img.shields.io/github/license/IMT-Atlantique-FIL-2020-2023/NADA-extended?style=flat-square
 [license-url]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/blob/main/LICENSE/
 [logo]: src/assets/logo.png
-
-
-NADA-SENSIO
-Message Broker
-NADA-SERVE
-NADA-DB
-NADA-TRANSFORM

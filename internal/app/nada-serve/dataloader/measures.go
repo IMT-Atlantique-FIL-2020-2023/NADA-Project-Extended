@@ -85,8 +85,7 @@ duration = if discretizeMode then duration(v: (int(v: timeRangeEnd) - int(v:time
 
 filterFunc = (r) => {
     item = dict.get(dict: sensorsIds, key: r.airportId, default: [])
-    len = length(arr: item) 
-    return (len == 0 or contains(value: r.sensorId, set: item))
+    return (contains(value: r.sensorId, set: item))
 }
 
 from(bucket: "nada-bucket")
@@ -126,7 +125,7 @@ from(bucket: "nada-bucket")
 			measureData[airportId][sensorId] = make(map[string][]*model.MeasureMeanData)
 		}
 		measureData[airportId][sensorId][measurement] = append(measureData[airportId][sensorId][measurement], &model.MeasureMeanData{
-			ID:        uuid.NewMD5(space, []byte(start.String()+end.String())).String(),
+			ID:        uuid.NewMD5(space, []byte(start.String()+end.String()+airportId+sensorId+measurement)).String(),
 			Sensor:    sensor,
 			Airport:   sensor.Airport,
 			StartDate: start,

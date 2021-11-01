@@ -50,8 +50,17 @@ type DirectiveRoot struct {
 
 type ComplexityRoot struct {
 	Airport struct {
+		Continent          func(childComplexity int) int
+		ElevationFt        func(childComplexity int) int
 		GetSubsetOfSensors func(childComplexity int, sensorIds []string) int
+		GpsCode            func(childComplexity int) int
 		ID                 func(childComplexity int) int
+		IsoCountry         func(childComplexity int) int
+		IsoRegion          func(childComplexity int) int
+		Lat                func(childComplexity int) int
+		LocalCode          func(childComplexity int) int
+		Lon                func(childComplexity int) int
+		Municipality       func(childComplexity int) int
 		Name               func(childComplexity int) int
 		Sensors            func(childComplexity int) int
 	}
@@ -113,6 +122,20 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 	_ = ec
 	switch typeName + "." + field {
 
+	case "Airport.continent":
+		if e.complexity.Airport.Continent == nil {
+			break
+		}
+
+		return e.complexity.Airport.Continent(childComplexity), true
+
+	case "Airport.elevationFt":
+		if e.complexity.Airport.ElevationFt == nil {
+			break
+		}
+
+		return e.complexity.Airport.ElevationFt(childComplexity), true
+
 	case "Airport.getSubsetOfSensors":
 		if e.complexity.Airport.GetSubsetOfSensors == nil {
 			break
@@ -125,12 +148,61 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Airport.GetSubsetOfSensors(childComplexity, args["sensorIds"].([]string)), true
 
+	case "Airport.gpsCode":
+		if e.complexity.Airport.GpsCode == nil {
+			break
+		}
+
+		return e.complexity.Airport.GpsCode(childComplexity), true
+
 	case "Airport.id":
 		if e.complexity.Airport.ID == nil {
 			break
 		}
 
 		return e.complexity.Airport.ID(childComplexity), true
+
+	case "Airport.isoCountry":
+		if e.complexity.Airport.IsoCountry == nil {
+			break
+		}
+
+		return e.complexity.Airport.IsoCountry(childComplexity), true
+
+	case "Airport.isoRegion":
+		if e.complexity.Airport.IsoRegion == nil {
+			break
+		}
+
+		return e.complexity.Airport.IsoRegion(childComplexity), true
+
+	case "Airport.lat":
+		if e.complexity.Airport.Lat == nil {
+			break
+		}
+
+		return e.complexity.Airport.Lat(childComplexity), true
+
+	case "Airport.localCode":
+		if e.complexity.Airport.LocalCode == nil {
+			break
+		}
+
+		return e.complexity.Airport.LocalCode(childComplexity), true
+
+	case "Airport.lon":
+		if e.complexity.Airport.Lon == nil {
+			break
+		}
+
+		return e.complexity.Airport.Lon(childComplexity), true
+
+	case "Airport.municipality":
+		if e.complexity.Airport.Municipality == nil {
+			break
+		}
+
+		return e.complexity.Airport.Municipality(childComplexity), true
 
 	case "Airport.name":
 		if e.complexity.Airport.Name == nil {
@@ -563,7 +635,52 @@ type Airport implements Node {
   """
   Airport literal name
   """
-  name: String! @fake(locale: fr, type: city)
+  name: String @fake(locale: fr, type: city)
+
+  """
+  Airport elevation in feet
+  """
+  elevationFt: Int
+
+  """
+  Airport continent
+  """
+  continent: String
+
+  """
+  Airport continent
+  """
+  isoCountry: String
+
+  """
+  Airport iso region
+  """
+  isoRegion: String
+
+  """
+  Airport municipality
+  """
+  municipality: String
+
+  """
+  Airport gps code
+  """
+  gpsCode: String
+
+  """
+  Airport local code
+  """
+  localCode: String
+
+  """
+  Airport coordinate lat (Decimal Degree) in WGS84 coordinate system
+  """
+  lat: Float
+
+  """
+  Airport coordinate lat (Decimal Degree) in WGS84 coordinate system
+  """
+  lon: Float
 
   """
   List of available sensors for this airport
@@ -1034,24 +1151,309 @@ func (ec *executionContext) _Airport_name(ctx context.Context, field graphql.Col
 		if tmp == nil {
 			return nil, nil
 		}
-		if data, ok := tmp.(string); ok {
+		if data, ok := tmp.(*string); ok {
 			return data, nil
 		}
-		return nil, fmt.Errorf(`unexpected type %T from directive, should be string`, tmp)
+		return nil, fmt.Errorf(`unexpected type %T from directive, should be *string`, tmp)
 	})
 	if err != nil {
 		ec.Error(ctx, err)
 		return graphql.Null
 	}
 	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
 		return graphql.Null
 	}
-	res := resTmp.(string)
+	res := resTmp.(*string)
 	fc.Result = res
-	return ec.marshalNString2string(ctx, field.Selections, res)
+	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Airport_elevationFt(ctx context.Context, field graphql.CollectedField, obj *model.Airport) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:     "Airport",
+		Field:      field,
+		Args:       nil,
+		IsMethod:   false,
+		IsResolver: false,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ElevationFt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*int)
+	fc.Result = res
+	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Airport_continent(ctx context.Context, field graphql.CollectedField, obj *model.Airport) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:     "Airport",
+		Field:      field,
+		Args:       nil,
+		IsMethod:   false,
+		IsResolver: false,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Continent, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*string)
+	fc.Result = res
+	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Airport_isoCountry(ctx context.Context, field graphql.CollectedField, obj *model.Airport) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:     "Airport",
+		Field:      field,
+		Args:       nil,
+		IsMethod:   false,
+		IsResolver: false,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.IsoCountry, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*string)
+	fc.Result = res
+	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Airport_isoRegion(ctx context.Context, field graphql.CollectedField, obj *model.Airport) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:     "Airport",
+		Field:      field,
+		Args:       nil,
+		IsMethod:   false,
+		IsResolver: false,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.IsoRegion, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*string)
+	fc.Result = res
+	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Airport_municipality(ctx context.Context, field graphql.CollectedField, obj *model.Airport) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:     "Airport",
+		Field:      field,
+		Args:       nil,
+		IsMethod:   false,
+		IsResolver: false,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Municipality, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*string)
+	fc.Result = res
+	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Airport_gpsCode(ctx context.Context, field graphql.CollectedField, obj *model.Airport) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:     "Airport",
+		Field:      field,
+		Args:       nil,
+		IsMethod:   false,
+		IsResolver: false,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.GpsCode, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*string)
+	fc.Result = res
+	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Airport_localCode(ctx context.Context, field graphql.CollectedField, obj *model.Airport) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:     "Airport",
+		Field:      field,
+		Args:       nil,
+		IsMethod:   false,
+		IsResolver: false,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.LocalCode, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*string)
+	fc.Result = res
+	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Airport_lat(ctx context.Context, field graphql.CollectedField, obj *model.Airport) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:     "Airport",
+		Field:      field,
+		Args:       nil,
+		IsMethod:   false,
+		IsResolver: false,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Lat, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*float64)
+	fc.Result = res
+	return ec.marshalOFloat2ᚖfloat64(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Airport_lon(ctx context.Context, field graphql.CollectedField, obj *model.Airport) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:     "Airport",
+		Field:      field,
+		Args:       nil,
+		IsMethod:   false,
+		IsResolver: false,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Lon, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*float64)
+	fc.Result = res
+	return ec.marshalOFloat2ᚖfloat64(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Airport_sensors(ctx context.Context, field graphql.CollectedField, obj *model.Airport) (ret graphql.Marshaler) {
@@ -3519,9 +3921,24 @@ func (ec *executionContext) _Airport(ctx context.Context, sel ast.SelectionSet, 
 			}
 		case "name":
 			out.Values[i] = ec._Airport_name(ctx, field, obj)
-			if out.Values[i] == graphql.Null {
-				atomic.AddUint32(&invalids, 1)
-			}
+		case "elevationFt":
+			out.Values[i] = ec._Airport_elevationFt(ctx, field, obj)
+		case "continent":
+			out.Values[i] = ec._Airport_continent(ctx, field, obj)
+		case "isoCountry":
+			out.Values[i] = ec._Airport_isoCountry(ctx, field, obj)
+		case "isoRegion":
+			out.Values[i] = ec._Airport_isoRegion(ctx, field, obj)
+		case "municipality":
+			out.Values[i] = ec._Airport_municipality(ctx, field, obj)
+		case "gpsCode":
+			out.Values[i] = ec._Airport_gpsCode(ctx, field, obj)
+		case "localCode":
+			out.Values[i] = ec._Airport_localCode(ctx, field, obj)
+		case "lat":
+			out.Values[i] = ec._Airport_lat(ctx, field, obj)
+		case "lon":
+			out.Values[i] = ec._Airport_lon(ctx, field, obj)
 		case "sensors":
 			field := field
 			out.Concurrently(i, func() (res graphql.Marshaler) {
