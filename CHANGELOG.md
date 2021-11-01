@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Docs
+- **nada-serve:** add initial changelog
+
 
 <a name="0.0.1-alpha"></a>
 ## 0.0.1-alpha - 2021-10-31
@@ -103,9 +106,6 @@
 - **nada-transform:** :fire: vendor
 - **nada-transform:** :recycle: env variables
 - **nada-transform:** :loud_sound: added logging
-
-### Pull Requests
-- Merge pull request [#1](https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/issues/1) from IMT-Atlantique-FIL-2020-2023/develop
 
 ### BREAKING CHANGE
 
