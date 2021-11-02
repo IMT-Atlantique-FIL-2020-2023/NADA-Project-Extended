@@ -67,6 +67,9 @@ from(bucket: "nada-bucket")
 }
 
 func (r *sensorResolver) GetMeanMeasureInterval(ctx context.Context, obj *model.Sensor, start time.Time, end time.Time, discretize *string, discretizeMode *model.MeanMeasureMode) ([]*model.MeasureMeanData, error) {
+	if start.Sub(end).Round(time.Second).Seconds() >= 0 {
+		return nil, gqlerror.Errorf("Invalid date %v / %v", start, end)
+	}
 	thunk := r.Dataloader.MeanValuesDataloader.Load(ctx, dl.MeanDataDlKey{
 		AirportId:      obj.Airport.ID,
 		Start:          start,
