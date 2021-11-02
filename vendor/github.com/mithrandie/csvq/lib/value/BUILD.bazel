@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "value",
+    srcs = [
+        "comparison.go",
+        "conv.go",
+        "pool.go",
+        "type.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/mithrandie/csvq/lib/value",
+    importpath = "github.com/mithrandie/csvq/lib/value",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/mithrandie/csvq/lib/cmd",
+        "//vendor/github.com/mithrandie/ternary",
+    ],
+)

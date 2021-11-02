@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "dotenv",
+    srcs = ["parser.go"],
+    importpath = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-serve/config/dotenv",
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//vendor/github.com/joho/godotenv",
+        "//vendor/github.com/knadh/koanf/maps",
+    ],
+)

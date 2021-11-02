@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "validator",
+    srcs = [
+        "error.go",
+        "messaging.go",
+        "prelude.go",
+        "schema.go",
+        "suggestionList.go",
+        "validator.go",
+        "vars.go",
+        "walk.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/vektah/gqlparser/v2/validator",
+    importpath = "github.com/vektah/gqlparser/v2/validator",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/agnivade/levenshtein",
+        "//vendor/github.com/vektah/gqlparser/v2/ast",
+        "//vendor/github.com/vektah/gqlparser/v2/gqlerror",
+        "//vendor/github.com/vektah/gqlparser/v2/parser",
+    ],
+)

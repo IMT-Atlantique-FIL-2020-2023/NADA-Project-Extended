@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "table",
+    srcs = [
+        "encoder.go",
+        "main.go",
+        "types.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/mithrandie/go-text/table",
+    importpath = "github.com/mithrandie/go-text/table",
+    visibility = ["//visibility:public"],
+    deps = ["//vendor/github.com/mithrandie/go-text"],
+)

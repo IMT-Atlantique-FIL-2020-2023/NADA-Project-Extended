@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "generated",
+    srcs = ["generated.go"],
+    importpath = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-serve/graph/generated",
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//internal/app/nada-serve/graph/model",
+        "//vendor/github.com/99designs/gqlgen/graphql",
+        "//vendor/github.com/99designs/gqlgen/graphql/introspection",
+        "//vendor/github.com/vektah/gqlparser/v2:gqlparser",
+        "//vendor/github.com/vektah/gqlparser/v2/ast",
+    ],
+)

@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "generator",
+    srcs = [
+        "generator.go",
+        "template.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/vektah/dataloaden/pkg/generator",
+    importpath = "github.com/vektah/dataloaden/pkg/generator",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/pkg/errors",
+        "//vendor/golang.org/x/tools/go/packages",
+        "//vendor/golang.org/x/tools/imports",
+    ],
+)

@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "csv",
+    srcs = [
+        "main.go",
+        "reader.go",
+        "types.go",
+        "writer.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/mithrandie/go-text/csv",
+    importpath = "github.com/mithrandie/go-text/csv",
+    visibility = ["//visibility:public"],
+    deps = ["//vendor/github.com/mithrandie/go-text"],
+)

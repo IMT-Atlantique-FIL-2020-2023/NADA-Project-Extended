@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "resolvergen",
+    srcs = ["resolver.go"],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/99designs/gqlgen/plugin/resolvergen",
+    importpath = "github.com/99designs/gqlgen/plugin/resolvergen",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/99designs/gqlgen/codegen",
+        "//vendor/github.com/99designs/gqlgen/codegen/config",
+        "//vendor/github.com/99designs/gqlgen/codegen/templates",
+        "//vendor/github.com/99designs/gqlgen/internal/rewrite",
+        "//vendor/github.com/99designs/gqlgen/plugin",
+        "//vendor/github.com/pkg/errors",
+    ],
+)

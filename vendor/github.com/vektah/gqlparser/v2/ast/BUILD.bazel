@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "ast",
+    srcs = [
+        "argmap.go",
+        "collections.go",
+        "definition.go",
+        "directive.go",
+        "document.go",
+        "dumper.go",
+        "fragment.go",
+        "operation.go",
+        "path.go",
+        "selection.go",
+        "source.go",
+        "type.go",
+        "value.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/vektah/gqlparser/v2/ast",
+    importpath = "github.com/vektah/gqlparser/v2/ast",
+    visibility = ["//visibility:public"],
+)

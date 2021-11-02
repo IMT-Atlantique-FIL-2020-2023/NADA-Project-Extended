@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "db",
+    srcs = [
+        "csvq.go",
+        "db.go",
+    ],
+    importpath = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-serve/db",
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//internal/app/nada-serve/config",
+        "//internal/app/nada-serve/graph/model",
+        "//vendor/github.com/influxdata/influxdb-client-go/v2:influxdb-client-go",
+        "//vendor/github.com/influxdata/influxdb-client-go/v2/api",
+        "//vendor/github.com/influxdata/influxdb-client-go/v2/domain",
+        "//vendor/github.com/mithrandie/csvq-driver",
+        "//vendor/github.com/rs/zerolog/log",
+    ],
+)

@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "color",
+    srcs = [
+        "effector.go",
+        "main.go",
+        "palette.go",
+        "pre_defined.go",
+        "types.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/mithrandie/go-text/color",
+    importpath = "github.com/mithrandie/go-text/color",
+    visibility = ["//visibility:public"],
+)

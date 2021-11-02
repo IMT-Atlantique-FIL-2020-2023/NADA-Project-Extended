@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "lru",
+    srcs = ["lru.go"],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/99designs/gqlgen/graphql/handler/lru",
+    importpath = "github.com/99designs/gqlgen/graphql/handler/lru",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/99designs/gqlgen/graphql",
+        "//vendor/github.com/hashicorp/golang-lru",
+    ],
+)

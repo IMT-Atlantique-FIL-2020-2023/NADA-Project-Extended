@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "write",
+    srcs = [
+        "ext.go",
+        "options.go",
+        "point.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/influxdata/influxdb-client-go/v2/api/write",
+    importpath = "github.com/influxdata/influxdb-client-go/v2/api/write",
+    visibility = ["//visibility:public"],
+    deps = ["//vendor/github.com/influxdata/line-protocol"],
+)

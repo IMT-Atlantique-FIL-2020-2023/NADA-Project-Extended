@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "dataloaden_lib",
+    srcs = ["dataloaden.go"],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/vektah/dataloaden",
+    importpath = "github.com/vektah/dataloaden",
+    visibility = ["//visibility:private"],
+    deps = ["//vendor/github.com/vektah/dataloaden/pkg/generator"],
+)
+
+go_binary(
+    name = "dataloaden",
+    embed = [":dataloaden_lib"],
+    visibility = ["//visibility:public"],
+)

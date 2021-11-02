@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "koanf",
+    srcs = [
+        "getters.go",
+        "interfaces.go",
+        "koanf.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/knadh/koanf",
+    importpath = "github.com/knadh/koanf",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/knadh/koanf/maps",
+        "//vendor/github.com/mitchellh/copystructure",
+        "//vendor/github.com/mitchellh/mapstructure",
+    ],
+)

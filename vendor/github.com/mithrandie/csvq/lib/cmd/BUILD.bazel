@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "cmd",
+    srcs = [
+        "default_env.go",
+        "environment.go",
+        "flags.go",
+        "palette.go",
+        "static.go",
+        "utils.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/mithrandie/csvq/lib/cmd",
+    importpath = "github.com/mithrandie/csvq/lib/cmd",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/mitchellh/go-homedir",
+        "//vendor/github.com/mithrandie/csvq/lib/file",
+        "//vendor/github.com/mithrandie/go-text",
+        "//vendor/github.com/mithrandie/go-text/color",
+        "//vendor/github.com/mithrandie/go-text/json",
+    ],
+)

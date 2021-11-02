@@ -1,0 +1,32 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "api",
+    srcs = [
+        "authorizations.go",
+        "buckets.go",
+        "delete.go",
+        "doc.go",
+        "labels.go",
+        "organizations.go",
+        "paging.go",
+        "query.go",
+        "tasks.go",
+        "users.go",
+        "write.go",
+        "writeAPIBlocking.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/influxdata/influxdb-client-go/v2/api",
+    importpath = "github.com/influxdata/influxdb-client-go/v2/api",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/influxdata/influxdb-client-go/v2/api/http",
+        "//vendor/github.com/influxdata/influxdb-client-go/v2/api/query",
+        "//vendor/github.com/influxdata/influxdb-client-go/v2/api/write",
+        "//vendor/github.com/influxdata/influxdb-client-go/v2/domain",
+        "//vendor/github.com/influxdata/influxdb-client-go/v2/internal/log",
+        "//vendor/github.com/influxdata/influxdb-client-go/v2/internal/write",
+        "//vendor/github.com/influxdata/influxdb-client-go/v2/log",
+        "//vendor/golang.org/x/net/publicsuffix",
+    ],
+)

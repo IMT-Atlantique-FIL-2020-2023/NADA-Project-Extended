@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "fixedlen",
+    srcs = [
+        "delimiter.go",
+        "main.go",
+        "measure.go",
+        "reader.go",
+        "types.go",
+        "writer.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/mithrandie/go-text/fixedlen",
+    importpath = "github.com/mithrandie/go-text/fixedlen",
+    visibility = ["//visibility:public"],
+    deps = ["//vendor/github.com/mithrandie/go-text"],
+)

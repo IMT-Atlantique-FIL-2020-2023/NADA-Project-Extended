@@ -1,0 +1,8 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "model",
+    srcs = ["model.go"],
+    importpath = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/pkg/common/model",
+    visibility = ["//:__subpackages__"],
+)

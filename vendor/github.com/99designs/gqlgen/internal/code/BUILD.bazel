@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "code",
+    srcs = [
+        "compare.go",
+        "imports.go",
+        "packages.go",
+        "util.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/99designs/gqlgen/internal/code",
+    importpath = "github.com/99designs/gqlgen/internal/code",
+    visibility = ["//vendor/github.com/99designs/gqlgen:__subpackages__"],
+    deps = [
+        "//vendor/github.com/pkg/errors",
+        "//vendor/golang.org/x/tools/go/packages",
+    ],
+)

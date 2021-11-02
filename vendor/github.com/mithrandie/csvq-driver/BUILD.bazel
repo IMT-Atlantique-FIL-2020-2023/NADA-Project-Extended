@@ -1,0 +1,27 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "csvq-driver",
+    srcs = [
+        "conn.go",
+        "driver.go",
+        "init.go",
+        "result.go",
+        "rows.go",
+        "session.go",
+        "stmt.go",
+        "tx.go",
+        "types.go",
+        "value_converter.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/mithrandie/csvq-driver",
+    importpath = "github.com/mithrandie/csvq-driver",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/mithrandie/csvq/lib/file",
+        "//vendor/github.com/mithrandie/csvq/lib/parser",
+        "//vendor/github.com/mithrandie/csvq/lib/query",
+        "//vendor/github.com/mithrandie/csvq/lib/value",
+        "//vendor/github.com/mithrandie/ternary",
+    ],
+)

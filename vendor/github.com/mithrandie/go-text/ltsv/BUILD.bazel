@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "ltsv",
+    srcs = [
+        "main.go",
+        "range_tables.go",
+        "reader.go",
+        "writer.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/mithrandie/go-text/ltsv",
+    importpath = "github.com/mithrandie/go-text/ltsv",
+    visibility = ["//visibility:public"],
+    deps = ["//vendor/github.com/mithrandie/go-text"],
+)

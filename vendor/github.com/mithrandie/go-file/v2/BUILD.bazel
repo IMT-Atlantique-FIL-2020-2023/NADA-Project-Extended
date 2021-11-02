@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go-file",
+    srcs = [
+        "error.go",
+        "file.go",
+        "lock.go",
+        "lock_solaris.go",
+        "lock_unix.go",
+        "lock_windows.go",
+        "main.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/mithrandie/go-file/v2",
+    importpath = "github.com/mithrandie/go-file/v2",
+    visibility = ["//visibility:public"],
+)

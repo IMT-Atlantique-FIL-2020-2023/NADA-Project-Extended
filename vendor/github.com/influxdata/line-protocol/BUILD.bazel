@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "line-protocol",
+    srcs = [
+        "encoder.go",
+        "escape.go",
+        "handler.go",
+        "machine.go",
+        "metric.go",
+        "parser.go",
+        "writer.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/influxdata/line-protocol",
+    importpath = "github.com/influxdata/line-protocol",
+    visibility = ["//visibility:public"],
+)

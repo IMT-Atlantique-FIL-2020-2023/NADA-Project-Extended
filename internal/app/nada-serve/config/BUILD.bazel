@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "config",
+    srcs = ["config.go"],
+    importpath = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-serve/config",
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//internal/app/nada-serve/config/dotenv",
+        "//vendor/github.com/go-playground/validator/v10:validator",
+        "//vendor/github.com/knadh/koanf",
+        "//vendor/github.com/knadh/koanf/parsers/yaml",
+        "//vendor/github.com/knadh/koanf/providers/env",
+        "//vendor/github.com/knadh/koanf/providers/file",
+        "//vendor/github.com/knadh/koanf/providers/structs",
+        "//vendor/github.com/mitchellh/mapstructure",
+        "//vendor/github.com/rs/zerolog",
+        "//vendor/github.com/rs/zerolog/log",
+    ],
+)

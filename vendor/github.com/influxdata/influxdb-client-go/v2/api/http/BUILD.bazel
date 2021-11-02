@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "http",
+    srcs = [
+        "error.go",
+        "options.go",
+        "service.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/influxdata/influxdb-client-go/v2/api/http",
+    importpath = "github.com/influxdata/influxdb-client-go/v2/api/http",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/influxdata/influxdb-client-go/v2/internal/http",
+        "//vendor/github.com/influxdata/influxdb-client-go/v2/internal/log",
+    ],
+)

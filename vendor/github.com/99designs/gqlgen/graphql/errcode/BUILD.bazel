@@ -1,0 +1,10 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "errcode",
+    srcs = ["codes.go"],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/99designs/gqlgen/graphql/errcode",
+    importpath = "github.com/99designs/gqlgen/graphql/errcode",
+    visibility = ["//visibility:public"],
+    deps = ["//vendor/github.com/vektah/gqlparser/v2/gqlerror"],
+)

@@ -1,0 +1,31 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "viper",
+    srcs = [
+        "flags.go",
+        "util.go",
+        "viper.go",
+        "watch.go",
+        "watch_wasm.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/spf13/viper",
+    importpath = "github.com/spf13/viper",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/fsnotify/fsnotify",
+        "//vendor/github.com/magiconair/properties",
+        "//vendor/github.com/mitchellh/mapstructure",
+        "//vendor/github.com/spf13/afero",
+        "//vendor/github.com/spf13/cast",
+        "//vendor/github.com/spf13/jwalterweatherman",
+        "//vendor/github.com/spf13/pflag",
+        "//vendor/github.com/spf13/viper/internal/encoding",
+        "//vendor/github.com/spf13/viper/internal/encoding/hcl",
+        "//vendor/github.com/spf13/viper/internal/encoding/json",
+        "//vendor/github.com/spf13/viper/internal/encoding/toml",
+        "//vendor/github.com/spf13/viper/internal/encoding/yaml",
+        "//vendor/github.com/subosito/gotenv",
+        "//vendor/gopkg.in/ini.v1:ini_v1",
+    ],
+)

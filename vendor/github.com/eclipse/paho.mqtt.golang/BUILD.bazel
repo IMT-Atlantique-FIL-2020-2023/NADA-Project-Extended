@@ -1,0 +1,33 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "paho_mqtt_golang",
+    srcs = [
+        "client.go",
+        "components.go",
+        "filestore.go",
+        "memstore.go",
+        "message.go",
+        "messageids.go",
+        "net.go",
+        "netconn.go",
+        "oops.go",
+        "options.go",
+        "options_reader.go",
+        "ping.go",
+        "router.go",
+        "store.go",
+        "token.go",
+        "topic.go",
+        "trace.go",
+        "websocket.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/eclipse/paho.mqtt.golang",
+    importpath = "github.com/eclipse/paho.mqtt.golang",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/eclipse/paho.mqtt.golang/packets",
+        "//vendor/github.com/gorilla/websocket",
+        "//vendor/golang.org/x/net/proxy",
+    ],
+)

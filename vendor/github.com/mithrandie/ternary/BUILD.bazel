@@ -1,0 +1,9 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "ternary",
+    srcs = ["ternary.go"],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/mithrandie/ternary",
+    importpath = "github.com/mithrandie/ternary",
+    visibility = ["//visibility:public"],
+)

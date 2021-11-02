@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "nada-transform_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/cmd/nada-transform",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//internal/app/nada-transform/database",
+        "//internal/pkg/common/env",
+        "//internal/pkg/common/model",
+        "//internal/pkg/common/myLog",
+        "//internal/pkg/common/myMqttClient",
+        "//vendor/github.com/eclipse/paho.mqtt.golang:paho_mqtt_golang",
+        "//vendor/github.com/influxdata/influxdb-client-go/v2:influxdb-client-go",
+    ],
+)
+
+go_binary(
+    name = "nada-transform",
+    embed = [":nada-transform_lib"],
+    visibility = ["//visibility:public"],
+)

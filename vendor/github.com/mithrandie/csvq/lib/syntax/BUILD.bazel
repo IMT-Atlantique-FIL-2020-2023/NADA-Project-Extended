@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "syntax",
+    srcs = [
+        "element.go",
+        "store.go",
+        "syntax.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/mithrandie/csvq/lib/syntax",
+    importpath = "github.com/mithrandie/csvq/lib/syntax",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/mithrandie/csvq/lib/cmd",
+        "//vendor/github.com/mithrandie/go-text/color",
+    ],
+)

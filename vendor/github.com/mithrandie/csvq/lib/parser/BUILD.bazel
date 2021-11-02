@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "parser",
+    srcs = [
+        "ast.go",
+        "format_identifiers.go",
+        "lexer.go",
+        "parser.go",
+        "scanner.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/mithrandie/csvq/lib/parser",
+    importpath = "github.com/mithrandie/csvq/lib/parser",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/mithrandie/csvq/lib/cmd",
+        "//vendor/github.com/mithrandie/csvq/lib/value",
+        "//vendor/github.com/mithrandie/ternary",
+    ],
+)

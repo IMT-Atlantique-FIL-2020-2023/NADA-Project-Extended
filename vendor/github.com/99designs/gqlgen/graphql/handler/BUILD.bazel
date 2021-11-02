@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "handler",
+    srcs = ["server.go"],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/99designs/gqlgen/graphql/handler",
+    importpath = "github.com/99designs/gqlgen/graphql/handler",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/99designs/gqlgen/graphql",
+        "//vendor/github.com/99designs/gqlgen/graphql/executor",
+        "//vendor/github.com/99designs/gqlgen/graphql/handler/extension",
+        "//vendor/github.com/99designs/gqlgen/graphql/handler/lru",
+        "//vendor/github.com/99designs/gqlgen/graphql/handler/transport",
+        "//vendor/github.com/vektah/gqlparser/v2/gqlerror",
+    ],
+)

@@ -1,0 +1,29 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "cmd",
+    srcs = [
+        "ambient.go",
+        "gen.go",
+        "init.go",
+        "root.go",
+        "version.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/99designs/gqlgen/cmd",
+    importpath = "github.com/99designs/gqlgen/cmd",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/99designs/gqlgen/api",
+        "//vendor/github.com/99designs/gqlgen/codegen/config",
+        "//vendor/github.com/99designs/gqlgen/graphql",
+        "//vendor/github.com/99designs/gqlgen/graphql/handler",
+        "//vendor/github.com/99designs/gqlgen/graphql/introspection",
+        "//vendor/github.com/99designs/gqlgen/handler",
+        "//vendor/github.com/99designs/gqlgen/internal/code",
+        "//vendor/github.com/99designs/gqlgen/plugin/servergen",
+        "//vendor/github.com/pkg/errors",
+        "//vendor/github.com/urfave/cli/v2:cli",
+        "//vendor/github.com/vektah/gqlparser/v2:gqlparser",
+        "//vendor/github.com/vektah/gqlparser/v2/ast",
+    ],
+)

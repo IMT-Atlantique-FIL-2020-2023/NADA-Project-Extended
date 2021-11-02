@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "database",
+    srcs = ["database.go"],
+    importpath = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/internal/app/nada-transform/database",
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//internal/pkg/common/env",
+        "//internal/pkg/common/model",
+        "//internal/pkg/common/myLog",
+        "//vendor/github.com/influxdata/influxdb-client-go/v2:influxdb-client-go",
+    ],
+)

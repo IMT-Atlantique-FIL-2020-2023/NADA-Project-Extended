@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "moq_lib",
+    srcs = ["main.go"],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/matryer/moq",
+    importpath = "github.com/matryer/moq",
+    visibility = ["//visibility:private"],
+    deps = ["//vendor/github.com/matryer/moq/pkg/moq"],
+)
+
+go_binary(
+    name = "moq",
+    embed = [":moq_lib"],
+    visibility = ["//visibility:public"],
+)

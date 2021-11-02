@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "dataloader",
+    srcs = [
+        "cache.go",
+        "dataloader.go",
+        "in_memory_cache.go",
+        "key.go",
+        "trace.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/graph-gophers/dataloader/v6",
+    importpath = "github.com/graph-gophers/dataloader/v6",
+    visibility = ["//visibility:public"],
+    deps = ["//vendor/github.com/opentracing/opentracing-go"],
+)

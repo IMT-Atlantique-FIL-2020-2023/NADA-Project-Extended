@@ -1,0 +1,22 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "nada-sensio_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/cmd/nada-sensio",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//internal/app/nada-sensio/simulation",
+        "//internal/pkg/common/env",
+        "//internal/pkg/common/model",
+        "//internal/pkg/common/myLog",
+        "//internal/pkg/common/myMqttClient",
+        "//vendor/github.com/eclipse/paho.mqtt.golang:paho_mqtt_golang",
+    ],
+)
+
+go_binary(
+    name = "nada-sensio",
+    embed = [":nada-sensio_lib"],
+    visibility = ["//visibility:public"],
+)

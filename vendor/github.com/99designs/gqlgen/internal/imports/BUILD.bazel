@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "imports",
+    srcs = ["prune.go"],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/99designs/gqlgen/internal/imports",
+    importpath = "github.com/99designs/gqlgen/internal/imports",
+    visibility = ["//vendor/github.com/99designs/gqlgen:__subpackages__"],
+    deps = [
+        "//vendor/github.com/99designs/gqlgen/internal/code",
+        "//vendor/golang.org/x/tools/go/ast/astutil",
+        "//vendor/golang.org/x/tools/imports",
+    ],
+)

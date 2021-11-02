@@ -1,0 +1,21 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "go-text",
+    srcs = [
+        "main.go",
+        "range_tables.go",
+        "string.go",
+        "transform.go",
+        "types.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/mithrandie/go-text",
+    importpath = "github.com/mithrandie/go-text",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/golang.org/x/text/encoding",
+        "//vendor/golang.org/x/text/encoding/japanese",
+        "//vendor/golang.org/x/text/encoding/unicode",
+        "//vendor/golang.org/x/text/transform",
+    ],
+)

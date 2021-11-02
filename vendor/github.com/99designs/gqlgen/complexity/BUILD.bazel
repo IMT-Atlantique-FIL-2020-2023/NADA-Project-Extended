@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "complexity",
+    srcs = ["complexity.go"],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/99designs/gqlgen/complexity",
+    importpath = "github.com/99designs/gqlgen/complexity",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/99designs/gqlgen/graphql",
+        "//vendor/github.com/vektah/gqlparser/v2/ast",
+    ],
+)

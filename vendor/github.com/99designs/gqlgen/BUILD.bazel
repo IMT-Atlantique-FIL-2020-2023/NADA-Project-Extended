@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "gqlgen_lib",
+    srcs = ["main.go"],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/99designs/gqlgen",
+    importpath = "github.com/99designs/gqlgen",
+    visibility = ["//visibility:private"],
+    deps = ["//vendor/github.com/99designs/gqlgen/cmd"],
+)
+
+go_binary(
+    name = "gqlgen",
+    embed = [":gqlgen_lib"],
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,21 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "api",
+    srcs = [
+        "generate.go",
+        "option.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/99designs/gqlgen/api",
+    importpath = "github.com/99designs/gqlgen/api",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/99designs/gqlgen/codegen",
+        "//vendor/github.com/99designs/gqlgen/codegen/config",
+        "//vendor/github.com/99designs/gqlgen/plugin",
+        "//vendor/github.com/99designs/gqlgen/plugin/federation",
+        "//vendor/github.com/99designs/gqlgen/plugin/modelgen",
+        "//vendor/github.com/99designs/gqlgen/plugin/resolvergen",
+        "//vendor/github.com/pkg/errors",
+    ],
+)

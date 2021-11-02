@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "write",
+    srcs = [
+        "queue.go",
+        "service.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/influxdata/influxdb-client-go/v2/internal/write",
+    importpath = "github.com/influxdata/influxdb-client-go/v2/internal/write",
+    visibility = ["//vendor/github.com/influxdata/influxdb-client-go/v2:__subpackages__"],
+    deps = [
+        "//vendor/github.com/influxdata/influxdb-client-go/v2/api/http",
+        "//vendor/github.com/influxdata/influxdb-client-go/v2/api/write",
+        "//vendor/github.com/influxdata/influxdb-client-go/v2/internal/gzip",
+        "//vendor/github.com/influxdata/influxdb-client-go/v2/internal/log",
+        "//vendor/github.com/influxdata/influxdb-client-go/v2/log",
+        "//vendor/github.com/influxdata/line-protocol",
+    ],
+)

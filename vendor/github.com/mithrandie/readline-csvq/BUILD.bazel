@@ -1,0 +1,43 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "readline-csvq",
+    srcs = [
+        "ansi_windows.go",
+        "complete.go",
+        "complete_helper.go",
+        "complete_segment.go",
+        "history.go",
+        "operation.go",
+        "password.go",
+        "rawreader_windows.go",
+        "readline.go",
+        "remote.go",
+        "runebuf.go",
+        "runes.go",
+        "search.go",
+        "std.go",
+        "std_windows.go",
+        "term.go",
+        "term_bsd.go",
+        "term_linux.go",
+        "term_solaris.go",
+        "term_unix.go",
+        "term_windows.go",
+        "terminal.go",
+        "utils.go",
+        "utils_unix.go",
+        "utils_windows.go",
+        "vim.go",
+        "windows_api.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/mithrandie/readline-csvq",
+    importpath = "github.com/mithrandie/readline-csvq",
+    visibility = ["//visibility:public"],
+    deps = select({
+        "@io_bazel_rules_go//go/platform:solaris": [
+            "//vendor/golang.org/x/sys/unix",
+        ],
+        "//conditions:default": [],
+    }),
+)

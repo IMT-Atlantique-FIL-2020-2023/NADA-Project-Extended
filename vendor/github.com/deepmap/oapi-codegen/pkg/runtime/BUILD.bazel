@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "runtime",
+    srcs = [
+        "bind.go",
+        "bindparam.go",
+        "bindstring.go",
+        "deepobject.go",
+        "styleparam.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/deepmap/oapi-codegen/pkg/runtime",
+    importpath = "github.com/deepmap/oapi-codegen/pkg/runtime",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/deepmap/oapi-codegen/pkg/types",
+        "//vendor/github.com/pkg/errors",
+    ],
+)

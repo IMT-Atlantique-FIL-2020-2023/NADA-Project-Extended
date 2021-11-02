@@ -1,0 +1,9 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "query",
+    srcs = ["table.go"],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/influxdata/influxdb-client-go/v2/api/query",
+    importpath = "github.com/influxdata/influxdb-client-go/v2/api/query",
+    visibility = ["//visibility:public"],
+)

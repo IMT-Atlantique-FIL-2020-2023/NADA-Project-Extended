@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "file",
+    srcs = [
+        "config.go",
+        "container.go",
+        "error.go",
+        "functions.go",
+        "handler.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/mithrandie/csvq/lib/file",
+    importpath = "github.com/mithrandie/csvq/lib/file",
+    visibility = ["//visibility:public"],
+    deps = ["//vendor/github.com/mithrandie/go-file/v2:go-file"],
+)

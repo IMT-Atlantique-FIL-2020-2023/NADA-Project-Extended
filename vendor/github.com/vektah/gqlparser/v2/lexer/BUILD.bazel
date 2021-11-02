@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "lexer",
+    srcs = [
+        "blockstring.go",
+        "lexer.go",
+        "token.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/vektah/gqlparser/v2/lexer",
+    importpath = "github.com/vektah/gqlparser/v2/lexer",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//vendor/github.com/vektah/gqlparser/v2/ast",
+        "//vendor/github.com/vektah/gqlparser/v2/gqlerror",
+    ],
+)

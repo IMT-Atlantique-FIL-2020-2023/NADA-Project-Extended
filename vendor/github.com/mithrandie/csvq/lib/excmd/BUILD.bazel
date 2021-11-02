@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "excmd",
+    srcs = [
+        "args_splitter.go",
+        "argument_scanner.go",
+        "const.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/mithrandie/csvq/lib/excmd",
+    importpath = "github.com/mithrandie/csvq/lib/excmd",
+    visibility = ["//visibility:public"],
+    deps = ["//vendor/github.com/mithrandie/csvq/lib/parser"],
+)

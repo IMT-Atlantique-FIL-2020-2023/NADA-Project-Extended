@@ -1,0 +1,10 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "log",
+    srcs = ["logger.go"],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/influxdata/influxdb-client-go/v2/internal/log",
+    importpath = "github.com/influxdata/influxdb-client-go/v2/internal/log",
+    visibility = ["//vendor/github.com/influxdata/influxdb-client-go/v2:__subpackages__"],
+    deps = ["//vendor/github.com/influxdata/influxdb-client-go/v2/log"],
+)

@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "cbor",
+    srcs = [
+        "base.go",
+        "cbor.go",
+        "decode_stream.go",
+        "string.go",
+        "time.go",
+        "types.go",
+    ],
+    importmap = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/vendor/github.com/rs/zerolog/internal/cbor",
+    importpath = "github.com/rs/zerolog/internal/cbor",
+    visibility = ["//vendor/github.com/rs/zerolog:__subpackages__"],
+)
