@@ -83,7 +83,7 @@ func LoadConfig() {
 	k.Load(f, yaml.Parser())
 	k.Load(f2, yaml.Parser())
 
-	d := file.Provider("nada-serve.env")
+	d := file.Provider(".nada-serve.env")
 	k.Load(d, dotenv.Parser())
 	if !watcherAdded {
 		d.Watch(watch(d))
