@@ -1,0 +1,21 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "nada-sensio-fulfiller_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/cmd/nada-sensio-fulfiller",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//internal/app/nada-sensio/simulation",
+        "//internal/pkg/common/env",
+        "//internal/pkg/common/model",
+        "//internal/pkg/common/myLog",
+        "//internal/pkg/common/myMqttClient",
+    ],
+)
+
+go_binary(
+    name = "nada-sensio-fulfiller",
+    embed = [":nada-sensio-fulfiller_lib"],
+    visibility = ["//visibility:public"],
+)
