@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"log"
 	"os"
 	"reflect"
 	"strconv"
@@ -47,7 +48,11 @@ func main() {
 		fmt.Println("temperature, altitude, pressure, latitude, longitude, windspeed, windirx, winddiry")
 		return
 	}
-
+	_interval := env.GetEnv("NADA_SENSIO_MEASURE_INTERVAL_MS")
+	interval, err := strconv.ParseInt(_interval, 10, 32)
+	if err != nil {
+		log.Fatal(err)
+	}
 	var mqtt_port string = env.GetEnv("NADA_SENSIO_MQTT_PORT")
 	var mqtt_host string = env.GetEnv("NADA_SENSIO_MQTT_HOST")
 	var mqtt_client_id string = env.GetEnv("NADA_SENSIO_MQTT_CLIENT_ID")
@@ -56,7 +61,7 @@ func main() {
 	var mqtt_client_paswrd string = env.GetEnv("NADA_SENSIO_MQTT_PSWRD")
 
 	client := myMqttClient.Connect(mqtt_host+":"+mqtt_port, mqtt_client_id, mqtt_client_name, mqtt_client_paswrd, nil)
-	go generateNewData(client, measureType, sensorID, airportID)
+	go generateNewData(client, measureType, sensorID, airportID, int(interval))
 
 	defer myLog.MyLog(myLog.Get_level_INFO(), "main(end)")
 	ctx := context.Background()
@@ -102,8 +107,8 @@ func main() {
 	ctx.Done()
 }
 
-func generateNewData(client mqtt.Client, measureType string, sensorID string, airportID string) {
-	ticker := time.NewTicker(500 * time.Millisecond)
+func generateNewData(client mqtt.Client, measureType string, sensorID string, airportID string, interval int) {
+	ticker := time.NewTicker(time.Duration(interval) * time.Millisecond)
 	for {
 		select {
 		case <-ticker.C:
@@ -127,7 +132,7 @@ func generateNewData(client mqtt.Client, measureType string, sensorID string, ai
 			index += 1
 			mutex.Unlock()
 
-			time.Sleep(time.Millisecond * 500)
+			time.Sleep(time.Millisecond * time.Duration(interval))
 		}
 	}
 }
