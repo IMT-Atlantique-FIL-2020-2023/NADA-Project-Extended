@@ -1,16 +1,21 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+
+<a name="0.0.2"></a>
+## [0.0.2] - 2021-11-02
 ### Build
 - add bazel build files
 
 ### Chore
+- add nada fullfiller
 - update .env.example to reflect devcontainer config
 - tidy up project
 - update changelog
 - **nada-serve:** update changelog file
 
 ### Docs
+- update changelog
 - update readme
 - update readme
 - update changelog
@@ -21,6 +26,10 @@
 - **nada-serve:** rename nada-serve.env file to .nada-serve.env
 - **nada-serve:** do an empty request to check authorization with influxdb
 - **nada-serve:** prevent launching if auth params from influxdb are invalid
+
+### BREAKING CHANGE
+
+rename your .env file for nada-serve
 
 
 <a name="0.0.1-alpha"></a>
@@ -132,4 +141,5 @@ empty array arg will not return anymore every sensors when using getSubsetOfSens
 rename your env var to NADA_TRANSFORM_INFLUXDB_ORG
 
 
-[Unreleased]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/compare/0.0.1-alpha...HEAD
+[Unreleased]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/compare/0.0.2...HEAD
+[0.0.2]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/compare/0.0.1-alpha...0.0.2
