@@ -2,6 +2,17 @@
 ## [Unreleased]
 
 
+<a name="0.0.3"></a>
+## [0.0.3] - 2021-11-02
+### Docs
+- update changelog
+
+### Fix
+- **nada-serve:** prevent user from querying invalid dates
+- **nada-serve:** remove console print
+- **nada-serve:** critical bug with range data selection
+
+
 <a name="0.0.2"></a>
 ## [0.0.2] - 2021-11-02
 ### Build
@@ -141,5 +152,6 @@ empty array arg will not return anymore every sensors when using getSubsetOfSens
 rename your env var to NADA_TRANSFORM_INFLUXDB_ORG
 
 
-[Unreleased]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/compare/0.0.2...HEAD
+[Unreleased]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/compare/0.0.3...HEAD
+[0.0.3]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/compare/0.0.2...0.0.3
 [0.0.2]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/compare/0.0.1-alpha...0.0.2
