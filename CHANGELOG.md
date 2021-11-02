@@ -1,15 +1,24 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Build
+- add bazel build files
+
 ### Chore
+- update .env.example to reflect devcontainer config
+- tidy up project
 - update changelog
 - **nada-serve:** update changelog file
 
 ### Docs
+- update readme
+- update readme
+- update changelog
 - **nada-serve:** :memo: update graphQL query example
 - **nada-serve:** add initial changelog
 
 ### Fix
+- **nada-serve:** rename nada-serve.env file to .nada-serve.env
 - **nada-serve:** do an empty request to check authorization with influxdb
 - **nada-serve:** prevent launching if auth params from influxdb are invalid
 
