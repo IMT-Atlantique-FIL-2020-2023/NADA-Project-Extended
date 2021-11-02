@@ -3,6 +3,7 @@ package dataloader
 import (
 	"context"
 	"fmt"
+	"log"
 	"strconv"
 	"time"
 
@@ -89,7 +90,7 @@ filterFunc = (r) => {
 }
 
 from(bucket: "nada-bucket")
-    |> range(start: -1y, stop: -0m)
+    |> range(start: timeRangeStart, stop: timeRangeEnd)
     |> filter(fn: (r) => exists r.sensorId and exists r.airportId)
     |> filter(fn: filterFunc)
     |> window(every: duration,  createEmpty: false)
@@ -104,6 +105,7 @@ from(bucket: "nada-bucket")
 		getDiscritzeIntoValue(everyValue, *mode),
 		*mode == model.MeanMeasureModeForInterval,
 	)
+	log.Print(query)
 	result, err := r.queryApi.Query(c, query)
 	measureData := make(map[string]map[string]map[string][]*model.MeasureMeanData, 0)
 	if err != nil {
