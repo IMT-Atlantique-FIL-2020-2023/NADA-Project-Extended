@@ -3,7 +3,6 @@ package dataloader
 import (
 	"context"
 	"fmt"
-	"log"
 	"strconv"
 	"time"
 
@@ -105,7 +104,6 @@ from(bucket: "nada-bucket")
 		getDiscritzeIntoValue(everyValue, *mode),
 		*mode == model.MeanMeasureModeForInterval,
 	)
-	log.Print(query)
 	result, err := r.queryApi.Query(c, query)
 	measureData := make(map[string]map[string]map[string][]*model.MeasureMeanData, 0)
 	if err != nil {
