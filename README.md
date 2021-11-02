@@ -9,7 +9,7 @@
 <br />
 <div align="center">
 <a href="https://nada-extended.herokuapp.com/">
-<img src="https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-webapp/blob/main/src/assets/NADA.svg" alt="Logo" width="200" height="200">
+<img src="./docs/NADA.svg" alt="Logo" width="200" height="200">
 </a>
 
 <h2 align="center">N.A.D.A Extended</h2>
@@ -17,7 +17,7 @@
 <p align="center">National Atmospheric Data | Capture data from airport sensor and visualize it.</p>
 <p align="center">
 <a href="https://nada-extended.herokuapp.com/">
-<strong>Browse the deployment »</strong>
+<strong>Browse the NADA-serve deployment »</strong>
 </a>
 <br />
 <br />
@@ -30,65 +30,73 @@
 </div>
 
 <!-- TABLE OF CONTENTS -->
+## Table of Contents
 
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-	<li><a href="#configuration">Configuration</a></li>
-      </ul>
-    </li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
-
-<!-- ABOUT THE PROJECT -->
+- [Table of Contents](#table-of-contents)
+- [About The Project](#about-the-project)
+  - [General purpose](#general-purpose)
+  - [General architecture](#general-architecture)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Configuration](#configuration)
+- [Nada-sensio (MQTT Publisher)](#nada-sensio-mqtt-publisher)
+- [nada-transform (MQTT subscriber + database insert)](#nada-transform-mqtt-subscriber--database-insert)
+- [nada-serve (GraphQL API for NADA-Webapp)](#nada-serve-graphql-api-for-nada-webapp)
+  - [Source code](#source-code)
+  - [Launching](#launching)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
 
 ## About The Project
 
+### General purpose
+
+The NADA project is a student project.
+The team is composed of @creeperdeking, @RaphaelPainter, @maxerbox & @mlhoutel. They are IT students at IMT Atlantique, France.
+It allows an user to view on a web page (NADA-webapp) aggregated sensor data captured from sensors (NADA-sensio) served by a GraphQL Api (NADA-serve)
+
 ### General architecture
 
-This is an IoT application example using <a href="https://github.com/eclipse/paho.mqtt.golang">Paho</a> MQTT Client.
+This is an IoT application using [Paho](https://github.com/eclipse/paho.mqtt.golang) MQTT Client.
 
 <img src="https://raw.githubusercontent.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/develop/assets/architecture.PNG" alt="Architecture" width="50%" align="center">
-<a href="https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-webapp">Nada-Webapp</a> is in another git project 
 
-
-<!-- GETTING STARTED -->
+Frontend made in VueJS 3 + Vite : [NADA-Webapp](https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-webapp)
 
 ## Getting Started
 
-
 ### Prerequisites
 
-- MQTT broker (example: <a href="https://github.com/eclipse/mosquitto">Mosquitto</a>)
-- Time series database (example: <a href="https://www.influxdata.com/">InfluxDB</a>)
+- MQTT broker : [Mosquitto](https://github.com/eclipse/mosquitto)
+- [Influxdb v2](https://www.influxdata.com/)
 
 ### Installation
 
 - git clone <repository>
-	
+
+We do provide an .devcontainer file ! This mean that if you have the vscode extension installed, project will be operational in a minute. Just click on "Reopen in container popup". Every .env.example file is configured to be operational with the container by default, so you just have to rename those files !
+
+__More infos :__
+
+Name: Remote - Containers  
+Id: ms-vscode-remote.remote-containers  
+Description: Open any folder or repository inside a Docker container and take advantage of Visual Studio Code's full feature set.  
+VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
+
 ### Configuration
-	
-- create and configure <a href="https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/blob/develop/nada-sensio.env.example">nada-sensio </a>, <a href="https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/blob/develop/nada-transform.env.example">nada-transform </a>, and <a href="https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/blob/develop/.nada-serve.env.example">nada-serve </a> .env files (follow links to see examples)
 
-## Launching 
+- create and configure [NADA-Sensio](.nada-sensio.env.example), [NADA-Transform](.nada-transform.env.example), and [NADA-Serve](.nada-serve.env.example) .env files (follow links to see examples)
 
-### Nada-sensio (MQTT Publisher)
-- Simulates a sensor publishing data to the configured MQTT Broker
+## Nada-sensio (MQTT Publisher)
+
+- Simulates a sensor, publishing data to the configured MQTT Broker
 
 go run cmd/nada-sensio/main.go  [sensorID] [airportID] [measureType]
 
 Accepted measureType:
+
 - temperature
 - altitude
 - pressure
@@ -98,19 +106,40 @@ Accepted measureType:
 - winddirx
 - winddiry
 
-**example**: 
+**example**:
 > go run cmd/nada-sensio/main.go S0 A0 windspeed 
 
-### nada-transform (MQTT subscriber + database insert)
-- Subscribes to a configured MQTT topic  
-- Inserts received data into the configured influxDB database
+## nada-transform (MQTT subscriber + database insert)
 
-**example**: 
+- Subscribes to a configured MQTT topic  
+- Inserts received data from NADA-Sensio into the configured influxDB database
+
+**example**:
 > go run cmd/nada-transform/Main.go
 
-<!-- CONTRIBUTING -->
+## nada-serve (GraphQL API for NADA-Webapp)
+
+- Query influxdb database and read data inserted by nada-transform
+- Serve data through a graphql api
+
+GraphQL Schema [available here](./api/schema.graphql)  
+Influxdb example queries made by nada-webapp [available here](./scripts/queries.flux)  
+We are providing a heroku instance with a graphql playground at [https://nada-extended.herokuapp.com/](https://nada-extended.herokuapp.com/)  
+
+### Source code
+
+- [main.go](./cmd/nada-serve)
+- [internal code](./internal/app/nada-serve)
+
+### Launching
+
+Be sure to have a file named `.nada-serve.env` in your current working directory. You can take a look at an [example](./.nada-serve.env) to create it
+
+`go run cmd/nada-serve/main.go`
 
 ## Contributing
+
+You can use the .devcontainer to quick bootstrap the project
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
