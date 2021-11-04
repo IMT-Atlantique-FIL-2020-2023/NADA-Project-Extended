@@ -126,7 +126,7 @@ func generateNewData(client mqtt.Client, measureType string, sensorID string, ai
 
 			measureValue := sim.GetMeasureValue(measureType, params)
 
-			result := model.Measure{SensorID: sensorID, AirportID: airportID, MeasureType: measureType, Value: measureValue, Timestamp: time.Now().String()}
+			result := model.Measure{SensorID: sensorID, AirportID: airportID, MeasureType: measureType, Value: measureValue, Timestamp: time.Now().Format(time.RFC3339Nano)}
 			mutex.Lock()
 			cachedMeasures[index] = result
 			index += 1
