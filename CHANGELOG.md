@@ -1,7 +1,11 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+
+<a name="0.0.4"></a>
+## [0.0.4] - 2021-11-04
 ### Docs
+- update changelog
 - update changelog
 
 ### Feat
@@ -10,6 +14,10 @@
 ### Fix
 - **nada-sensio:** send date in right format
 - **nada-transform:** change to info if date format is not right
+
+### BREAKING CHANGE
+
+New env var NADA_SENSIO_MEASURE_INTERVAL_MS
 
 
 <a name="0.0.3"></a>
@@ -162,6 +170,7 @@ empty array arg will not return anymore every sensors when using getSubsetOfSens
 rename your env var to NADA_TRANSFORM_INFLUXDB_ORG
 
 
-[Unreleased]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/compare/0.0.3...HEAD
+[Unreleased]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/compare/0.0.4...HEAD
+[0.0.4]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/compare/0.0.3...0.0.4
 [0.0.3]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/compare/0.0.2...0.0.3
 [0.0.2]: https://github.com/IMT-Atlantique-FIL-2020-2023/NADA-extended/compare/0.0.1-alpha...0.0.2
