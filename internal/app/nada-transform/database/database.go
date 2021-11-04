@@ -51,7 +51,7 @@ func Insert(client influxdb2.Client, measure model.Measure) {
 	*/
 	t, err := time.Parse(time.RFC3339Nano, measure.Timestamp)
 	if err != nil {
-		myLog.MyLog(myLog.Get_level_WARNING(), err.Error())
+		myLog.MyLog(myLog.Get_level_INFO(), err.Error())
 		return
 	}
 
