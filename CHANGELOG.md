@@ -1,6 +1,16 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Docs
+- update changelog
+
+### Feat
+- **nada-sension:** add an interval env var, to set time measure interval
+
+### Fix
+- **nada-sensio:** send date in right format
+- **nada-transform:** change to info if date format is not right
+
 
 <a name="0.0.3"></a>
 ## [0.0.3] - 2021-11-02
